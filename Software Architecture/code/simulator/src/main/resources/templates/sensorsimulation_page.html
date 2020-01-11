@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Sensor Simulation</title>
+</head>
+<body>
+    <h1>Sensor Simulation</h1>
+    <a href="/">Go to homepage</a>
+    <form method="post" th:action="@{/sensor-simulation/start}" th:object="${properties}" th:if="${!isBusy}">
+        <p>Timespan in minutes: <input type="number" th:field="*{timeSpanInMinutes}" /></p>
+        <p>Avg delay in ms: <input type="number" th:field="*{avgDelayInMs}" /></p>
+        <p>Delay variance: <input type="number" th:field="*{delayVariance}" /></p>
+        <div>
+            <label>XCoordRange:</label>
+            <ul style="list-style: none;">
+                <li>
+                    Min:
+                    <input type="number" th:field="*{xCoordRange.minValue}" />
+                </li>
+                <li>
+                    Max:
+                    <input type="number" th:field="*{xCoordRange.maxValue}" />
+                </li>
+            </ul>
+        </div>
+        <div>
+            <label>YCoordRange:</label>
+            <ul style="list-style: none;">
+                <li>
+                    Min:
+                    <input type="number" th:field="*{yCoordRange.minValue}" />
+                </li>
+                <li>
+                    Max:
+                    <input type="number" th:field="*{yCoordRange.maxValue}" />
+                </li>
+            </ul>
+        </div>
+        <div>
+            <label>Sensors:</label>
+            <ul style="list-style: none;">
+                <li th:each="sensor, i : *{sensors}">
+                    <label th:text="${sensor.sensorType}"></label>
+                    <input type="hidden" th:field="*{sensors[__${i.index}__].sensorType}" />
+                    <div style="margin-left: 15px;">
+                        <p>
+                            Min:
+                            <input type="number" th:field="*{sensors[__${i.index}__].minValue}" />
+                        </p>
+                        <p>
+                            Max:
+                            <input type="number" th:field="*{sensors[__${i.index}__].maxValue}" />
+                        </p>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <input type="submit" value="Start simulation" />
+    </form>
+    <div th:if="${isBusy}">
+        <progress></progress>
+        <p>
+            Simulator is running...
+            Refresh manually to update status.
+        </p>
+    </div>
+</body>
+</html>

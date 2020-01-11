@@ -1,0 +1,10 @@
+server:
+  port: 8080
+
+spring:
+  rabbitmq:
+    host: whale-01.rmq.cloudamqp.com
+    virtual-host: gfetlwgt
+    port: 5672
+    username: gfetlwgt
+    password: arjuaj-ZNFoCizqDsqCzU1Hu8VXyN0Mu

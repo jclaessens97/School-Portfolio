@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Measurements</title>
+</head>
+<body>
+<h1>Measurements</h1>
+<a href="/">Go to homepage</a>
+<form>
+    <table style="border: 1px;">
+        <thead>
+        <tr>
+            <th>Sensor-type</th>
+            <th>Chart-type</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>
+                <select name="sensorTypeFilter" id="sensorTypeFilter" onchange="draw()">
+                    <option value="invalid" text=""></option>
+                    <option th:each="type: ${sensorTypes}" th:value="${type}" th:text="${type}"></option>
+                </select>
+            </td>
+            <td>
+                <select name="chartTypeFilter" id="chartTypeFilter" onchange="draw()">
+                    <option value="time" text="Lijn grafiek">Lijn grafiek</option>
+                    <option value="coord" text="heatmap">Heatmap</option>
+                </select>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</form>
+<div id="chart" style="width: 1000px; height: 500px;"></div>
+</body>
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB50GwGhwFoF-ePLfmyt-xxwXLcD6MPPVk&libraries=visualization&callback=initMap"></script>
+<script type="text/javascript">
+    google.charts.load('current', {'packages':['corechart']});
+    google.charts.setOnLoadCallback(drawChart);
+
+    function draw() {
+        var e = document.getElementById('chartTypeFilter');
+        var t =document.getElementById('sensorTypeFilter');
+        var chartType = e.options[e.selectedIndex].value;
+        var type = t.options[t.selectedIndex].value;
+        var url = "api/values_per_"+chartType+"?type="+type;
+        console.log(url);
+        var jsonData = $.ajax({
+            url: url,
+            dataType: "json",
+            async: false
+        });
+        if (chartType == "time") {
+            drawChart(jsonData.responseText, type);
+        }  else if (chartType == "coord") {
+            drawMap(jsonData.responseJSON);
+        }
+    }
+
+    function drawChart(jsonData, type) {
+        var data = new google.visualization.DataTable(jsonData);
+        var options = {
+            title: type,
+            legend: { position: 'bottom' }
+        };
+        var chart = new google.visualization.LineChart(document.getElementById('chart'));
+
+        chart.draw(data, options);
+
+    }
+
+    function drawMap(jsonData) {
+        var heatMapData = [];
+        for ( i = 0; i<jsonData.length; i++) {
+            heatMapData[i] = {location : new google.maps.LatLng(jsonData[i].lat, jsonData[i].lng), weight: jsonData[i].weight};
+        }
+        console.log(heatMapData);
+
+        var map = new google.maps.Map(document.getElementById('chart'), {
+            zoom: 13,
+            center: {lat: 51.215732, lng: 4.414474},
+            mapTypeId: 'satellite'
+        });
+
+        var heatmap = new google.maps.visualization.HeatmapLayer({
+            data: heatMapData,
+            map: map
+        });
+    }
+</script>
+</html>

@@ -1,0 +1,12 @@
+issue title,issue description
+15: Simuleren van rit op basis van een csv-bestand,
+16: In een ride simulatie delays gebruiken die in het csv-bestand worden meegegeven,
+17: Een ride simulatie starten via de webinterface,
+18: Random sensor berichten genereren ,
+19: Een sensor simulator starten via de webinterface,
+31: Queue en andere settings kunnen beheren in configuratiebestand,
+33: Project versiebeheer in GitLab opzetten,
+32: Logging en foutafhandeling correct toepassen,
+47: Een Ride CSV opladen via web interface,
+48: Een sensor simulatie configureren via web interface,
+53: Spring boot project opzetten,

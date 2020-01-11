@@ -1,0 +1,20 @@
+sensor.generation:
+  timespanInMinutes: 60
+  avgDelayInMs: 20000
+  delayVariance: 1000
+  xCoordRange:
+    minValue: 51.180301
+    maxValue: 51.257408
+  yCoordRange:
+    minValue: 4.329483
+    maxValue: 4.486368
+  sensors:
+    - sensorType: CO2
+      minValue: 250
+      maxValue: 2000
+    - sensorType: NO2
+      minValue: 0
+      maxValue: 200
+    - sensorType: Temperature
+      minValue: 0
+      maxValue: 36

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Measurements List</title>
+</head>
+<body>
+    <h1>Measurements list</h1>
+    <a href="/">Go to homepage</a>
+    <form th:action="@{/measurements/list}" th:object="${filterDto}" method="get">
+        <table style="border: 1px;">
+            <thead>
+                <tr>
+                    <th>Sensor-type</th>
+                    <th>Tijdstip</th>
+                    <th>Locatie</th>
+                    <th>Locatie afwijking</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        <select name="typeFilter" id="typeFilter" th:field="*{type}">
+                            <option value=""></option>
+                            <option th:each="type: ${sensorTypes}" th:value="${type}" th:text="${type}"></option>
+                        </select>
+                    </td>
+                    <td>
+                        <input type="date" id="date" th:field="*{date}">
+                    </td>
+                    <td>
+                        <input type="number" id="xCoord" th:field="*{xCoord}" step="any"><input type="number" id="yCoord" th:field="*{yCoord}" step="any">
+                    </td>
+                    <td>
+                        <input type="number" id="variance" th:field="*{variance}" step="any">
+                    </td>
+                    <td>
+                        <input type="submit" id="filter" value="Filter">
+                    </td>
+                </tr>
+            </tbody>
+
+        </table>
+    </form>
+    <div>
+        <table style="border: 1px;">
+            <thead>
+                <tr>
+                    <th>Timestamp</th>
+                    <th>X-coord</th>
+                    <th>Y-coord</th>
+                    <th>SensorType</th>
+                    <th>Value</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="measurement : ${measurements}" style="text-align: center;">
+                    <td th:text="${measurement.timeStamp}" style="width: 225px;"></td>
+                    <td th:text="${#numbers.formatDecimal(measurement.xCoord, 0, 6)}" style="width: 100px;"></td>
+                    <td th:text="${#numbers.formatDecimal(measurement.yCoord, 0, 6)}" style="width: 100px;"></td>
+                    <td th:text="${measurement.sensorType}" style="width: 150px;"></td>
+                    <td th:text="${#numbers.formatDecimal(measurement.value, 0, 2)}"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

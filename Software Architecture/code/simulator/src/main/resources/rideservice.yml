@@ -1,0 +1,9 @@
+ride.service:
+  baseUri: http://localhost:8082/api
+  routes:
+    find_nearest_free_vehicle: /find_nearest_free_vehicle
+    get_free_locks: /free_locks
+    lock_free_vehicle: /lock/free_vehicle
+    lock_station_vehicle: /lock/station_vehicle
+    unlock_free_vehicle: /unlock/free_vehicle
+    unlock_station_vehicle: /unlock/station_vehicle

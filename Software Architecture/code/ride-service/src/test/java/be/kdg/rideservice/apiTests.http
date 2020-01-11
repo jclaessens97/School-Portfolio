@@ -1,0 +1,70 @@
+### GET success
+
+GET http://localhost:8082/api/free_locks?stationId=1
+
+###
+
+POST http://localhost:8082/api/find_nearest_free_vehicle
+Accept: application/json
+Content-Type: application/json
+
+{
+  "xCoord" : 51.21990425067991,
+  "yCoord" : 4.4160927863778445,
+  "bikeType" : {
+    "bikeTypeId" : 4
+  }
+}
+
+###
+
+POST http://localhost:8082/api/vehicles
+Accept: application/json
+Content-Type: application/json
+
+{
+  "serialNumber": "7001000",
+  "bikeLot": 12,
+  "lastMaintenanceOn": [
+    2019,
+    4,
+    9,
+    16,
+    58,
+    15
+  ],
+  "lock": null
+}
+
+###
+
+GET http://localhost:8082/api/vehicles/3243
+Accept: application/json
+Content-Type: application/json
+
+###
+
+PUT http://localhost:8082/api/vehicles
+Accept: application/json
+Content-Type: application/json
+
+{
+  "vehicleId": 7001,
+  "serialNumber": "7001000",
+  "bikeLot": 12,
+  "lastMaintenanceOn": [
+    2019,
+    4,
+    9,
+    16,
+    58,
+    15
+  ],
+  "lock": null
+}
+
+###
+
+DELETE http://localhost:8082/api/vehicles/3243
+Accept: application/json
+Content-Type: application/json

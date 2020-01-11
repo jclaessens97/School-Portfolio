@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Ride Simulation</title>
+</head>
+<body>
+    <h1>Sensor Simulation</h1>
+    <form method="post" enctype="multipart/form-data" th:action="@{/ride-simulation/start}">
+        <input type="file" name="file" />
+        <input type="submit" value="Start simulation" />
+    </form>
+</body>
+</html>

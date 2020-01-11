@@ -1,0 +1,7 @@
+unlock_station_vehicle,1;1,2000
+unlock_free_vehicle,3;3,2000
+location_of_free_vehicle,2019-02-22 22:02:56;1;51.634589;53.855453,3000
+get_free_locks,1,1000
+lock_station_vehicle,1;1,2000
+lock_free_vehicle,3;3,2000
+find_nearest_free_vehicle,51.634589;53.855453;STATION_VEHICLE,1500

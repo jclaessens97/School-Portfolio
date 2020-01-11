@@ -1,0 +1,6 @@
+POST http://localhost:8081/measurements/filtered
+Content-Type: application/json
+
+{"type": "CO2", "time" : "", "xCoord":25, "yCoord":25, "variance": ""}
+
+###

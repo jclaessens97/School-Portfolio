@@ -1,0 +1,10 @@
+issue title,issue description
+7: Luchtkwaliteit bericht registreren in H2 database,
+6: De luchtkwaliteit opvolgen op basis van een lijst ,
+8: De luchtkwaliteit opvolgen op basis van een lijn-grafiek,
+9: De luchtkwaliteit opvolgen op basis van een heatmap,
+"22: Bij opvolging luchtkwaliteit filteren op type meting, tijd en locatie",
+"42: Queue, databank en andere settings kunnen beheren in  configuratiebestand",
+44: Project versiebeheer in GitLab opzetten,
+46: Logging en foutafhandeling correct toepassen,
+54: Spring boot project opzetten,
