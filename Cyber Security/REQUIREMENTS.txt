@@ -1,0 +1,2 @@
+./vcpkg.exe install curl[non-http]
+./vcpkg.exe install opencv

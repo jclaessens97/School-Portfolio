@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="BankManager.cpp" />
+    <ClCompile Include="EmailManager.cpp" />
+    <ClCompile Include="KeyLogger.cpp" />
+    <ClCompile Include="MicrophoneCapture.cpp" />
+    <ClCompile Include="ScreenCapture.cpp" />
+    <ClCompile Include="Spreader.cpp" />
+    <ClCompile Include="SystemInformation.cpp" />
+    <ClCompile Include="Util.cpp" />
+    <ClCompile Include="WebcamCapture.cpp" />
+    <ClCompile Include="unzip.cpp" />
+    <ClCompile Include="zip.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="EmailManager.h" />
+    <ClInclude Include="KeyLogger.h" />
+    <ClInclude Include="MicrophoneCapture.h" />
+    <ClInclude Include="ScreenCapture.h" />
+    <ClInclude Include="spreader.h" />
+    <ClInclude Include="SystemInformation.h" />
+    <ClInclude Include="Util.h" />
+    <ClInclude Include="WebcamCapture.h" />
+    <ClInclude Include="unzip.h" />
+    <ClInclude Include="zip.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+</Project>
