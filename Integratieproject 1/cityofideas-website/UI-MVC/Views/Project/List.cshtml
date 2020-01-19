@@ -1,0 +1,38 @@
+﻿
+@{
+    ViewData["Title"] = "List";
+    Layout = "_LayoutAdmin";
+}
+
+<h2>Overzicht projecten</h2>
+
+<div class="btn-group btn-group-toggle" data-toggle="buttons">
+    <label class="btn btn-default active">
+        <input type="radio" name="options" id="active" autocomplete="off" checked> 
+        Active
+    </label>
+    <label class="btn btn-default">
+        <input type="radio" name="options" id="finished" autocomplete="off"> 
+        Finished
+    </label>
+</div>
+
+<section id="active-projects">
+    <h3>Actieve projecten</h3>
+    @foreach (var project in ViewBag.Active)
+    {
+        @project.Title
+    }
+</section>
+
+<section id="finished-projects">
+    <h3>Afgelopen projecten</h3>
+    @foreach (var project in ViewBag.Finished)
+    {
+        @project.Title
+    }
+</section>
+
+@section Scripts {
+    <script type="module" src="~/dist/listProject.entry.js" defer></script>
+}

@@ -1,0 +1,153 @@
+@using COI.BL.Domain.Answer
+@using COI.BL.Domain.Foundation
+@using COI.BL.Domain.Ideation
+@using COI.BL.Domain.User
+@using COI.UI_MVC.Extensions
+@using COI.UI_MVC.Models
+@using Microsoft.AspNetCore.Identity
+@using Microsoft.AspNetCore.Identity.UI.Pages.Internal
+@model COI.UI_MVC.Models.IdeationReplyViewModel
+@inject SignInManager<User> SignInManager
+@inject UserManager<User> UserManager
+
+@{
+    ViewBag.Title = "Idee";
+    Layout = "_Layout";
+}
+
+@section Scripts
+{
+    <script type="module" src="~/dist/viewIdeation.entry.js" defer></script>
+}
+
+<div class="container">
+    <div class="ideation-reply-header">
+        <div class="w-75">
+            @if (ViewBag.IsAdminIdeation)
+            {
+                <a asp-controller="Project" asp-action="Details" asp-route-id="@ViewBag.ProjectId" class="btn-default"><i class="fas fa-backward"></i> naar project</a>
+            }
+            else
+            {
+                <a asp-controller="Ideation" asp-action="Overview" asp-route-id="@ViewBag.IdeationId" class="btn-default"><i class="fas fa-backward"></i> naar all ideeën</a>
+            }
+            <h3 id="ideation-reply-title" class="mb-0 mt-3 h4">@Model.CentralQuestion</h3>
+            <p id="ideation-reply-creator" class="mb-0"><span class="font-weight-bold">@Model.UserDisplayName</span> (<span class="font-italic" id="date-created">@Model.DateTime.FormatParasableDate()</span>)</p>
+            <a href="#" class="italic" id="report-button">Dit idee als ongepast melden</a>
+        </div>
+        <div class="w-25">
+            <div class="d-flex justify-content-between">
+                <p class="h6">
+                    <span class="fas fa-arrow-up mr-2"></span><span id="votes-up">0</span>
+                </p>
+                <p class="h6">
+                    <span class="fas fa-arrow-down mr-2"></span><span id="votes-down">0</span>
+                </p>
+            </div>
+            <div id="votes-display" class="progress">
+                <div id="progress" class="progress-bar">
+                </div>
+            </div>
+
+            <div id="vote-wrapper">
+                <button class="btn-default mb-3" id="button-like">Stem voor</button><button class="btn-default mb-3" id="button-dislike">Stem tegen</button>
+            </div>
+        </div>
+    </div>
+
+
+    <input type="hidden" value="@Model.IdeationReplyId" id="ideation-reply-id"/>
+    <input type="hidden" value="@Model.UserHasVoted" id="ideation-user-voted"/>
+    <input type="hidden" value="@Model.UpVotes" id="ideation-upvote-count"/>
+    <input type="hidden" value="@Model.DownVotes" id="ideation-downvote-count"/>
+    <input type="hidden" value="@ViewBag.IsMod" id="user-is-mod"/>
+    <input type="hidden" value="@ViewBag.HasReported" id="user-has-reported"/>
+    <input type="hidden" value="@Model.ReviewedByMod" id="post-reviewed"/>
+    <input type="hidden" value="@Model.Hidden" id="post-hidden"/>
+    <h5 class="mb-0 h4">@Model.Title</h5>
+    <div id="grid" class=" mb-3 mt-3">
+        @foreach (AnswerViewModel answer in Model.Answers)
+        {
+            <div class="ideation-answer grid-item">
+                <div class="ideation-header">
+                    <p>@answer.QuestionString</p>
+                </div>
+                <div class="ideation-body">
+                    @switch (answer.FieldType)
+                    {
+                        case FieldType.OpenText:
+                            <p class="mb-0">@answer.OpenAnswer</p>
+                            break;
+                        case FieldType.DropDown:
+                        case FieldType.SingleChoice:
+                            <p class="mb-0">
+                                <span class="fas fa-check mr-2"></span>@answer.SingleAnswer</p>
+                            break;
+                        case FieldType.MultipleChoice:
+                            foreach (string text in answer.MultipleAnswer)
+                            {
+                                <p class="m-0">
+                                    <span class="fas fa-check mr-2"></span>@text</p>
+                            }
+                            break;
+                        case FieldType.Image:
+                            ViewBag.url = @answer.FileAnswer.Url.Contains("http") ? @answer.FileAnswer.Url : $"/uploads/{@answer.FileAnswer.Url}";
+                            <img class="media" src="@ViewBag.url" alt="@answer.FileAnswer.Name"/>
+                            break;
+                        case FieldType.Video:
+                            ViewBag.url = @answer.FileAnswer.Url.Contains("http") ? @answer.FileAnswer.Url : $"/uploads/{@answer.FileAnswer.Url}";
+                            <video class="media" controls>
+                                <source src="@ViewBag.url" type="video/mp4"/>
+                                Your browser does not support the video tag.
+                            </video>
+                            break;
+                        case FieldType.Location:
+                            <img class="media" src="https://maps.googleapis.com/maps/api/staticmap?center=@(answer.LocationAnswer.Latitude),@(answer.LocationAnswer.Longitude)&zoom=@(answer.LocationAnswer.ZoomLevel)&size=600x300&markers=color:red%7C@(answer.LocationAnswer.Latitude),@(answer.LocationAnswer.Longitude)&key=AIzaSyAcjLH-kOiE6TOc84tcRYRewC9bPiRKqvo"/>
+                            break;
+                    }
+                </div>
+            </div>
+        }
+    </div>
+
+
+    @if (ViewBag.IsMod)
+    {
+        <div class="mod-box w-100 p-3 mb-3">
+            <p class="h4 mb-0">Beheerder acties</p>
+            @if (Model.IsFlagged)
+            {
+                <p class="text-danger mb-0">Deze post is als ongepast gemeld door gebruikers</p>
+            }
+            <div id="review-post" class="mt-2 mb-2">
+
+            </div>
+            <h3>Gerapporteerde reacties afhandelen:</h3>
+            <div id="reported-comment-section">
+
+            </div>
+        </div>
+    }
+
+
+    <h3>Reacties</h3>
+
+    <div id="comment-section">
+
+    </div>
+    @if (SignInManager.IsSignedIn(User))
+    {
+        <input type="hidden" id="user-name" value="@UserManager.GetUserAsync(User).Result.UserName"/>
+        <div id="new-comment" class="mb-3">
+
+        </div>
+    }
+    else
+    {
+        <p class="text-danger">Je moet ingelogd zijn om te kunnen reageren</p>
+    }
+
+    <div id="popup" class="modal">
+
+    </div>
+</div>

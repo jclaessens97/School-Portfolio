@@ -1,0 +1,107 @@
+@model int
+
+@{
+    ViewBag.Title = "Link IoT opstelling";
+    Layout = "_Layout";
+}
+
+<input type="hidden" value="@Model" id="project-id"/>
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <a asp-controller="Project" asp-action="Details" asp-route-id="@Model" class="btn-default"><i class="fas fa-backward"></i>  naar project</a>
+            <h1 class="mt-3">IoT opstelling beheren</h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <h2>Kies een ideation of een vragenlijst waaraan je een IoT opstelling wil koppelen</h2>
+        </div>
+        <div class="col-12">
+            <h5>Ideations</h5>
+            <div id="ideations" class="d-none">
+                <table class="table table-borderless table-striped">
+                    <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Centrale vraag</th>
+                        <th>Link maken</th>
+                    </tr>
+                    </thead>
+                    <tbody id="ideation-table">
+
+                    </tbody>
+                </table>
+            </div>
+            <p id="no-ideations" class="d-none font-italic">Er zijn geen ideations om te koppelen</p>
+        </div>
+        <div class="col-12">
+            <h5>Vragenlijsten</h5>
+            <div id="forms" class="d-none">
+                <table class="table table-borderless table-striped">
+                    <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Titel</th>
+                        <th>Link maken</th>
+                    </tr>
+                    </thead>
+                    <tbody id="form-table">
+
+                    </tbody>
+                </table>
+            </div>
+            <p id="no-forms" class="d-none font-italic">Er zijn geen vragenlijsten om te koppelen</p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <h2>Beheer bestaande IoT opstellingen</h2>
+        </div>
+        <div class="col-12">
+            <h5>Ideations</h5>
+            <div id="ideations-linked" class="d-none">
+                <table class="table table-borderless table-striped">
+                    <thead>
+                    <tr>
+                        <th>IoT Link identificatie nr</th>
+                        <th>Ideation nr</th>
+                        <th>Centrale vraag</th>
+                        <th>Link beheren</th>
+                        <th>Link verwijderen</th>
+                    </tr>
+                    </thead>
+                    <tbody id="ideation-table-linked">
+                    </tbody>
+                </table>
+            </div>
+            <p id="no-ideations-linked" class="d-none font-italic">Er zijn nog geen gekoppelde ideations</p>
+        </div>
+        <div class="col-12">
+            <h5>Vragenlijsten</h5>
+            <div id="forms-linked" class="d-none">
+                <table class="table table-borderless table-striped">
+                    <thead>
+                    <tr>
+                        <th>IoT link ID</th>
+                        <th>Formulier nr</th>
+                        <th>Titel</th>
+                        <th>Link beheren</th>
+                        <th>Link verwijderen</th>
+                    </tr>
+                    </thead>
+                    <tbody id="form-table-linked">
+                    </tbody>
+                </table>
+            </div>
+            <p id="no-forms-linked" class="d-none font-italic">Er zijn nog geen gekoppelde vragenlijsten</p>
+        </div>
+    </div>
+</div>
+
+<div id="popup"></div>
+
+@section Scripts {
+    <script type="module" src="~/dist/createIoT.entry.js" defer></script>
+}
+

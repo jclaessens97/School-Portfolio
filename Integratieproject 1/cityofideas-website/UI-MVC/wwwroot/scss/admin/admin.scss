@@ -1,0 +1,83 @@
+﻿@import '../_colors';
+
+@import '_dashboard';
+
+header {
+    position: fixed; //fixed is absolute to a browser
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1;
+    height: 40px;
+    width: 100vw;
+    background-color: $primary;
+}
+
+header h1 {
+    color: #fff;
+    font-size: 1.7em;
+    font-weight: lighter;
+    margin-top: 5px;
+}
+
+#toggle-sidenav {
+    background-color: $primary;
+    color: #fff;
+    border: 0;
+}
+
+.sidenav {
+    height: 100vh;
+    width: 200px;
+    position: fixed;
+  //  z-index: -1;
+    top: 0;
+    left: 0;
+    background-color: #e5e5e5;
+    overflow-x: hidden;
+    padding-top: 45px;
+}
+
+.sidenav a {
+    padding: 0 6px 6px 32px;
+    text-decoration: none;
+    display: block;
+    color: $primary;
+    font-weight: 500;
+    transition: .3s all;
+}
+
+.sidenav a:hover {
+    opacity: .4;
+}
+
+main {
+    margin-left: 200px; /* Same as the width of the sidenav */
+    padding: 15px;
+}
+
+.btn-default {
+    background-color: $primary;
+    padding: 6px 20px;
+    cursor: pointer;
+    border: none;
+    border-radius: 2px;
+    font-weight: 600;
+    color: #fff;
+    transition: .3s all
+}
+
+.btn-default:hover {
+    opacity: .8;
+    color: #fff;
+}
+
+@media screen and (max-height: 450px) {
+    .sidenav {
+        padding-top: 15px;
+    }
+
+    .sidenav a {
+        font-size: 18px;
+    }
+}

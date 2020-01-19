@@ -1,0 +1,94 @@
+@page
+
+@{
+    ViewData["Title"] = "Register";
+}
+
+<script type="module" src="~/dist/registerUser.entry.js" defer></script>
+
+<div id="background-fill" class="bodycolor"></div>
+
+<div class="container justify-content-center mt-5">
+    <div id="login-container" class="text-center shadow">
+        <section>
+            <h2>
+                <b>Registreer</b>
+            </h2>
+        </section>
+        <section>
+            <form method="post">
+                <div class="form-group">
+                    <div class="form-group has-feedback">
+                        <h4>Maak een nieuwe account</h4>
+                        <div id="otherDiv">
+                            <span id="other-error"></span>
+                        </div>
+                    </div>
+                    <div class="form-group has-feedback" id="firstnameDiv">
+                        <label>Voornaam: </label>
+                        <input id="firstname"/>
+                        <span class="glyphicon glyphicon-user form-control-feedback"></span>
+                        <span id="firstname-error"></span>
+                    </div>
+                    <div class="form-group has-feedback" id="lastnameDiv">
+                        <label>Achternaam: </label>
+                        <input id="lastname"/>
+                        <span id="lastname-error"></span>
+                    </div>
+                    <div class="form-group has-feedback" id="firmNameDiv">
+                        <label>Bedrijfsnaam: </label>
+                        <input id="firmname"/>
+                        <span id="firmname-error"></span>
+                    </div>
+                    <div class="form-group has-feedback" id="VATDiv">
+                        <label>BTW-nummer: </label>
+                        <input id="vat"/>
+                        <span id="vat-error"></span>
+                    </div>
+                    <div class="form-group has-feedback" id="birthdayDiv">
+                        <label>Geboortedatum: </label>
+                        <input id="birthday"/>
+                        <span id="birthday-error"></span>
+                    </div>
+                    <div class="form-group has-feedback" id="sexDiv">
+                        <label>Geslacht: </label>
+                        <label id="sexMDiv"><input id="sexM" type="radio"/>&emsp;Man  </label>
+                        <label id="sexVDiv"><input id="sexV" type="radio"/> &emsp;Vrouw  </label>
+                        <span id="sex-error"></span>
+                    </div>
+                    <div class="form-group has-feedback" id="zipcodeDiv">
+                        <label>Postcode: </label>
+                        <input id="zipcode"/>
+                        <span id="zipcode-error"></span>
+                    </div>
+                    <div class="form-group has-feedback" id="emailDiv">
+                        <label>Email: </label>
+                        <input id="email"/>
+                        <span id="email-error"></span>
+                    </div>
+                    <div class="form-group has-feedback" id="passwordDiv">
+                        <label>Wachtwoord: </label>
+                        <input id="password"/>
+                        <span id="password-error"></span>
+                    </div>
+                    <div class="form-group has-feedback" id="confirmPasswordDiv">
+                        <label>Bevestig wachtwoord: </label>
+                        <input id="confirmpassword"/>
+                        <span id="confirmpassword-error"></span>
+                    </div>
+                    <div class="form-group has-feedback" id="organisationDiv">
+                        <label>Organisatie? </label>
+                        <input id="organisation" type="checkbox"/>
+                        <span id="organisation-error"></span>
+                    </div>
+                </div>
+                <div>
+                    <p>
+                        <button type="submit" class="btn btn-default" id="register">Registreer</button>
+                        <a class="btn btn-default" asp-area="Identity" asp-page="login" id="alreadyAccount">Ik heb al een account?</a>
+                    </p>
+                </div>
+            </form>
+        </section>
+    </div>
+</div>

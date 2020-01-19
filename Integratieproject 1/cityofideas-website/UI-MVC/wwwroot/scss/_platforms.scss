@@ -1,0 +1,220 @@
+﻿@import '_tabswitch';
+
+/* Platform index */
+#action-box {
+   // z-index: 10;
+   // position: absolute;
+   // bottom: 50%;
+   // left: 50%;
+   // -webkit-transform: translateX(-50%) translateY(-50%);
+   // transform: translateX(-50%) translateY(-50%);<div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 75%"></div>
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 70%;
+    //margin: 0 auto;
+   // margin-top: -65px;
+    background-color: #fff;
+    //border-top: 3px solid $primary;
+    border-radius: 5px;
+    //box-shadow: 3px 0px 10px rgba(0, 0, 0, 0.4);
+    //height: 75px;
+    padding: 20px 0;
+    //margin-bottom: 50px;
+}
+
+#projects {
+    display: flex;
+    justify-content: center;
+}
+
+.no-projects-found p {
+    font-weight: bold;
+}
+
+.no-projects-found img {
+    animation-name: animateNotFoundBulb;
+    animation-iteration-count: infinite;
+    animation-timing-function: ease-in-out;
+    animation-duration: 1s;
+    height: 150px;
+}
+
+@keyframes animateBar {
+    0% {
+        transform: translateX(-100%);
+    }
+
+    100% {
+        transform: translateX(0);
+    }
+}
+
+@keyframes animateNotFoundBulb {
+    0% {
+        transform: rotate(-10deg);
+    }
+
+    50% {
+        transform: rotate(10deg);
+    }
+
+    100% {
+        transform: rotate(-10deg);
+    }
+}
+
+// cards
+.card {
+    border: 0;
+    color: #000;
+}
+
+.card-img-top {
+    width: 100%;
+    object-fit: cover;
+}
+
+// progress bar animation
+.progress .progress-bar {
+/*    animation-name: animateBar;
+    animation-iteration-count: 1;
+    animation-timing-function: ease-in;
+    animation-duration: .4s;
+    background: $primary;*/
+}
+
+/* Platform list */
+#platform-list img {
+    height: 50px;
+    margin: 0 auto;
+}
+
+#platform-list .thead-dark {
+    background-color: $primary;
+    font-weight: bold;
+    color: #fff;
+}
+
+#platform-list tr {
+    vertical-align: middle;
+}
+
+.fa-pencil-alt {
+    //color: $primary;
+}
+
+/* Platform create/edit */
+#color-preview {
+    background-color: #f8f8f8;
+    border: 1px solid #000;
+}
+
+#social-bar-preview {
+    background-color: $primary;
+    color: #fff;
+    height: 20px;
+    display: flex;
+    justify-content: space-between;
+}
+
+#social-bar-preview span:last-child {
+    font-size: .8em;
+}
+
+#navbar-preview {
+    background-color: #fff;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+ 
+#banner-preview {
+    height: 150px;
+    background-color: lightblue;
+}
+
+#text-preview {
+    width: 75%;
+}
+
+#button-preview {
+    margin: 0 auto;
+}
+
+#footer-preview {
+    background-color: $primary;
+    height: 20px;
+}
+
+.color-chooser:hover {
+    cursor: pointer;
+    animation: breathing 1s ease-out infinite normal;
+}
+
+.a-color-picker {
+    position: absolute;
+    left: 45vw;
+    top: 53%;
+}
+
+.animating-color-chooser {
+    animation: breathing 1s ease-out infinite normal;
+}
+
+@keyframes breathing {
+    0% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.4;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+/*.color-cube-container {
+    display: flex;
+}
+
+.color-cube {
+    width: 25px;
+    height: 25px;
+}
+
+.colorField {
+    display: flex;
+    align-items: center;
+}
+
+.colorBox {
+    border: 1px solid grey;
+    width: 30px;
+    height: 30px;
+    margin-right: 25px;
+}
+
+.colorBox:hover {
+    cursor: pointer;
+}*/
+
+
+.statistics-col {
+    margin-bottom: 5px;
+    border-right: 1px solid #dee2e6;
+}
+
+.statistics-col:last-child {
+    border-right: 0;
+}
+
+@media only screen and (max-width: 768px) {
+    .statistics-col:nth-child(odd) {
+        border-right: 1px solid #dee2e6;
+    }
+    .statistics-col:nth-child(even) {
+        border-right: 0;
+    }
+}

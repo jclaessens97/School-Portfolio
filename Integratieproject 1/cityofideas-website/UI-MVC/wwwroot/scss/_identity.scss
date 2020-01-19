@@ -1,0 +1,56 @@
+﻿#background-fill{
+    //background-color: red;
+    height: 100vh;
+    width: 100vw;
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: -1;
+}
+
+#login-container {
+    height: 100%;
+    background-color: #fff;
+    border-radius: 5px;
+    padding-bottom: 30px;
+}
+
+#login-container form {
+    max-width: 55%;
+    margin: 0 auto;
+}
+
+#login-container .checkbox {
+    text-align: left;
+}
+
+#externalprovider-container {
+    display: flex;
+    justify-content: center;
+}
+
+#externalprovider-container ul {
+    list-style: none;
+}
+
+#externalprovider-container button {
+    width: 75px;
+    display: inline-block;
+    border-radius: 7px;
+}
+
+.btn-facebook {
+    background-color: #3b5998 !important;
+}
+
+.btn-google {
+    background-color: #CC3333 !important;
+}
+
+.btn-microsoft {
+    background-color: #2f2f2f !important;
+}
+
+.btn-twitter {
+    background-color: #38A1F3 !important;
+}

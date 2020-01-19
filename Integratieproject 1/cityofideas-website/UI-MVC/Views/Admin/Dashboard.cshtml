@@ -1,0 +1,55 @@
+﻿@{
+    Layout = "_LayoutAdmin";
+}
+
+<h2>Dashboard</h2>
+
+<section id="metrics" class="row counter">
+    <div class="row m-3">
+        <div class="dashboard-counter mr-3">
+            <span class="value">@ViewBag.TotalPlatforms</span>
+            <label>Platformen</label>
+            <span class="icon"><i class="fab fa-buffer"></i></span>
+        </div>
+        <div class="dashboard-counter mr-3">
+            <span class="value">@ViewBag.TotalProjects</span>
+            <label>Projecten</label>
+            <span class="icon"><i class="far fa-clipboard"></i></span>
+        </div>
+        <div class="dashboard-counter">
+            <span class="value">@ViewBag.TotalIdeations</span>
+            <label>Ideations</label>
+            <span class="icon"><i class="far fa-lightbulb"></i></span>
+        </div>
+    </div>
+    <div class="row m-3">
+        <div class="dashboard-counter mr-3">
+            <span class="value">@ViewBag.TotalVotes</span>
+            <label>Stemmen</label>
+            <span class="icon"><i class="far fa-sticky-note"></i></span>
+        </div>
+        <div class="dashboard-counter mr-3">
+            <span class="value">@ViewBag.TotalUsers</span>
+            <label>Gebruikers</label>
+            <span class="icon"><i class="far fa-user"></i></span>
+        </div>
+        <div class="dashboard-counter">
+            <span class="value">@ViewBag.TotalOrganisations</span>
+            <label>Organisaties</label>
+            <span class="icon"><i class="far fa-building"></i></span>
+        </div>
+    </div>
+</section>
+
+<h3>Snelkoppelingen</h3>
+
+<section id="shortcuts" class="row">
+    <a href="/Platform/Create" class="btn m-3">
+        <span><i class="fas fa-plus"></i></span>
+        nieuw platform
+    </a>
+</section>
+
+@section Scripts {
+    <script type="module" src="~/dist/dashboard.entry.js" defer></script>
+}

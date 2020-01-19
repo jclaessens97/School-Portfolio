@@ -1,0 +1,234 @@
+@using System.Diagnostics
+@using Castle.Core.Internal
+@using COI.BL
+@using COI.BL.Domain.User
+@using COI.UI_MVC.Util
+@using Microsoft.AspNetCore.Http
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<User> SignInManager
+@inject UserManager<User> UserManager
+@inject IVerifyRequestManager VerifyRequestManager
+@{
+    //Get subdomain
+    string GetSubdomain(string requestHostname)
+    {
+         foreach (var hostname in Constants.hostnames)
+         {
+             if (requestHostname.Contains(hostname))
+             {
+                 var trimmed = requestHostname.Replace(hostname, "");
+
+                 if (trimmed.Contains("www."))
+                 {
+                     trimmed = trimmed.Replace("www.", "");
+                 }
+
+                 if (trimmed.Length > 1)
+                 {
+//                     Debug.WriteLine("Subdomain detected");
+                     return trimmed.Replace(".", "");
+                 }
+             }
+         }
+         return "";  
+    }
+}
+
+@if (SignInManager.IsSignedIn(User))
+{
+    if (User.HasClaim("Organisation", "Organisation"))
+    {
+        if (User.HasClaim(GetSubdomain(Context.Request.Host.ToString()), "Admin") || User.HasClaim("SuperAdmin", "SuperAdmin"))
+        {
+            if (User.HasClaim("Verified", "Verified"))
+            {
+                <form asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new {area = ""})" method="post" id="logoutForm" class="navbar-right">
+                    <ul>
+                        <li>
+                            <a asp-controller="Admin" asp-action="Dashboard">Dashboard</a>
+                        </li>
+                        <li>
+                            <a class="" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @UserManager.GetUserAsync(User).Result.FirmName <i class="fas fa-building"></i><i class="fas fa-check"></i></a>
+                        </li>
+                        <li>
+                            <a>
+                                <button type="submit" class="btn btn-link">
+                                    <a style="color: #ffffff;" class="fas fa-sign-out-alt"></a>
+                                </button >
+                            </a>
+                        </li>
+                    </ul>
+                </form>
+            }
+            else
+            {
+                <form asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new {area = ""})" method="post" id="logoutForm" class="navbar-right">
+                    <ul>
+                        <li>
+                            <a asp-controller="Admin" asp-action="Dashboard">Dashboard</a>
+                        </li>
+                        <li>
+                            <a class="" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @UserManager.GetUserAsync(User).Result.FirmName <i class="fas fa-building"></i></a>
+                        </li>
+                        <li>
+                            <a>
+                                <button type="submit" class="btn btn-link">
+                                    <a style="color: #ffffff;" class="fas fa-sign-out-alt"></a>
+                                </button >
+                            </a>
+                        </li>
+                    </ul>
+                </form>
+            }
+        }
+        else
+        {
+            if (User.HasClaim("Verified", "Verified"))
+            {
+                <form asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new {area = ""})" method="post" id="logoutForm" class="navbar-right">
+                    <ul>
+                        <li>
+                            <a class="" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @UserManager.GetUserAsync(User).Result.FirmName <i class="fas fa-user-cog"></i><i class="fas fa-check"></i></a>
+                        </li>
+                        <li>
+                            <a>
+                                <button type="submit" class="btn btn-link">
+                                    <a style="color: #ffffff;" class="fas fa-sign-out-alt"></a>
+                                </button >
+                            </a>
+                        </li>
+                    </ul>
+                </form>
+            }
+            else
+            {
+                <form asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new {area = ""})" method="post" id="logoutForm" class="navbar-right">
+                    <ul>
+                        <li>
+                            <a class="" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @UserManager.GetUserAsync(User).Result.FirmName <i class="fas fa-building"></i></a>
+                        </li>
+                        <li>
+                            <a>
+                                <button type="submit" class="btn btn-link">
+                                    <a style="color: #ffffff;" class="fas fa-sign-out-alt"></a>
+                                </button >
+                            </a>
+                        </li>
+                    </ul>
+                </form>
+            }
+        }
+    }
+    else
+    {
+        if (User.HasClaim(GetSubdomain(Context.Request.Host.ToString()), "Admin") || User.HasClaim("SuperAdmin", "SuperAdmin"))
+        {
+            if (User.HasClaim("Verified", "Verified"))
+            {
+                <form asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new {area = ""})" method="post" id="logoutForm" class="navbar-right">
+                    <ul>
+                        <li>
+                            <a asp-controller="Admin" asp-action="Dashboard">Dashboard</a>
+                        </li>
+                        <li>
+                            <a class="" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @UserManager.GetUserAsync(User).Result.FirstName @UserManager.GetUserAsync(User).Result.LastName <i class="fas fa-user-cog"></i><i class="fas fa-check"></i></a>
+                        </li>
+                        <li>
+                            <a>
+                                <button type="submit" class="btn btn-link">
+                                    <a style="color: #ffffff;" class="fas fa-sign-out-alt"></a>
+                                </button >
+                            </a>
+                        </li>
+                    </ul>
+                </form>
+            }
+            else
+            {
+                <form asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new {area = ""})" method="post" id="logoutForm" class="navbar-right">
+                    <ul>
+                        <li>
+                            <a asp-controller="Admin" asp-action="Dashboard">Dashboard</a>
+                        </li>
+                        <li>
+                            <a class="" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @UserManager.GetUserAsync(User).Result.FirstName @UserManager.GetUserAsync(User).Result.LastName <i class="fas fa-user-cog"></i></a>
+                        </li>
+                        <li>
+                            <a>
+                                <button type="submit" class="btn btn-link">
+                                    <a style="color: #ffffff;" class="fas fa-sign-out-alt"></a>
+                                </button >
+                            </a>
+                        </li>
+                    </ul>
+                </form>
+            }
+        }
+        else
+        {
+            if (User.HasClaim("Verified", "Verified"))
+            {
+                <form asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new {area = ""})" method="post" id="logoutForm" class="navbar-right">
+                    <ul>
+                        <li>
+                            <a class="" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @UserManager.GetUserAsync(User).Result.FirstName @UserManager.GetUserAsync(User).Result.LastName <i class="fas fa-user"></i><i class="fas fa-check"></i></a>
+                        </li>
+                        <li>
+                            <a>
+                                <button type="submit" class="btn btn-link">
+                                    <a style="color: #ffffff;" class="fas fa-sign-out-alt"></a>
+                                </button >
+                            </a>
+                        </li>
+                    </ul>
+                </form>
+            }
+            else
+            {
+                <form asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new {area = ""})" method="post" id="logoutForm" class="navbar-right">
+                    <ul>
+                        <li>
+                            <a class="" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @UserManager.GetUserAsync(User).Result.FirstName @UserManager.GetUserAsync(User).Result.LastName <i class="fas fa-user"></i></a>
+                        </li>
+                        <li>
+                            <a>
+                                <button type="submit" class="btn btn-link">
+                                    <a style="color: #ffffff;" class="fas fa-sign-out-alt"></a>
+                                </button >
+                            </a>
+                        </li>
+                    </ul>
+                </form>
+            }
+        }
+    }
+}
+else
+{
+    var url = GetSubdomain(Context.Request.Host.ToString());
+    if (url!="")
+    {
+        <ul>
+            <li>
+                <a asp-area="Identity" asp-page="/Account/Register">
+                    Register
+                </a>
+            </li>
+            <li>
+                <a asp-area="Identity" asp-page="/Account/Login">
+                    Login
+                </a>
+            </li>
+        </ul>
+    }
+    else
+    {
+        <ul>
+            <li>
+                <a asp-area="Identity" asp-page="/Account/Login">
+                    Login
+                </a>
+            </li>
+        </ul>
+    }
+}

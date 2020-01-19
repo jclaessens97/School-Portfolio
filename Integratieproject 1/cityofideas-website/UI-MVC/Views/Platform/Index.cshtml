@@ -1,0 +1,336 @@
+﻿@model COI.BL.Domain.Platform.Platform;
+@using COI.UI_MVC.Extensions;
+
+@{
+    ViewData["Title"] = Model.Name;
+}
+
+@{
+    if (Model.Banner != null)
+    {
+        ViewBag.bannerUrl = @Model.Banner.Url.Contains("http") ? Model.Banner.Url : $"/uploads/{@Model.Banner.Url}";
+    }
+}
+
+<input id="platform-id" type="hidden" value="@Model.PlatformId"/>
+
+
+@if (@ViewBag.IsAdmin)
+{
+    <div id="side-nav">
+        <a href="@Url.Action("Edit", "Platform", new {id = Model.PlatformId})" class="btn-default d-inline-block m-1">
+            Bewerken <i class="fas fa-pencil-alt ml-2"></i>
+        </a>
+        <a href="@Url.Action("Create", "Project", new {id = Model.PlatformId})" class="btn-default d-inline-block m-1">
+            Project <i class="fas fa-plus ml-2"></i>
+        </a>
+    </div>
+}
+@if (Model.Banner != null)
+{
+    <section class="jumbotron jumbotron-fluid parallax mb-0 position-relative" style="background-image: url(@ViewBag.bannerUrl)">
+        <div class="container-fluid image-overlay d-flex flex-column justify-content-center">
+            <div class="row">
+                <div class="col-12 text-center">
+                    <h1>Welkom op @Model.Name</h1>
+                    <a href="#projects" class="btn btn-default btn-large mt-3">
+                        Onze projecten
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+}
+else
+{
+    <section class="jumbotron jumbotron-fluid parallax parralax-rm-img mb-0 position-relative background-color">
+        <div class="container-fluid image-overlay d-flex flex-column justify-content-center">
+            <div class="row">
+                <div class="col-12 text-center">
+                    <h1>Welkom op @Model.Name</h1>
+                    <a href="#projects" class="btn btn-default btn-large mt-3">
+                        Onze projecten
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+}
+
+<div class="socialbar-color flex-column d-flex justify-content-center">
+    <div id="action-box" class="shadow ml-auto mr-auto mt-2 mb-2">
+        <partial name="_ActivityFeedPartial"/>
+    </div>
+</div>
+
+
+@if (@ViewBag.IoTCount > 0)
+{
+    <input id="iot-count" type="hidden" value="@ViewBag.IoTCount"/>
+    <div class="bg-light pt-2">
+        <h2 class="w-100 mt-0 text-center">Volg <span class="font-weight-bold text-danger">live</span> de toestand van onze opstelling(en)</h2>
+        <div id="iot-loader" class="ml-auto mr-auto d-block text-center">
+            <h3>Ophalen...</h3>
+            <div class="spinner-border spinner-border ml-auto mr-auto d-block" style="width: 5rem; height: 5rem;" role="status">
+                <span class="sr-only">Loading...</span>
+            </div>
+        </div>
+        <div style="opacity: 0" class="carousel" id="iot-wrapper" data-flickity='{ "pageDots": false }'>
+        </div>
+    </div>
+}
+
+<section id="projects" class="container-fluid mt-5">
+    <div class="col-md-12">
+        <div class="tab-slider--nav">
+            <ul class="tab-slider--tabs">
+                <li id="active-button" class="tab-slider--trigger active text-uppercase">actieve projecten</li>
+                <li id="inactive-button" class="tab-slider--trigger text-uppercase">afgelopen projecten</li>
+            </ul>
+        </div>
+
+        <div id="actief" style="min-height: 600px">
+            @if (Model.ActiveProjects.Count > 0)
+            {
+                <div class="carousel mb-5" id="active-projects">
+                    <div id="projects-loader" class="ml-auto mr-auto d-block text-center">
+                        <h3>Projecten ophalen...</h3>
+                        <div class="spinner-border spinner-border ml-auto mr-auto d-block" style="width: 5rem; height: 5rem;" role="status">
+                            <span class="sr-only">Loading...</span>
+                        </div>
+                    </div>
+                    @foreach (var project in Model.ActiveProjects)
+                    {
+                        <div style="opacity: 0" class="shadow-sm mb-3 bg-white rounded activeProject project">
+                            <input type="hidden" value="@project.ProjectId"/>
+                            @{
+                                ViewBag.url = @project.Logo.Url.Contains("http") ? @project.Logo.Url : $"/uploads/{@project.Logo.Url}";
+                            }
+                            <img src="" data-src="@ViewBag.url" alt="@project.Logo.Name" class="card-img-top lazy-image loading project-image"/>
+                            <div class="card-body justify-content-between flex-column d-flex">
+                                <div>
+                                    <h2 class="card-title mt-2">@project.Title</h2>
+                                    <p class="description m-2">
+                                        @project.Goal
+                                    </p>
+                                </div>
+                                <div>
+                                    <div class="row font-weight-bold justify-content-between counter">
+                                        <span class="badge badge-pill badge-secondary col-3 p-1 m-2">
+                                            <i class="fas fa-lightbulb"></i><br/>
+                                            <div class="ideationReplyCount">
+                                                <div class="spinner-border spinner-border-sm" role="status">
+                                                    <span class="sr-only">Loading...</span>
+                                                </div>
+                                            </div>
+                                        </span>
+                                        <span class="badge badge-pill badge-secondary col-3 p-1 m-2">
+                                            <i class="fas fa-heart"></i><br/>
+                                            <div class="voteCount">
+                                                <div class="spinner-border spinner-border-sm" role="status">
+                                                    <span class="sr-only">Loading...</span>
+                                                </div>
+                                            </div>
+                                        </span>
+                                        <span class="badge badge-pill badge-secondary col-3 p-1 m-2">
+                                            <i class="fas fa-comment"></i><br/>
+                                            <div class="commentCount">
+                                                <div class="spinner-border spinner-border-sm" role="status">
+                                                    <span class="sr-only">Loading...</span>
+                                                </div>
+                                            </div>
+                                        </span>
+                                    </div>
+                                    <div class="phase-container container">
+                                        <div class="row">
+                                            <div class="col-12 text-center font-weight-bold">
+                                                Fase @project.CurrentPhaseNumber van de @project.Phases.Count
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="w-100">
+                                                <div class="progress">
+                                                    <div class="progress-bar progress-bar-primary progress-bar-striped progress-bar-animated" style="width: @(@project.Phases.Count > 0 ? ((Double) project.CurrentPhaseNumber / (Double) project.Phases.Count * 100f) : 0)%;"></div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="font-weight-light col-6">
+                                                        @project.StartDate.FormatDate()
+                                                    </div>
+                                                    <div class="font-weight-light col-6 text-right">
+                                                        @project.EndDate.FormatDate()
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 text-center">
+                                        <a asp-controller="Project" asp-action="Details" asp-route-id="@project.ProjectId" class="btn btn-default text-uppercase mt-3 card-action-button">
+                                            Bekijk en stem
+                                        </a>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    }
+                </div>
+            }
+            else
+            {
+                <div class="no-projects-found text-center">
+                    <p>
+                        Er zijn geen actieve projecten op dit ogenblik.
+                    </p>
+                    <img id="sad-lightbulb" src="dist/sadLightBulb.png"/>
+                </div>
+            }
+        </div>
+
+        <div id="afgelopen" style="display: none; min-height: 600px">
+            @if (Model.FinishedProjects.Count > 0)
+            {
+                <div class="carousel" id="finished-projects" style="min-height: 600px">
+                    @foreach (var project in Model.FinishedProjects)
+                    {
+                        <div class="shadow mb-5 bg-white rounded finishedProject project">
+                            <input type="hidden" value="@project.ProjectId"/>
+                            <img data-src="@project.Logo.Url" alt="@project.Logo.Name" class="card-img-top project-image lazy-image loading"/>
+                            <div class="card-body justify-content-between flex-column d-flex">
+                                <div>
+                                    <h2 class="card-title mt-2">@project.Title</h2>
+                                    <p class="description m-2">
+                                        @project.Goal
+                                    </p>
+                                </div>
+                                <div>
+                                    <div class="row font-weight-bold justify-content-between counter">
+                                        <span class="badge badge-pill badge-secondary col-3 p-1 m-2">
+                                            <i class="fas fa-lightbulb"></i><br/>
+                                            <div class="spinner-border" role="status">
+                                                <span class="sr-only">Loading...</span>
+                                            </div>
+                                        </span>
+                                        <span class="badge badge-pill badge-secondary col-3 p-1 m-2">
+                                            <i class="fas fa-heart"></i><br/>
+                                            <div class="spinner-border" role="status">
+                                                <span class="sr-only">Loading...</span>
+                                            </div>
+                                        </span>
+                                        <span class="badge badge-pill badge-secondary col-3 p-1 m-2">
+                                            <i class="fas fa-comment"></i><br/>
+                                            <div class="spinner-border" role="status">
+                                                <span class="sr-only">Loading...</span>
+                                            </div>
+                                        </span>
+                                    </div>
+                                    <div class="phase-container container">
+                                        <div class="row">
+                                            <div class="col-12 text-center font-weight-bold">
+                                                Fase @project.CurrentPhaseNumber van de @project.Phases.Count
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="w-100">
+                                                <div class="progress">
+                                                    <div class="progress-bar progress-bar-primary progress-bar-striped progress-bar-animated" style="width: @(@project.Phases.Count > 0 ? ((Double) project.CurrentPhaseNumber / (Double) project.Phases.Count * 100f) : 0)%;"></div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="font-weight-light col-6">
+                                                        @project.StartDate.FormatDate()
+                                                    </div>
+                                                    <div class="font-weight-light col-6 text-right">
+                                                        @project.EndDate.FormatDate()
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 text-center">
+                                        <a asp-controller="Project" asp-action="Details" asp-route-id="@project.ProjectId" class="btn btn-default text-uppercase mt-3 card-action-button">
+                                            Bekijk en stem
+                                        </a>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    }
+                </div>
+            }
+            else
+            {
+                <div class="no-projects-found text-center">
+                    <p>
+                        Er zijn geen afgelopen projecten op dit ogenblik.
+                    </p>
+                    <img id="sad-lightbulb" src="dist/sadLightBulb.png"/>
+                </div>
+            }
+        </div>
+
+    </div>
+</section>
+
+<div style="height: 250px" class="socialbar-color position-relative shadow-sm">
+    <div style="text-shadow: 3px 3px 3px rgba(0, 0, 0, 0.4)" class="container d-flex flex-column justify-content-around h-100 text-center font-weight-bold h3 text-white mt-0">
+        <div class="row">
+            <div class="col-12">
+                <h2 class="font-weight-bold">Zoveel mensen zitten al op ons platform. Jij ook?</h2>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3 col-sm-6 statistics-col">
+                <i class="fas fa-user"></i>
+                <span class="d-block">@ViewBag.UserCount gebruikers</span>
+            </div>
+            <div class="col-md-3 col-sm-6 statistics-col">
+                <i class="fas fa-lightbulb"></i>
+                <span class="d-block">@ViewBag.IdeationReplyCount ideeën</span>
+            </div>
+            <div class="col-md-3 col-sm-6 statistics-col">
+                <i class="fas fa-comment"></i>
+                <span class="d-block">@ViewBag.CommentCount reacties</span>
+            </div>
+            <div class="col-md-3 col-sm-6 statistics-col">
+                <i class="fas fa-vote-yea"></i>
+                <span class="d-block">@ViewBag.VoteCount stemmen</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="bg-light position-relative shadow-sm">
+    <div class="container d-flex h-100 flex-column justify-content-around font-weight-bold mt-0 pt-3 pt-3">
+        <div class="row" id="about">
+            <div class="col-12">
+                <h2 style="text-shadow: 3px 3px 3px rgba(0, 0, 0, 0.1)" class="font-weight-bold text-center">Wie zijn wij?</h2>
+            </div>
+            <div class="col-12">
+                <p>@Model.Description</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@*<section id="platform-banner" class="jumbotron jumbotron-fluid banner-color">
+    <div class="container-fluid">
+        <div class="row align-items-center">
+            <div class="col-12 col-md-4">
+                <img id="platform-logo" class="float-md-right" src="@Model.Logo.Url"/>
+            </div>
+            <div class="col-10 col-md-6">
+                <h1>Welkom op @Model.Name</h1>
+                <p>@Model.Description</p>
+            </div>
+        </div>
+    </div>
+</section>*@
+
+@section Scripts {
+    <script type="module" src="~/dist/indexPlatform.entry.js" defer></script>
+}

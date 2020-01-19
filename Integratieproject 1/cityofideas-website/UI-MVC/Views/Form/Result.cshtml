@@ -1,0 +1,31 @@
+@model COI.BL.Domain.Form.Form
+
+@{
+    ViewBag.Title = "Resultaten van vragenlijst";
+    Layout = "_LayoutAdmin";
+}
+<div class="container ml-0">
+    <a asp-controller="Project" asp-action="Details" asp-route-id="@Model.Project.ProjectId" class="btn-default mb-2 d-inline-block"><i class="fas fa-external-link-alt"></i> naar project</a>
+    <input type="hidden" id="form-id" value="@Model.FormId"/>
+    <h2>Resultaten van vragenlijst</h2>
+    <h4>@Model.Title</h4>
+    <div id="form-loader" class="d-block">
+        <h3>Ophalen...</h3>
+        <div class="spinner-border spinner-border " style="width: 5rem; height: 5rem;" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
+    </div>
+    <div class="container ml-0">
+        <div class="row" id="questions-wrapper">
+
+        </div>
+    </div>
+
+</div>
+
+@section Scripts {
+    <script type="module" src="~/dist/result.entry.js" defer></script>
+}
+
+
+

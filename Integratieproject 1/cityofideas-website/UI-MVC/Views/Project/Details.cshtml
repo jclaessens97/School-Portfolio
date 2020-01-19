@@ -1,0 +1,218 @@
+﻿@model COI.BL.Domain.Project.Project;
+@using COI.BL.Domain.Form
+@using COI.BL.Domain.Foundation
+@using COI.BL.Domain.Ideation
+@using COI.BL.Domain.User
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+@{
+    ViewBag.bannerUrl = @Model.Logo.Url.Contains("http") ? Model.Logo.Url : $"/uploads/{@Model.Logo.Url}";
+/*    if (Model.Phases.Count > 0)
+    {
+        ViewBag.StatementForm = Model.CurrentPhase.Forms.FirstOrDefault(f => f.IsStatementForm);
+    }
+    else
+    {
+        ViewBag.StatementForm = null;
+    }*/
+    
+}
+<input type="hidden" id="project-id" value="@Model.ProjectId"/>
+<section class="jumbotron jumbotron-fluid parallax mb-0" style="background-image: url(@ViewBag.bannerUrl)">
+    <div class="container-fluid mt-5 pt-5">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h1>@Model.Title</h1>
+                <a href="#fases" class="btn btn-default btn-large mt-3">
+                    Geef je mening <i class="fas fa-poll-h"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+@if (@ViewBag.IoTCount > 0)
+{
+    <input id="iot-count" type="hidden" value="@ViewBag.IoTCount"/>
+    <div class="bg-light pt-2 mb-3">
+        <h2 class="w-100 mt-0 text-center">Volg <span class="font-weight-bold text-danger">live</span> de toestand van onze opstelling(en)</h2>
+        <div id="iot-loader" class="ml-auto mr-auto d-block text-center">
+            <h3>Ophalen...</h3>
+            <div class="spinner-border spinner-border ml-auto mr-auto d-block" style="width: 5rem; height: 5rem;" role="status">
+                <span class="sr-only">Loading...</span>
+            </div>
+        </div>
+        <div style="opacity: 0" class="carousel" id="iot-wrapper" data-flickity='{ "pageDots": false }'>
+        </div>
+    </div>
+}
+@if (@ViewBag.IsAdmin)
+{
+    <div id="side-nav">
+        <a href="@Url.Action("Edit", "Project", new {id = Model.ProjectId})" class="btn-default d-inline-block m-1">
+            Bewerken <i class="fas fa-pencil-alt ml-2"></i>
+        </a>
+        <a href="@Url.Action("Create", "Form", new {id = Model.ProjectId})" class="btn-default d-inline-block m-1">
+            Vragenlijst <i class="fas fa-plus ml-2"></i>
+        </a>
+        <a href="@Url.Action("Create", "Ideation", new {id = Model.ProjectId})" class="btn-default d-inline-block m-1">
+            Ideation <i class="fas fa-plus ml-2"></i>
+        </a>
+        <a href="@Url.Action("CreateIoT", "Project", new {id = Model.ProjectId})" class="btn-default d-inline-block m-1">
+            IoT <i class="fas fa-wifi"></i>
+        </a>
+        
+    </div>
+}
+<div class="container">
+    <div class="row row-no-padding">
+        <div class="pl-0 col-sm-12 @*@((ViewBag.StatementForm != null)?"col-md-6":"*@col-md-12@*"*@)">
+            <h2>Doel van dit project</h2>
+            <p>@Model.Goal</p>
+        </div>
+        @*@if (ViewBag.StatementForm != null)
+        {
+            <input type="hidden" id="form-id" value="@ViewBag.StatementForm.FormId"/>
+            <div id="form-question" class="col-sm-12 col-md-6 border border-dark p-3 text-center d-flex align-items-center flex-column justify-content-center">
+                $1$ <i id="form-loader" class="fas fa-spinner fa-spin fa-4x mx-auto d-block "></i> #1#
+                <div class="spinner-border" role="status" id="form-loader">
+                    <span class="sr-only">Loading...</span>
+                </div>
+            </div>
+        }*@
+    </div>
+    
+    <div class="row" id="fases">
+        @* <h2 class="w-100 mb-4">Fasen van het project</h2> *@
+        <ul class="progressbar mb-0">
+            @foreach (var phase in @Model.Phases)
+            {
+                if (phase == @Model.CurrentPhase)
+                {
+                    <li class="activeStep selected" style="width: @(100 / @Model.Phases.Count)%;">@phase.Title</li>
+                }
+                else if (phase.Number < Model.CurrentPhase.Number)
+                {
+                    <li class="doneStep" style="width: @(100 / @Model.Phases.Count)%;">@phase.Title</li>
+                }
+                else
+                {
+                    <li style="width: @(100 / @Model.Phases.Count)%;">@phase.Title</li>
+                }
+            }
+        </ul>
+    </div>
+
+    @foreach (var phase in @Model.Phases)
+    {
+        <div id="phase@(phase.Number)" class="row @(Model.CurrentPhaseNumber != phase.Number ? "d-none" : "")">
+            @* <h3 class="w-100">Fase @phase.Number: @phase.Title</h3> *@
+            @* <h1 class="w-100">Geef jouw mening</h1> *@
+            <div class="row w-100">
+                <div class="col-lg-8 col-md-6 col-sm-12 p-2">
+                    <h2 class="mt-3" style="height: 5%">Over deze fase</h2>
+                    <div class="w-75 text-justify d-flex justify-content-center flex-column" style="height: 95%">
+                        @phase.Description
+                    </div>
+                </div>
+                @foreach (Ideation ideation in @phase.Ideations)
+                {
+                    <div class="col-lg-4 col-md-6 col-sm-12 p-2" style="height: 400px">
+                        @if (ideation.IdeationType == IdeationType.Admin && ideation.Replies.Count > 0)
+                        {
+                            <div class="shadow h-100 p-4">
+                                @* <div class="socialbar-color p-3 text-white" style="height: 15%"> *@
+                                @*     <h4 class="m-0">Idee</h4> *@
+                                @* </div> *@
+                                <div class="d-flex flex-column justify-content-between h-100">
+                                    <div>
+                                        <p class="w-100 reply-title">@ideation.CentralQuestion</p>
+                                        <p>Een idee opgesteld door <strong>@Model.Platform.Name</strong></p>
+
+                                    </div>
+                                    <a asp-controller="Ideation" asp-action="View" asp-route-id="@ideation.Replies[0].IdeationReplyId" class="font-weight-bold d-block reply-link">Stuur je stem in <i class="fas fa-arrow-right"></i></a>
+                                </div>
+                            </div>
+                        }
+                        else if (ideation.IdeationType == IdeationType.Admin && @ViewBag.IsAdmin && ideation.Replies.Count == 0)
+                        {
+                            <div class="shadow h-100">
+                                <div class="socialbar-color p-3 text-white" style="height: 15%">
+                                    <h4 class="m-0">Admin only ideation</h4>
+                                </div>
+                                <div class="p-2 align-content-center d-flex flex-column justify-content-between" style="height: 85%">
+                                    <h6 class="w-100 text-danger">Beste Admin, gelieve een idee te geven voor gebruikers de ideation kunnen zien</h6>
+                                    <h6 class="w-100">@ideation.CentralQuestion</h6>
+                                    <div>
+                                        <a asp-controller="Ideation" asp-action="Reply" asp-route-id="@ideation.IdeationId" class="btn-default w-75 text-white mx-auto d-block">Geef je idee <i class="fas fa-arrow-right"></i></a>
+                                    </div>
+
+                                </div>
+                            </div>
+                        }
+                        @if (ideation.IdeationType == IdeationType.User)
+                        {
+                            <div class="shadow h-100 p-4">
+                                @* <div class="socialbar-color p-3 text-white" style="height: 15%"> *@
+                                @*     <h4 class="m-0">Geef jouw idee</h4> *@
+                                @* </div> *@
+                                <div class="d-flex flex-column justify-content-between h-100">
+                                    <p class="w-100 reply-title">@ideation.CentralQuestion</p>
+                                    <div>
+                                        <a asp-controller="Ideation" asp-action="Reply" asp-route-id="@ideation.IdeationId" class="d-block font-weight-bold reply-link">Geef je idee <i class="fas fa-arrow-right"></i></a>
+                                        <a asp-controller="Ideation" asp-action="Overview" asp-route-id="@ideation.IdeationId" class="d-block font-weight-bold reply-link">Steun andere ideeën <i class="fas fa-arrow-right"></i></a>
+                                    </div>
+
+                                </div>
+                            </div>
+                        }
+                    </div>
+                }
+
+                @foreach (Form form in phase.Forms)
+                {
+                    if (!form.IsStatementForm)
+                    {
+                        <div class="col-lg-4 col-md-6 col-sm-12 p-2" style="height: 400px">
+                            <div class="shadow h-100 p-4">
+                                @*<div class="socialbar-color p-3 text-white" tyle="height: 15%">
+                                     <h4 class="m-0">Vragenlijst</h4>
+                                 </div>*@
+                                <div class="p-2 align-content-center d-flex flex-column justify-content-between h-100">
+                                    <p class="w-100 reply-title">@form.Title</p>
+                                    <div>
+                                        <a asp-controller="Form" asp-action="Reply" asp-route-id="@form.FormId" class="d-block font-weight-bold  reply-link">Vul in <i class="fas fa-arrow-right"></i></a>
+                                        @if (ViewBag.IsAdmin)
+                                        {
+                                            <a asp-controller="Form" asp-action="Result" asp-route-id="@form.FormId" class="text-danger font-weight-bold  d-block reply-link">Bekijk resultaten <i class="fas fa-arrow-right"></i></a>
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                }
+
+                @if (!phase.Ideations.Any() && !phase.Forms.Any())
+                {
+@*                     <div class="col-4 p-2"> *@
+@*                         <h2>Helaas, in deze fase kan je je mening nog niet geven</h2> *@
+@*                     </div> *@
+                }
+            </div>
+            
+        </div>
+    }
+    @*<div class="row mb-3 mt-4">
+        <h2 class="w-100 mb-4">Onze stemknoppen op locatie:</h2>
+    </div>
+    <div class="row mb-3" id="iot-wrapper">
+        
+    </div>*@
+</div>
+
+@section Scripts {
+    <script type="module" src="~/dist/projectDetails.entry.js" defer></script>
+}

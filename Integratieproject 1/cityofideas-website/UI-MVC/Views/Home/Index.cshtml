@@ -1,0 +1,75 @@
+@using COI.BL.Domain.Platform;
+@model IEnumerable<Platform>
+
+@{
+    ViewData["Title"] = "Welkom";
+}
+
+<section class="jumbotron jumbotron-fluid parallax">
+    <div class="container-fluid mt-5 pt-5">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h1>Welkom op City of Ideas</h1>
+                <a href="/platforms" class="btn btn-default btn-large mt-3">
+                    Ontdek de deelnemende platformen
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="about" class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h2>Over City of Ideas</h2>
+            <p>
+                Burgers betrekken bij beleid is heel erg belangrijk om een beter beleid te kunnen maken en
+                een groter draagvlak te vinden voor beslissingen. Burgers zijn expert in hun eigen buurt,
+                interesses en activiteiten. Maar het is een uitdaging voor elke overheid en organisatie
+                om een breed publiek te bereiken en niet telkens dezelfde burgers te laten deelnemen.
+                Daarom bestaat dit platform waarop burgers de mogelijkheid hebben om hun ideeën en suggesties
+                rond een bepaald thema te delen met elkaar. Want uw mening telt.
+            </p>
+        </div>
+    </div>
+</section>
+
+<section id="platform-overview" class="container">
+    <div class="row">
+        <div class="col-md-10">
+            <h2>Nieuwste platformen</h2>
+        </div>
+        <div class="row">
+            @foreach (var platform in ViewBag.Platforms)
+            {
+            <div  class="col-md-6">
+                <a href="@platform.Tenant" class="clickable-tile">
+                    <div class="shadow h-100 p-4 pb-5">
+                        <div class="text-center">
+                            @{
+                                ViewBag.url = @platform.Logo.Url.Contains("http") ? @platform.Logo.Url : $"/uploads/{@platform.Logo.Url}";
+                            }
+                            <img src="@ViewBag.url" class="platform-logo img-fluid mb-4" alt="@platform.Logo.Name" />
+                        </div>
+                        <div class="text-left">
+                            <h3>@platform.Name</h3>
+                            <p>@platform.Description</p>
+                        </div>
+                        <div class="platform-action">
+                            <span class="platform-button">
+                                Ga naar @platform.Name
+                                <i class="fas fa-arrow-right"></i>
+                            </span>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            }
+        </div>
+    </div>
+</section>
+
+@section Scripts {
+    <script type="module" src="~/dist/index.entry.js" defer></script>
+    <script type="module" src="~/dist/dashboard.entry.js" defer></script>
+}

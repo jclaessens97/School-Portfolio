@@ -1,0 +1,69 @@
+﻿.form-creator-box {
+    border: 1px solid $primary;
+    background-color: #ebebeb;
+}
+
+.form-creator-box .header {
+    background-color: $primary;
+    width: 100%;
+    color: #fff;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.form-creator-box .body {
+    padding: 8px;
+    width: 100%;
+}
+
+.form-creator-box .header h5 {
+    display: inline;
+    margin: 0;
+}
+
+.form-creator-box .header .icon-btn {
+    margin: 0 10px;
+}
+
+.form-creator-box .header .icon-btn:last-child {
+    margin-right: 0;
+}
+
+.form-creator-box .questionHandle {
+    cursor: grab;
+}
+
+.form-creator-question {
+    min-width: 20%;
+    max-width: 70%;
+    border: 1px solid #a0b9bf;
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
+    border-radius: 0;
+}
+
+.settings {
+    margin-top: 10px;
+}
+
+.checkbox-option label {
+    margin: 0;
+}
+
+.questionHandle, .optionHandle {
+    cursor: grab;
+}
+
+.question-ghost {
+    background-color: #C8EBFB;
+}
+
+.question-drag {
+}
+
+//reply form & ideation
+.option-zero {
+    color: rgba(0,0,0,.5);
+    font-style: italic;
+}

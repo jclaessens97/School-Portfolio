@@ -1,0 +1,29 @@
+﻿/*
+    Poppins
+        200: extra-light
+        300: light
+        400: regular
+        500: medium
+        700: bold
+
+*/
+@import url('https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,700');
+
+h1,
+h2,
+h3,
+h4 {
+    font-family: 'Poppins', sans-serif;
+}
+
+h2 {
+    font-size: 1.5em;
+}
+
+h3 {
+    font-size: 1.2em;
+}
+
+.badge {
+    font-size: 1.1em;
+}

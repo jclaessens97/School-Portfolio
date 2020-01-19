@@ -1,0 +1,90 @@
+﻿@using System.Linq
+
+@{
+    ViewData["Title"] = "Search";
+}
+
+<div class="container">
+    <div class="input-group">
+        <input id="searchInput" type="text" class="form-control" placeholder="Zoeken...." value="@ViewBag.Query">
+        <div class="input-group-append">
+            <button id="searchButton" class="btn btn-default" type="button">
+                <i class="fas fa-search"></i>
+            </button>
+
+        </div>
+    </div>
+    <div id="spinner" class="spinner-border text-info mt-3" role="status" style="display: none;">
+        <span class="sr-only">Loading...</span>
+    </div>
+
+    <div id="search-results" class="mt-3">
+        <div id="platform-results">
+            <h2>Zoekresultaten voor "@ViewBag.Query"</h2>
+            <h3>Platformen</h3>
+            <ul>
+                @if (ViewBag.PlatformResults == null)
+                {
+                    <li><i>Geen platformen gevonden voor deze zoekterm.</i></li>
+                }
+                else
+                {
+                    foreach (var platform in ViewBag.PlatformResults)
+                    {
+                        <li>
+                            <a href="@platform.Tenant">
+                                @platform.Name
+                            </a>
+                        </li>
+                    }
+                }
+            </ul>
+        </div>
+
+        <div id="project-results">
+            <h3>Projecten</h3>
+            <ul>
+                @if (ViewBag.ProjectResults == null)
+                {
+                    <li><i>Geen projecten gevonden voor deze zoekterm.</i></li>
+                }
+                else
+                {
+                    foreach (var project in ViewBag.ProjectResults)
+                    {
+                        <li>
+                            <a href="@project.Platform.Tenant/project/details/@project.ProjectId">
+                                @project.Title
+                            </a>
+                        </li>
+                    }
+                }
+            </ul>
+        </div>
+
+        <div id="ideation-results">
+            <h3>Ideations</h3>
+            <ul>
+                @if (ViewBag.IdeationResults == null)
+                {
+                    <li><i>Geen ideations gevonden voor deze zoekterm.</i></li>
+                }
+                else
+                {
+                    foreach (var ideation in ViewBag.IdeationResults)
+                    {
+                        <li>
+                            <a href="@ideation.Project.Platform.Tenant/ideation/view/@ideation.IdeationId">
+                                @ideation.CentralQuestion
+                            </a>
+                        </li>
+                    }
+                }
+            </ul>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script type="module" src="~/dist/search.entry.js" defer></script>
+}

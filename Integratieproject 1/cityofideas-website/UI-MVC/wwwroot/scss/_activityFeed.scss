@@ -1,0 +1,22 @@
+﻿#action-box #activity-feed {
+    max-height: 65px;
+    //margin-top: -15px;
+}
+
+#action-box h2 {
+    display: none;
+}
+
+#activity-feed {
+    max-height: 300px;
+    //overflow-y: auto;
+    overflow: hidden;
+} 
+
+.activity-entry span {
+    color: $primary;
+}
+
+.activity-date {
+    color: #000 !important;
+}

@@ -1,0 +1,51 @@
+@using COI.BL.Domain.User
+@using Microsoft.AspNetCore.Identity
+@model COI.UI_MVC.Models.IdeationViewModel
+@inject UserManager<User> UserManager
+
+@{
+    ViewBag.Title = "Antwoord op de ideation";
+    Layout = "_Layout";
+}
+
+@section Scripts
+{
+    <script type="module" src="~/dist/replyIdeation.entry.js" defer></script>
+}
+
+<div class="container">
+    <a asp-controller="Project" asp-action="Details" asp-route-id="@ViewBag.ProjectId" class="btn-default"><i class="fas fa-backward"></i>  naar project</a>
+    <h2 class="mt-3">@Model.CentralQuestion</h2>
+    <p>@Model.Description</p>
+    <a target="_blank" href='@Model.Url' class="btn-default">Meer info </a>
+
+    <form class="mb-3">
+        <input type="hidden" value="@Model.IdeationId" id="ideation-id"/>
+        <input type="hidden" value="@Model.UserId" id="user-id"/>
+        <label for="title" class="mt-4 h5">Titel van jouw idee</label>
+        <input id="title" type="text" class="form-control" required/>
+        <span id="title-error" class="error"></span>
+        <div id="ideation-wrapper" class="grid mt-3">
+
+        </div>
+    </form>
+
+
+    <div id="addquestion-wrapper" class="w100 d-none">
+        <h3>Vraag opnieuw toevoegen</h3>
+        <select id="addquestion-select" class="form-control"></select>
+        <button id="addquestion-button" class="btn-default mt-2" type="button">Vraag toevoegen</button>
+    </div>
+    <br/>
+    <div class="mb-3">
+        <button class="btn-default" id="SaveBtn" type="button">Idee inzenden</button>
+    </div>
+    <div id="confirm-popup" class="modal">
+
+    </div>
+</div>
+
+
+
+
+

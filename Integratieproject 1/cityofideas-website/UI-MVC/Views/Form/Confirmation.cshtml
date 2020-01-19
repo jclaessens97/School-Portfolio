@@ -1,0 +1,19 @@
+@using COI.BL.Domain.User
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<User> SignInManager
+
+@{
+    ViewBag.Title = "Bedankt";
+    Layout = "_Layout";
+}
+<div class="container">
+    <h2>Bedankt voor je mening!</h2>
+@*     @if (!SignInManager.IsSignedIn(User)) *@
+@*     { *@
+@*         <h4>Bevestig je email adres</h4> *@
+@*         <p>Om jouw mening te bevestigen hebben je een bevestigingmail gestuurd op het mailadres: @ViewBag.email </p> *@
+@*     } *@
+    <a class="btn btn-default" @*href="#"*@ asp-controller="Home" asp-action="Index">Terug naar home</a>
+
+</div>
+

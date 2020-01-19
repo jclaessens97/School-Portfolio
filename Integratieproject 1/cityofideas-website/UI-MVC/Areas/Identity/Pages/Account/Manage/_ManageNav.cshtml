@@ -1,0 +1,46 @@
+@using COI.BL.Domain.User
+@inject SignInManager<User> SignInManager
+
+<div class="container">
+    <p>
+        <button type="submit" class="btn btn-default">
+            <a asp-page="./Index" style="color: #ffffff;">Profile</a>
+        </button>
+    </p>
+
+    <p>
+        <button type="submit" class="btn btn-default">
+
+            <a id="change-password" asp-page="./ChangePassword" style="color: #ffffff;">Wachtwoord</a>
+        </button>
+    </p>
+    <p>
+        <button type="submit" class="btn btn-default">
+
+            <a asp-page="./PersonalData" style="color: #ffffff;">Persoonlijke data</a>
+        </button>
+    </p>
+    @if (!User.HasClaim("SuperAdmin", "SuperAdmin"))
+    {
+        <p>
+            <button type="submit" class="btn btn-default">
+
+                <a asp-page="./VerifyUser" style="color: #ffffff;">Verifieer uzelf</a>
+            </button>
+        </p>
+    } @*else if (User.HasClaim("Organisation", "Organisation"))
+    {
+        <p>
+            <button type="submit" class="btn btn-default">
+
+                <a asp-page="./VerifyUser" style="color: #ffffff;">Verifieer uzelf</a>
+            </button>
+        </p>
+        <p>
+            <button type="submit" class="btn btn-default">
+
+                <a asp-page="./PlatformRequest" style="color: #ffffff;">Platform aanvraag</a>
+            </button>
+        </p>
+    }*@
+</div>

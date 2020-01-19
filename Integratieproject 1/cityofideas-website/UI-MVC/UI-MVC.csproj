@@ -1,0 +1,150 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+    <PropertyGroup>
+        <TargetFramework>netcoreapp2.1</TargetFramework>
+        <RootNamespace>COI.UI_MVC</RootNamespace>
+        <WWWRoot>wwwroot\</WWWRoot>
+        <UserSecretsId>UIGEN</UserSecretsId>
+        <TypeScriptToolsVersion>3.1</TypeScriptToolsVersion>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="AspNetCoreSubdomain" Version="1.1.0" />
+        <PackageReference Include="Google.Cloud.Storage.V1" Version="2.3.0" />
+        <PackageReference Include="Microsoft.AspNetCore.App" />
+        <PackageReference Include="Microsoft.AspNetCore.Owin" Version="2.1.1" />
+        <PackageReference Include="Microsoft.AspNetCore.SignalR" Version="1.0.4" />
+        <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.4" />
+        <PackageReference Include="MQTTnet" Version="2.8.5" />
+        <PackageReference Include="MQTTnet.AspNetCore" Version="2.8.5" />
+        <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="2.1.0" />
+        <PackageReference Include="SendGrid" Version="9.10.0" />
+        <PackageReference Include="Newtonsoft.Json" Version="12.0.1" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\BL\BL.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <Content Remove="$(WWWRoot)**" />
+        <Content Remove="wwwroot\fonts\**" />
+        <Content Remove="wwwroot\toastr\**" />
+        <Content Include="$(WWWRoot)**" Exclude="$(WWWRoot)js\**; $(WWWRoot)css\**; $(WWWRoot)ts\**; $(WWWRoot)scss\**; $(WWWRoot)sass\**" />
+        <Content Include="wwwroot\js\forms\createFormValidation.js" />
+        <Content Include="wwwroot\js\forms\formCreatorValidation.js" />
+        <Content Include="wwwroot\js\forms\result.js" />
+        <Content Include="wwwroot\js\ideations\comments.js" />
+        <Content Include="wwwroot\js\ideations\create.js" />
+        <Content Include="wwwroot\js\ideations\createIdeationValidation.js" />
+        <Content Include="wwwroot\js\iot.js" />
+        <Content Include="wwwroot\js\map.js" />
+        <Content Include="wwwroot\js\forms\reply.js" />
+        <Content Include="wwwroot\js\ideations\reply.js" />
+        <Content Include="wwwroot\js\constants.js" />
+        <Content Include="wwwroot\js\projects\createIoT.js" />
+        <Content Include="wwwroot\js\projects\details.js" />
+        <Content Include="wwwroot\js\users\loginUser.js" />
+        <Content Include="wwwroot\js\users\reportPanel.js" />
+        <Content Include="wwwroot\js\users\registerUser.js" />
+        <Content Include="wwwroot\js\users\showPlatformRequests.js" />
+        <Content Include="wwwroot\js\users\showVerifyrequests.js" />
+        <Content Include="wwwroot\js\util.js" />
+        <Content Include="wwwroot\js\ideations\view.js" />
+        <None Remove="$(WWWRoot)**" />
+        <None Include="$(WWWRoot)**" Exclude="$(WWWRoot)dist\**" />
+        <Content Include="wwwroot\js\forms\create.js" />
+        <Content Include="wwwroot\js\forms\validation.js" />
+        <Compile Remove="wwwroot\fonts\**" />
+        <Compile Remove="wwwroot\toastr\**" />
+        <EmbeddedResource Remove="wwwroot\fonts\**" />
+        <EmbeddedResource Remove="wwwroot\toastr\**" />
+        <None Remove="$(WWWRoot)**" />
+        <None Remove="wwwroot\fonts\**" />
+        <None Remove="wwwroot\toastr\**" />
+        <None Include="$(WWWRoot)**" Exclude="$(WWWRoot)dist\**" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Content Remove="wwwroot\images\antwerpen_sky.png" />
+      <Content Remove="wwwroot\images\logo-treecompany.png" />
+      <Content Remove="wwwroot\images\logo-uigen.png" />
+      <Content Remove="wwwroot\images\sadLightBulb.png" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <_ContentIncludedByDefault Remove="Areas\Identity\Pages\Account\AccessDenied.cshtml" />
+      <_ContentIncludedByDefault Remove="Areas\Identity\Pages\Account\ConfirmEmail.cshtml" />
+      <_ContentIncludedByDefault Remove="Areas\Identity\Pages\Account\ExternalLogin.cshtml" />
+      <_ContentIncludedByDefault Remove="Areas\Identity\Pages\Account\ForgotPassword.cshtml" />
+      <_ContentIncludedByDefault Remove="Areas\Identity\Pages\Account\ForgotPasswordConfirmation.cshtml" />
+      <_ContentIncludedByDefault Remove="Areas\Identity\Pages\Account\Lockout.cshtml" />
+      <_ContentIncludedByDefault Remove="Areas\Identity\Pages\Account\Login.cshtml" />
+      <_ContentIncludedByDefault Remove="Areas\Identity\Pages\Account\LoginWith2fa.cshtml" />
+      <_ContentIncludedByDefault Remove="Areas\Identity\Pages\Account\LoginWithRecoveryCode.cshtml" />
+      <_ContentIncludedByDefault Remove="Areas\Identity\Pages\Account\Logout.cshtml" />
+      <_ContentIncludedByDefault Remove="Areas\Identity\Pages\Account\Manage\ChangePassword.cshtml" />
+      <_ContentIncludedByDefault Remove="Areas\Identity\Pages\Account\Manage\DeletePersonalData.cshtml" />
+      <_ContentIncludedByDefault Remove="Areas\Identity\Pages\Account\Manage\Disable2fa.cshtml" />
+      <_ContentIncludedByDefault Remove="Areas\Identity\Pages\Account\Manage\DownloadPersonalData.cshtml" />
+      <_ContentIncludedByDefault Remove="Areas\Identity\Pages\Account\Manage\EnableAuthenticator.cshtml" />
+      <_ContentIncludedByDefault Remove="Areas\Identity\Pages\Account\Manage\ExternalLogins.cshtml" />
+      <_ContentIncludedByDefault Remove="Areas\Identity\Pages\Account\Manage\GenerateRecoveryCodes.cshtml" />
+      <_ContentIncludedByDefault Remove="Areas\Identity\Pages\Account\Manage\Index.cshtml" />
+      <_ContentIncludedByDefault Remove="Areas\Identity\Pages\Account\Manage\PersonalData.cshtml" />
+      <_ContentIncludedByDefault Remove="Areas\Identity\Pages\Account\Manage\ResetAuthenticator.cshtml" />
+      <_ContentIncludedByDefault Remove="Areas\Identity\Pages\Account\Manage\SetPassword.cshtml" />
+      <_ContentIncludedByDefault Remove="Areas\Identity\Pages\Account\Manage\TwoFactorAuthentication.cshtml" />
+      <_ContentIncludedByDefault Remove="Areas\Identity\Pages\Account\Manage\_ManageNav.cshtml" />
+      <_ContentIncludedByDefault Remove="Areas\Identity\Pages\Account\Manage\_StatusMessage.cshtml" />
+      <_ContentIncludedByDefault Remove="Areas\Identity\Pages\Account\Manage\_ViewImports.cshtml" />
+      <_ContentIncludedByDefault Remove="Areas\Identity\Pages\Account\Register.cshtml" />
+      <_ContentIncludedByDefault Remove="Areas\Identity\Pages\Account\ResetPassword.cshtml" />
+      <_ContentIncludedByDefault Remove="Areas\Identity\Pages\Account\ResetPasswordConfirmation.cshtml" />
+      <_ContentIncludedByDefault Remove="Areas\Identity\Pages\Account\_ViewImports.cshtml" />
+      <_ContentIncludedByDefault Remove="Areas\Identity\Pages\_ViewImports.cshtml" />
+      <_ContentIncludedByDefault Remove="Areas\Identity\Pages\_ViewStart.cshtml" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Content Update="Views\Platform\Edit.cshtml">
+        <Pack>$(IncludeRazorContentInPack)</Pack>
+      </Content>
+      <Content Update="Views\Platform\Index.cshtml">
+        <Pack>$(IncludeRazorContentInPack)</Pack>
+      </Content>
+    </ItemGroup>
+
+    <Target Name="NpmInstall" BeforeTargets="Build" Condition=" !Exists('node_modules') ">
+        <Exec Command="node --version" ContinueOnError="true">
+            <Output TaskParameter="ExitCode" PropertyName="ErrorCode" />
+        </Exec>
+        <Error Condition="'$(ErrorCode)' != '0'" Text="Node.js is required to build and run this project. To continue, please install Node.js from https://nodejs.org/, and then restart your command prompt or IDE." />
+        <Message Importance="high" Text="Restoring dependencies using 'npm'. This may take several minutes..." />
+        <Exec Command="npm install" />
+    </Target>
+
+    <Target Name="NpmRunBuild" BeforeTargets="Build" DependsOnTargets="NpmInstall">
+        <Exec Command="npm run build" />
+    </Target>
+
+    <Target Name="NpmClean" BeforeTargets="Clean">
+        <RemoveDir Directories="$(WWWRoot)dist" />
+        <RemoveDir Directories="node_modules" />
+    </Target>
+
+    <Target Name="PublishRunWebpack" AfterTargets="ComputeFilesToPublish" DependsOnTargets="NpmInstall">
+        <!-- Include the newly-built files in the publish output -->
+        <ItemGroup>
+            <DistFiles Include="$(WWWRoot)dist\**" />
+            <ResolvedFileToPublish Include="@(DistFiles->'%(FullPath)')" Exclude="@(ResolvedFileToPublish)">
+                <RelativePath>%(DistFiles.Identity)</RelativePath>
+                <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+            </ResolvedFileToPublish>
+        </ItemGroup>
+    </Target>
+
+    <PropertyGroup>
+        <UserSecretsId>3024c8e7-0000-0000-b266-b33f42dd88c0</UserSecretsId>
+    </PropertyGroup>
+</Project>

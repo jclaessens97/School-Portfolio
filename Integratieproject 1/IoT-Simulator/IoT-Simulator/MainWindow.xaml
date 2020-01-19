@@ -1,0 +1,29 @@
+﻿<Window x:Class="IoT_Simulator.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:IoT_Simulator"
+        mc:Ignorable="d"
+        Title="IoT Simulator" 
+        Height="250" Width="600"
+        ResizeMode="NoResize" Closing="Window_Closing"
+    >
+    <DockPanel>
+        <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" HorizontalAlignment="Center" Margin="10">
+            <Label Content="Opstelling identificatie:" />
+            <TextBox x:Name="TxtIdentifier" Width="250" Text="1" />
+        </StackPanel>
+
+        <WrapPanel DockPanel.Dock="Bottom" HorizontalAlignment="Center" x:Name="buttonContainer">
+            <WrapPanel.Resources>
+                <Style TargetType="{x:Type Button}">
+                    <Setter Property="Margin" Value="10" />
+                </Style>
+            </WrapPanel.Resources>
+
+            <Button x:Name="ProButton" Width="150" Height="150" Content="Voor" Background="Green" Click="ProButton_Click" />
+            <Button x:Name="ConButton" Width="150" Height="150" Content="Tegen" Background="Red" Click="ConButton_Click" />
+        </WrapPanel>
+    </DockPanel>
+</Window>

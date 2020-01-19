@@ -1,0 +1,51 @@
+﻿@using COI.UI_MVC.Util
+@model COI.BL.Domain.Platform.Platform;
+@{
+    ViewData["Title"] = "Over ons";
+}
+
+<section class="section pb-0">
+    <div class="container">
+        <h2>@ViewData["Title"]</h2>
+        <div class="row">
+            <div class="col-md-4 mb-4 mb-md-0">
+                @{
+                    ViewBag.url = @Model.Logo.Url.Contains("http") ? @Model.Logo.Url : $"/uploads/{@Model.Logo.Url}";
+                }
+                <img src="@ViewBag.url" class="platform-logo img-fluid" alt="@Model.Logo.Name"/>
+            </div>
+            <div class="col-md-4 mb-4 mb-md-0">
+                <div class="bg-white shadow text-center p-5 px-md-2 px-lg-5">
+                    @Model.Description
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@{
+    //Get subdomain
+    string GetSubdomain(string requestHostname)
+    {
+        foreach (var hostname in Constants.hostnames)
+        {
+            if (requestHostname.Contains(hostname))
+            {
+                var trimmed = requestHostname.Replace(hostname, "");
+
+                if (trimmed.Contains("www."))
+                {
+                    trimmed = trimmed.Replace("www.", "");
+                }
+
+                if (trimmed.Length > 1)
+                {
+//                     Debug.WriteLine("Subdomain detected");
+                    return trimmed.Replace(".", "");
+                }
+            }
+        }
+        return "";
+    }
+
+}

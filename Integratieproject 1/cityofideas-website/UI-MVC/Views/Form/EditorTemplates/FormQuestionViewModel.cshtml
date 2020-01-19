@@ -1,0 +1,103 @@
+@using COI.BL.Domain.Foundation
+@model COI.UI_MVC.Models.FormQuestionViewModel
+
+@switch (Model.FieldType)
+{
+    case FieldType.OpenText:
+        <div class="form-group question">
+            <input class="field-type" type="hidden" asp-for="FieldType" value="@((int) Model.FieldType)"/>
+            <input type="hidden" asp-for="@Model.Question"/>
+            <input class="required" type="hidden" asp-for="@Model.Required"/>
+
+            <label class="question-label" asp-for="@Model.OpenAnswer">@Model.Question</label><br/>
+            @if (Model.LongAnswer)
+            {
+                <textarea asp-for="@Model.OpenAnswer" class="form-control question-input"></textarea>
+            }
+            else
+            {
+                <input asp-for="@Model.OpenAnswer" class="form-control question-input"/>
+            }
+
+            <div area-live="polite" class="error" asp-validation-for="@Model.OpenAnswer" class="text-danger"></div>
+        </div>
+        break;
+    case FieldType.MultipleChoice:
+        <div class="form-group question">
+            <input class="field-type" type="hidden" asp-for="FieldType" value="@((int) Model.FieldType)"/>
+            <input type="hidden" asp-for="@Model.Question"/>
+            <input class="required" type="hidden" asp-for="@Model.Required"/>
+
+
+            <label class="question-label">@Model.Question</label><br/>
+            @for (var j = 0; j < Model.Options.Count; j++)
+            {
+                <input type="hidden" asp-for="@Model.Options[j]"/>
+                <label for="@Model.Options[j]">
+                    <input class="question-input" asp-for="@Model.MultipleChoiceAnswer[j]" type="checkbox" id="@Model.Options[j]">
+                    @Model.Options[j]
+                </label>
+                <br/>
+            }
+            <div area-live="polite" class="error" asp-validation-for="@Model.MultipleChoiceAnswer" class="text-danger"></div>
+        </div>
+        break;
+    case FieldType.SingleChoice:
+        <div class="form-group question">
+            <input class="field-type" type="hidden" asp-for="FieldType" value="@((int) Model.FieldType)"/>
+            <input type="hidden" asp-for="@Model.Question"/>
+            <input class="required" type="hidden" asp-for="@Model.Required"/>
+
+            <label class="question-label">@Model.Question</label><br/>
+            @for (var j = 0; j < Model.Options.Count; j++)
+            {
+                <input type="hidden" asp-for="@Model.Options[j]"/>
+                <label for="@Model.Options[j]">
+                    <input class="field question-input" asp-for="@Model.SingleChoiceAnswer" type="radio" value="@j" id="@Model.Options[j]">
+                    @Model.Options[j]
+                </label>
+                <br/>
+            }
+            <div area-live="polite" class="error" asp-validation-for="@Model.SingleChoiceAnswer" class="text-danger"></div>
+        </div>
+        break;
+    case FieldType.Statement:
+        <div class="form-group question">
+            <input class="field-type" type="hidden" asp-for="FieldType" value="@((int) Model.FieldType)"/>
+            <input type="hidden" asp-for="@Model.Question"/>
+            <input class="required" type="hidden" asp-for="@Model.Required"/>
+
+            <label class="question-label">@Model.Question</label><br/>
+                <label>
+                    <input class="field question-input" asp-for="@Model.SingleChoiceAnswer" type="radio" value="1">
+                    Voor
+                </label>
+            <br/>
+            <label>
+                <input class="field question-input" asp-for="@Model.SingleChoiceAnswer" type="radio" value="0">
+                Tegen
+            </label>
+            <div area-live="polite" class="error" asp-validation-for="@Model.SingleChoiceAnswer" class="text-danger"></div>
+        </div>
+        break;
+    case FieldType.DropDown:
+        <div class="form-group question">
+            <input class="field-type" type="hidden" asp-for="FieldType" value="@((int) Model.FieldType)"/>
+            <input type="hidden" asp-for="@Model.Question"/>
+            <input class="required" type="hidden" asp-for="@Model.Required"/>
+
+            <label asp-for="SingleChoiceAnswer" class="question-label">@Model.Question</label><br/>
+
+            @*<select asp-for="SingleChoiceAnswer" asp-items="@(new SelectList(Model.Options))" class="form-control"></select>*@
+            <select class="question-input form-control" asp-for="@Model.SingleChoiceAnswer">
+                <option class="option-zero" value="-1">Maak een keuze</option>
+                @for (var j = 0; j < Model.Options.Count; j++)
+                {
+                    <option value="@j">@Model.Options[j]</option>
+                }
+            </select>
+            <div area-live="polite" class="error" asp-validation-for="@Model.SingleChoiceAnswer" class="text-danger"></div>
+        </div>
+        break;
+        
+}

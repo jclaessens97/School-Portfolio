@@ -1,0 +1,137 @@
+﻿@model COI.BL.Domain.Project.Project;
+
+@{
+    ViewData["Title"] = "Edit Project";
+}
+<div class="container">
+    <a asp-controller="Project" asp-action="Details" asp-route-id="@Model.ProjectId" class="btn-default"><i class="fas fa-backward"></i>  naar project</a>
+    <h2 class="mt-3">Edit Project</h2>
+
+    <form method="post">
+        @Html.AntiForgeryToken()
+        @Html.HiddenFor(p => p.ProjectId)
+        @Html.HiddenFor(p => p.StartDate)
+        @Html.HiddenFor(p => p.EndDate)
+        @Html.HiddenFor(p => p.Logo.Name)
+        <div class="form-group">
+            <label for="Title" class="control-label">Title</label>
+            <input id="Title" class="form-control" value="@Model.Title" required/>
+            <span id="title-error" class="error"></span>
+        </div>
+        <div class="form-group">
+            <label for="Goal" class="control-label">Goal</label>
+            <input id="Goal" class="form-control" value="@Model.Goal" required/>
+            <span id="goal-error" class="error"></span>
+        </div>
+        <div class="form-group">
+            <label>Logo</label>
+            <div class="box" id="logo-label-box">
+                <div class="box__input">
+                    <input id="logo-input" class="box__file" type="file" accept="image/*" required/>
+                    <label for="logo-input">
+                        <span id="logo-span1" class="font-weight-bold choose-text">Kies een afbeelding</span>
+                        <span id="logo-span2">of sleep het hier<br></span>
+                    </label>
+                </div>
+            </div>
+            <span id="logo-error" class="error"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="StartDate" class="control-label">Start datum</label>
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">
+                        <i class="far fa-calendar-alt"></i>
+                    </span>
+                </div>
+                <input id="StartDateInput" class="form-control" data-toggle="startdate-picker" readonly/>
+            </div>
+            <span id="startDate-error" class="error"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="EndDate" class="control-label">Eind datum</label>
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">
+                        <i class="far fa-calendar-alt"></i>
+                    </span>
+                </div>
+                <input id="EndDateInput" class="form-control" data-toggle="enddate-picker" readonly/>
+            </div>
+            <span id="endDate-error" class="error"></span>
+        </div>
+        <div class="form-group">
+            <h2>Phases</h2>
+
+            <div id="phase-input-container" class="row">
+                @foreach (var Phase in Model.Phases)
+                {
+                    <div class="phase-input-form col-md-4 my-3">
+                        <div class="form-group">
+                            <label class="control-label">Phase number:</label>
+                            <input type="text" value="@Phase.Number" class="phase-number form-control" readonly/>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">Phase title:</label>
+                            <input type="text" placeholder="title" value="@Phase.Title" class="phase-number form-control"/>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">Phase description:</label>
+                            <textarea placeholder="description"class="form-control text-align-left">@Phase.Description</textarea>
+                        </div>
+                        @if (Model.CurrentPhaseNumber == Phase.Number)
+                        {
+                            <div class="form-group">
+                                <input class="phase-current" id="phase-@Phase.Number" name="currentPhase" checked="checked" type="radio" required/>
+                                <label for="phase-@Phase.Number" class="control-label">Actieve fase</label>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="form-group">
+                                <input class="phase-current" id="phase-@Phase.Number" name="currentPhase" type="radio" required/>
+                                <label for="phase-@Phase.Number" class="control-label">Actieve fase</label>
+                            </div>
+                        }
+                    </div>
+                }
+                <div id="addPhase-button-wrapper" class="col-md-4">
+                    <button type="button"
+                            alt="Add phase"
+                            id="addPhase"
+                            class="btn btn-primary btn-block">
+                        <i class="fas fa-plus-circle"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <h2>Moderators</h2>
+            <h6>Moderators toewijzen</h6>
+            <div class="dropdown">
+                <div id="mod-dropdown" class="dropdown-content">
+                    <input type="text" placeholder="Search.." id="mod-input">
+                </div>
+            </div>
+            <h6>Toegewezen moderators</h6>
+            <table id="Table" class="table table-borderless table-striped">
+                <thead>
+                <tr>
+                    <th>Naam</th>
+                    <th>Voornaam</th>
+                    <th>Email</th>
+                    <th>Verwijderen</th>
+                </tr>
+                </thead>
+                <tbody id="mod-table-body">
+                </tbody>
+            </table>
+        </div>
+
+        <input id="updateProject" type="button" value="Update" class="btn-default"/>
+    </form>
+</div>
+
+@section Scripts {
+    <script type="module" src="~/dist/createProject.entry.js" defer></script>
+}

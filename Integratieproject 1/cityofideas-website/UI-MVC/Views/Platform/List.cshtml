@@ -1,0 +1,59 @@
+﻿@using COI.BL.Domain.Platform;
+
+@{
+    ViewData["Title"] = "Platforms";
+    Layout = "_LayoutAdmin";
+}
+
+<h2>Lijst van platformen</h2>
+
+<a class="btn btn-default" asp-controller="Platform" asp-action="Create">
+    <i class="fas fa-plus"></i>
+    Nieuw platform
+</a>
+
+<hr />
+
+<div class="row">
+    <div class="col-sm-12 col-md-10 col-lg-8">
+        <table id="platform-list" class="table table-hover">
+            <thead class="thead-dark">
+                <tr>
+                    <td scope="col">Logo</td>
+                    <td scope="col">Naam</td>
+                    <td scope="col">Subdomein</td>
+                    <td scope="col">Acties</td>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var platform in Model)
+                {
+                    <tr>
+                        <environment names="Production">
+                            <!-- On Production src is always a (google storage) url -->
+                            <td><img src="@platform.Logo.Url" alt="@platform.Logo.Name" /></td>
+                        </environment>
+                        <environment names="Development">
+                            <!-- On Development src can be an url or a localstoragePath -->
+                            @if (platform.Logo.Url.Contains("http"))
+                            {
+                                <td><img src="@platform.Logo.Url" alt="@platform.Logo.Name" /></td>
+                            }
+                            else
+                            {
+                                <td><img src="~/uploads/@platform.Logo.Url" alt="@platform.Logo.Name" /></td>
+                            }
+                        </environment>
+                        <td>@platform.Name</td>
+                        <td>@platform.Tenant</td>
+                        <td>
+                            <a href="@Url.Action("Edit", "Platform", new { id = platform.PlatformId })" class="btn">
+                                <i class="fas fa-pencil-alt"></i>
+                            </a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

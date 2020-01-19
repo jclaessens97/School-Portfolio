@@ -1,0 +1,80 @@
+GET https://localhost:5001/api/forms/all
+Cookie: .AspNetCore.Identity.Application=CfDJ8ADiISYlKqZFq-pvzaGd6_oVH0TKDVc8Q09GxgKnI47jmNDcdfuD-DFAJiMUGw_432I-GntB-nLMDS5HyKZnM48Qx7WFuFH0Fos1SiO-f6OFMoNqmtL6m5dfKcKU85iYW61B3sVFcrm8B7tHYoq4mjZIpZ6CdDlbEnO4QKC01wBQ7AQ83efYHLarAcopvnEkiRpPJf9VNl3dTdrQNFiSTrJD0CMzQEnHUhhHwJlLzJA9fN4xdjZCl-QyCS4ooT1EHkaSRVHc5kWeZsMmvG5IPFoYTdTy_tm_7CoPsDA1pjzPOLuRSS1uA2FrBFRhMx-yY6DVf5zEclagY07VtUSee5ipf48gnzHb1qyXYQmt4BimjVrJ_uQMhmQoOgE5IIWyrq69swwe_OHYrItI6YlY4MgCQO5xJSTPCJLZoCV1J8K5KuGYWaKivmOU26__YLfUrjAxUXn2Sw5A0ikagu_GMgRdTRTkYxufz-RJmNuBIq8Lfqh0NOFBBmVOgDcdJfVfPBx4cDQLHeMEFLTlqLygFw95noO-Dn0BUdRZDi7YpGCdC1A5L7EvQeyNjb6_a4YC0egM9tcIsuMo_fKbSMn-WMQzuVImtgCxxVN5iCgD23D9AWij2XlJvytn42j6OX6vdw; expires=Fri, 10 May 2019 09:27:11 GMT; path=/; secure; samesite=lax; httponly
+
+###
+
+POST https://havenbedrijf2.localhost:5001//api/users/registerUser HTTP/1.1
+Accept: application/json
+Content-Type: application/json
+
+{
+  "userName": "Brecht_Pallemans",
+  "firstName": "Brecht",
+  "lastName": "Pallemans",
+  "email": "brecht.pallemans@mail.be",
+  "password": "Test-1",
+  "confirmPassword": "Test-1",
+  "organisation": false,
+  "sexM": true,
+  "sexV": false,
+  "zipcode": 2000,
+  "birthdate": "2001-02-03T04:05:06Z"
+}
+
+###
+
+POST https://localhost:5001/api/users/loginuser HTTP/1.1
+Accept: application/json
+Content-Type: application/json
+Device: android
+
+{
+  "email": "brecht.pallemans@gmail.com",
+  "password": "Test-1"
+}
+
+###
+POST http://127.0.0.1:5001/api/account/forgotpassword HTTP/1.1
+Accept: application/json
+Content-Type: application/json
+
+{
+  "email": "brecht.pallemans@gmail.com"
+}
+
+###
+
+GET https://localhost:5001/api/project/All HTTP/1.1
+Accept: application/json
+Content-Type: application/json
+
+
+###
+
+GET https://localhost:5001/api/users/refreshtoken HTTP/1.1
+Accept: application/json
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJFbWFpbCI6ImJyZWNodC5wYWxsZW1hbnNAZ21haWwuY29tIiwibmJmIjoiMTU1ODYzMzI0NyIsImV4cCI6IjE1NTg2NDc2NDciLCJqdGkiOiJHSFVPUkdIQlVPRUpOR08zUkhHVU9SM0JHTEpaTkVPVUdCT1pVUkdMSlpHVURTSUJHSktTIn0.xm8l--UOL4g80PFjXRsfz1xzy2YVdKoZI1M3MgvsSNM
+
+###
+
+https://localhost:5001/api/ideations/all HTTP/1.1
+Accept: application/json
+Content-Type: application/json
+
+###
+
+GET https://localhost:5001/api/ideations/1
+
+###
+
+GET http://localhost:5000/api/platforms/all HTTP/1.1
+Accept: application/json
+Content-Type: application/json
+
+###
+
+POST https://localhost:5001/api/forms/vote/1/0
+Accept: application/json
+
+###

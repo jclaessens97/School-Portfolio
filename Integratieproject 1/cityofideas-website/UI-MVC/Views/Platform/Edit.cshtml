@@ -1,0 +1,151 @@
+﻿@model COI.UI_MVC.Models.PlatformViewModel
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "_LayoutAdmin";
+}
+
+<h2>Platform bewerken</h2>
+<a asp-action="List" class="btn btn-default">Terug</a>
+<hr />
+<div class="row">
+    <div class="col-12 col-lg-6">
+        <form asp-controller="Platform" asp-action="Edit" method="put" enctype="multipart/form-data">
+            @Html.AntiForgeryToken()
+            @Html.HiddenFor(p => p.PlatformId)
+
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="form-group row">
+                <div class="col">
+                    <label asp-for="Name" class="control-label"></label>
+                    <input asp-for="Name" class="form-control" required />
+                    <span id="name-error" class="error"></span>
+                </div>
+                <div class="col">
+                    <label asp-for="Tenant" class="control-label"></label>
+                    <input asp-for="Tenant" class="form-control" required />
+                    <span id="tenant-error" class="error"></span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Description" class="control-label"></label>
+                <textarea asp-for="Description" class="form-control" required></textarea>
+                <span id="description-error" class="error"></span>
+            </div>
+
+            <div class="form-group">
+                <label>Logo</label>
+                <div class="box" id="logo-label-box">
+                    <div class="box__input">
+                        <input id="logo-input" class="box__file" type="file" accept="image/*" required />
+                        <label for="logo-input">
+                            <span id="logo-span1" class="font-weight-bold choose-text">Kies een nieuw logo</span>
+                            <span id="logo-span2">of sleep het hier<br></span>
+                        </label>
+                    </div>
+                </div>
+                <div>
+                    <label>Logo preview</label>
+                    <div class="text-center">
+                        <img id="logo-preview" src="@Model.LogoUrl" alt="platform logo preview" />
+                    </div>
+                </div>
+                <span id="logo-error" class="error"></span>
+            </div>
+
+            <div class="form-group">
+                <div class="form-check">
+                    <input type="checkbox" class="form-check-input" id="bannerImageCheck">
+                    <label class="form-check-label" for="bannerImageCheck">Voeg nieuwe banner afbeelding toe in plaats van een kleur</label>
+                </div>
+                <div class="box" id="banner-label-box">
+                    <div class="box__input">
+                        <input id="banner-input" class="box__file" type="file" accept="image/*" required />
+                        <label for="banner-input">
+                            <span id="banner-span1" class="font-weight-bold choose-text">Kies een nieuwe banner</span>
+                            <span id="banner-span2">of sleep het hier<br></span>
+                        </label>
+                        <input id="hidden-banner-value" type="hidden" value="@Model.BannerUrl" />
+                    </div>
+                </div>
+                <span id="banner-error" class="error"></span>
+            </div>
+
+            <div class="form-group">
+                <span id="color-error" class="error"></span>
+                <label for="color-preview">Stel uw thema samen:</label>
+                <div id="color-preview" class="shadow">
+                    <div id="social-bar-preview" class="color-chooser" title="social-bar">
+                        <span class="ml-2">* * *</span>
+                        <span class="mr-2">login register</span>
+                    </div>
+                    <div id="navbar-preview" class="color-chooser" title="navbar">
+                        <span class="ml-2 text-uppercase">City of Ideas</span>
+                        <span class="mr-2">home about</span>
+                    </div>
+                    <div id="banner-preview" class="color-chooser" title="banner"></div>
+                    <div id="body-preview-color">
+                        <p id="text-preview" class="ml-2 color-chooser" title="tekst kleur">
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam in libero suscipit, convallis sem nec, tincidunt tortor. Curabitur eu fringilla massa, id maximus odio. Curabitur.
+                        </p>
+                    </div>
+                    <div class="text-center">
+                        <button id="body-preview" class="btn btn-default color-chooser" title="achtergrond kleur body">achtergrond</button>
+                        <button id="button-preview" class="btn btn-default color-chooser" title="achtergrondkleur knoppen">knop achtergrond</button>
+                        <button id="button-text-preview" class="btn btn-default color-chooser" title="textkleur knoppen">knop tekst</button>
+                    </div>
+                    <div id="footer-preview" class="mt-2 color-chooser" title="footer"></div>
+                </div>
+                <div id="colorpicker"
+                     acp-show-rgb="yes"
+                     acp-show-hsl="no"
+                     acp-palette="PALETTE_MATERIAL_CHROME"
+                     acp-palette-editable>
+                </div>
+            </div>
+
+            <!-- socialbar and footer are the same color -->
+            <input type="hidden" class="color-value" id="social-bar-value" value="@Model.SocialBarColor" />
+            <input type="hidden" class="color-value" id="navbar-value" value="@Model.NavbarColor" />
+            <input type="hidden" class="color-value" id="banner-value" value="@Model.BannerColor" />
+            <input type="hidden" class="color-value" id="text-value" value="@Model.TextColor" />
+            <input type="hidden" class="color-value" id="body-value" value="@Model.BodyColor" />
+            <input type="hidden" class="color-value" id="button-value" value="@Model.ButtonColor" />
+            <input type="hidden" class="color-value" id="button-text-value" value="@Model.ButtonTextColor" />
+            <input type="hidden" class="color-value" id="footer-value" value="@Model.SocialBarColor" />
+
+            <div class="form-group">
+                <h2>Users</h2>
+                <h6>Gebruiker als Admin toewijzen</h6>
+                <div class="dropdown">
+                    <div id="mod-dropdown" class="dropdown-content">
+                        <input type="text" placeholder="Search.." id="mod-input">
+                    </div>
+                </div>
+                <h6>Toegewezen admins</h6>
+                <table id="Table" class="table table-borderless table-striped">
+                    <thead>
+                    <tr>
+                        <th>Naam</th>
+                        <th>Voornaam</th>
+                        <th>Email</th>
+                        <th>Verwijderen</th>
+                    </tr>
+                    </thead>
+                    <tbody id="mod-table-body">
+                    </tbody>
+                </table>
+            </div>
+            
+            <div class="form-group text-center">
+                <input id="updatePlatform" type="button" value="Opslaan" class="btn btn-default btn-block" />
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <script type="module" src="~/dist/createPlatform.entry.js" defer></script>
+}

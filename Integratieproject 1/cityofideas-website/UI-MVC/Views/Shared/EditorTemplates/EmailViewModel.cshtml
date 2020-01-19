@@ -1,0 +1,17 @@
+@using COI.BL.Domain.User
+@using Microsoft.AspNetCore.Identity
+@inject UserManager<User> UserManager
+@inject SignInManager<User> SignInManager
+@model COI.UI_MVC.Models.EmailViewModel
+
+
+        @if (!SignInManager.IsSignedIn(User))
+        {
+            <label asp-for="Email">Email-address<span style='color:red !important'>*</span></label>
+            <input id="email" asp-for="Email" class="form-control" id="email" required/><br/>
+            <span id="email-error" asp-validation-for="Email" class="text-danger" ></span>
+        }
+        else
+        {
+            <input type="hidden" asp-for="Email" value="@UserManager.GetUserAsync(User).Result.Email" required/>
+        }

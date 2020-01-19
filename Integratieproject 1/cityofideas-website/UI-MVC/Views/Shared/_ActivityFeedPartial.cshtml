@@ -1,0 +1,43 @@
+﻿@using COI.UI_MVC.Models;
+
+<section id="latest-activity" class="container mt-0">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="container mt-0">
+                <div class="row">
+                    <div class="col-2 d-inline-block d-flex justify-content-center flex-column border-right">
+                        <p class="font-weight-bold font-italic m-0 text-danger">LIVE FEED</p>
+                    </div>
+                    <div class="col-10">
+                        <div id="activity-feed" class="carousel d-none">
+                            @if (ViewBag.Activities.Count == 0)
+                            {
+                                <i>Geen recente activiteiten</i>
+                            }
+                            else
+                            {
+                                foreach (ActivityViewModel activity in ViewBag.Activities)
+                                {
+                                    <div class="activity-entry w-100">
+                                        <div>
+                                            <p class="mb-0">
+                                                <span>@activity.User</span>
+                                                heeft
+                                                @activity.Action
+                                                <span><a href="@activity.GetLink()">@activity.Value</a></span>
+                                            </p>
+                                            <p class="mb-0 small"><span class="activity-date font-italic "> @activity.ActivityDate</span></p>
+                                        </div>
+                                    </div>
+                                }
+                            }
+                        </div>
+                    </div>
+                    
+                    
+                </div>
+            </div> 
+        </div>
+
+    </div>
+</section>

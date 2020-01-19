@@ -1,0 +1,56 @@
+﻿#metrics .row {
+    width: 100%;
+}
+
+
+
+.dashboard-counter {
+    background-color: $primary;
+    width: 250px;
+    height: 120px;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    border-radius: 5px;
+    padding-left: 10px;
+}
+
+.dashboard-counter .value {
+    font-weight: bold;
+    font-size: 3em;
+}
+
+.dashboard-counter .icon {
+    position: absolute;
+    display: block;
+    font-size: 5em;
+    margin-left: 150px;
+    margin-top: -5px;
+    opacity: .6;
+}
+
+.dashboard-counter label {
+    text-transform: uppercase;
+    font-size: 1.3em;
+    font-weight: 200;
+}
+
+#shortcuts a {
+    background-color: $primary;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    transition: .3s all;
+    text-transform: uppercase;
+}
+
+#shortcuts a:hover {
+    opacity: .4;
+}
+
+#shortcuts a:hover {
+    text-decoration: none;
+}

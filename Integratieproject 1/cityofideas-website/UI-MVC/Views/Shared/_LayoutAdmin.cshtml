@@ -1,0 +1,109 @@
+﻿@using COI.BL.Domain.User
+@using Microsoft.AspNetCore.Identity
+@inject UserManager<User> UserManager
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>@ViewData["Title"] - City Of Ideas</title>
+
+    <!-- CSS and JS bundles -->
+    <link rel="stylesheet" href="~/dist/site.css"/>
+    <link rel="stylesheet" href="~/dist/admin.css"/>
+    @RenderSection("StyleSheets", required: false)
+    <script type="module" src="~/dist/admin.entry.js" defer></script>
+    @RenderSection("Scripts", required: false)
+</head>
+<body>
+<div id="wrapper" style="min-height: 100vh; position: relative">
+    <header>
+        <a asp-controller="Home" asp-action="Index">
+            <h1 class="ml-3 pb-2">City of Ideas</h1>
+        </a>
+    </header>
+
+    @*TODO: Disable links depending on claims the user has*@
+    <nav class="sidenav">
+        <a asp-controller="Admin" asp-action="Dashboard">
+            <i class="fas fa-tachometer-alt"></i>
+            <span class="float-right">
+                Dashboard
+            </span>
+        </a>
+        <a asp-controller="Project" asp-action="List">
+            <i class="fas fa-folder-open"></i>
+            <span class="float-right">
+                Projecten
+            </span>
+        </a>
+        <a asp-controller="Platform" asp-action="List">
+            <i class="fab fa-buffer"></i>
+            <span class="float-right">
+                Platformen
+            </span>
+        </a>
+        <a asp-controller="Admin" asp-action="UserPanel">
+            <i class="fas fa-users"></i>
+            <span class="float-right">
+                Gebruikers
+            </span>
+        </a>
+        <a asp-controller="Admin" asp-action="OrganisationPanel">
+            <i class="fas fa-building"></i>
+            <span class="float-right">
+                Organisaties
+            </span>
+        </a>
+        <a asp-controller="Admin" asp-action="RequestPanel">
+            <i class="fas fa-edit"></i>
+            <span class="float-right">
+                Verify requests
+            </span>
+        </a>
+        <a asp-controller="Admin" asp-action="ReportPanel">
+            <i class="fas fa-flag"></i>
+            <span class="float-right">
+                Reports
+            </span>
+        </a>
+        @*<a asp-controller="Admin" asp-action="PlatformRequestPanel">
+            <i class="fas fa-edit"></i>
+            <span class="float-right">
+                Platform requests
+            </span>
+        </a>*@
+        <a asp-controller="Form" asp-action="ResultOverview">
+            <i class="fas fa-poll"></i>
+            <span class="float-right">
+                Resultaten
+            </span>
+        </a>
+        <hr/>
+        <a href="#">
+            <form asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new {area = ""})" method="post" id="logoutForm" class="navbar-right">
+
+                <i class="fas fa-sign-out-alt"></i>
+                <span class="float-right mr-4">
+                    <button type="submit" class="btn btn-click">
+                        <span class="float-right">
+                            Uitloggen
+                        </span>
+                    </button>
+                </span>
+            </form>
+        </a>
+    </nav>
+
+    <div class="flex-fill pb-4 mb-3">
+        <main class="mt-4">
+            @RenderBody()
+        </main>
+    </div>
+
+    <partial name="_FooterPartial"/>
+    <partial name="_PreLoaderPartial"/>
+</div>
+</body>
+</html>

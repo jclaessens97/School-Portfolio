@@ -1,0 +1,74 @@
+@model COI.UI_MVC.Models.CreateFormViewModel
+
+@{
+    ViewBag.Title = "Nieuwe ideation aanmaken";
+    Layout = "_Layout";
+}
+
+@section Scripts
+{
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script type="module" src="~/dist/createIdeation.entry.js" defer></script>
+}
+
+<div class="container">
+    <a asp-controller="Project" asp-action="Details" asp-route-id="@Model.ProjectId" class="btn-default"><i class="fas fa-backward"></i>  naar project</a>
+    <h2 class="mt-3">Nieuwe Ideation aanmaken</h2>
+
+<form>
+    <input type="hidden" value="@Model.ProjectId" id="ProjectId"/>
+    <div class="form-group">
+        <label asp-for="ProjectTitle">Project</label><br/>
+        <input asp-for="ProjectTitle" readonly class="form-control"/>
+    </div>
+    <div class="form-group">
+        <label asp-for="Phase">Phase</label>
+        <select id="PhaseId" asp-for="Phase" asp-items="@(Model.Phases.Select(p => new SelectListItem {Text = p.Title, Value = p.PhaseId.ToString()}))" class="form-control"></select>
+        <span id="error-PhaseId" class="error"></span>
+    </div>
+    <div class="form-group">
+        <label for="CentralQuestion">Centrale vraag<span class="text-danger">*</span></label><br/>
+        <input id="CentralQuestion" class="form-control" required/>
+        <span id="error-CenterQuestion" class="error"></span>
+    </div>
+    <div class="form-group">
+        <label for="Description">Beschrijving<span class="text-danger">*</span></label><br/>
+        <textarea id="Description" class="form-control" required></textarea>
+        <span id="error-Description" class="error"></span>
+    </div>
+    <div class="form-group">
+        <label for="Url">Url naar meer informatie<span class="text-danger">*</span></label><br/>
+        <input id="Url" class="form-control" placeholder="https://www.example.com" required/>
+        <span id="error-Url" class="error"></span>
+    </div>
+    <div class="form-group">
+        <label for="IdeationType">
+            Ideation type<span class="text-danger">*</span>
+        </label><br/>
+        <select id="IdeationType" class="form-control">
+            <option value="0">Maak een keuze</option>
+            <option value="1">Type 1: Gebruikers kunnen ideeën geven</option>
+            <option value="2">Type 2: Enkel admins kunnen ideeën geven</option>
+        </select>
+        <span id="error-IdeationType" class="error"></span>
+    </div>
+
+    <div class="container">
+        <div id="form-wrapper" class="row">
+            
+        </div>
+    </div>
+    
+    <div id="buttons-wrapper">
+    </div>
+    <span id="error-questions" class="error"></span>
+
+
+    <br/>
+    <button id="SaveBtn" type="button" class="btn-default">Opslaan</button>
+
+</form>
+<div id="modal" class="modal">
+
+</div>
+</div>

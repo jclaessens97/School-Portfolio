@@ -1,0 +1,73 @@
+﻿.parallax {
+    background-image: url('../images/antwerpen_sky.png');
+    height: 500px;
+ 
+    /* parallax effect */
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.parallax h1 {
+    //font-size: 5em;
+    font-size: 5vw;
+    font-weight: bold;
+    text-shadow: 3px 3px 3px rgba(0, 0, 0, 0.4);
+    color: #FFF;
+}
+
+.parallax .btn {
+    padding: 15px;
+}
+
+.parralax-rm-img {
+    background-image: none;
+}
+
+
+.jumbotron .conainer-fluid {
+    height: 100%;
+}
+
+.platform-logo {
+    max-height: 150px;
+}
+
+.platform-button {
+    width: 250px;
+    color: $primary;
+    font-weight: bold;
+    transition: .3s all;
+}
+
+.platform-button:hover {
+    opacity: .6;
+}
+
+.platform-action {
+    position: absolute;
+    bottom: 10px;
+    width: 100%;
+    text-align: center;
+    margin-left: -50px;
+}
+
+.platform-action p span {
+    text-align: center;
+    margin: 0 auto;
+}
+
+.clickable-tile,
+.clickable-tile:hover {
+    color: #000;
+}
+
+.clickable-tile .shadow {
+    transition: .3s all;
+}
+
+.clickable-tile .shadow:hover {
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.3) !important;
+}
+

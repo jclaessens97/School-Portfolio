@@ -1,0 +1,90 @@
+﻿@using Microsoft.AspNetCore.Http.Extensions
+@using COI.UI_MVC.Util;
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>@ViewData["Title"] - City Of Ideas</title>
+
+    <!-- CSS and JS bundles -->
+    <link rel="stylesheet" href="~/dist/site.css"/>
+    @RenderSection("StyleSheets", required: false)
+    <script type="module" src="~/dist/site.entry.js" defer></script>
+    @RenderSection("Scripts", required: false)
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+</head>
+
+<body>
+<div id="wrapper" style="min-height: 100vh; position: relative">
+    <header>
+        <div id="social-bar" class="container-fluid socialbar-color">
+            <div class="row">
+                <div id="social-wrapper" class="mt-2 ml-5 pl-3">
+                    <a target="_blank" href="https://facebook.com/sharer/sharer.php?u=https://cityofidea.be&t=Zet%20hier%20je%20eigen%20titel%20neer">
+                        <i class="fab fa-facebook-f m-1"></i>
+                    </a>
+                    <a href="https://twitter.com/share?text=Neem%20een%20kijkje%20op:%20&url=https://cityofidea.be" target="_blank">
+                        <i class="fab fa-twitter m-1"></i>
+                    </a>
+                    <a target="_blank" href="http://www.linkedin.com/shareArticle?mini=true&url=https://cityofidea.be&summary=Share%20City%20Of%20Ideas&source=cityofidea.be">
+                        <i class="fab fa-linkedin m-1"></i>
+                    </a>
+                    <a target="_blank" href="http://pinterest.com/pin/create/link/?url=https://cityofidea.be">
+                        <i class="fab fa-pinterest m-1"></i>
+                    </a>
+                </div>
+                <div id="login-partial" class="ml-auto mt-2 mr-5">
+                    <partial name="_LoginPartial"/>
+                </div>
+            </div>
+        </div>
+        <nav class="navbar navbar-expand-md navbar-light navbar-custom justify-content-between navbar-color">
+            <a class="navbar-brand ml-5 text-uppercase " href="/">
+                <img src="/images/Logo cityofideas.png" alt="Logo City of Ideas"/>
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse mr-auto" id="navbarSupportedContent">
+                <ul class="navbar-nav ml-auto pl-5 mr-4">
+
+                    <li class="nav-item active">
+                        <a class="nav-link" href="/">Home</a>
+                    </li>
+                    @*<li class="nav-item">
+            <a class="nav-link" href="/#actief">Projecten</a>
+        </li>*@
+                    <li class="nav-item">
+                        <a class="nav-link" href="@Url.Action("About", "Home")">Over ons</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="@Url.Action("Contact", "Home")">Contact</a>
+                    </li>
+                    <li class="nav-item">
+                        <div class="search-container">
+                            <div id="searchButtonNav" class="search-icon-btn">
+                                <i class="fa fa-search fa-lg"></i>
+                            </div>
+                            <div class="search-input">
+                                <input id="searchInputNav" type="search" class="search-bar" placeholder="Zoeken...">
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <div class="body pb-4 mb-3">
+        <main role="main" class="container-fluid p-0 pb-4">
+            @RenderBody()
+        </main>
+    </div>
+
+    <partial name="_FooterPartial"/>
+    <partial name="_PreLoaderPartial"/>
+</div>
+</body>
+</html>

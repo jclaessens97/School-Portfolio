@@ -1,0 +1,124 @@
+﻿@{
+    ViewData["Title"] = "Contacteer ons";
+}
+
+<section class="section pb-0">
+    <div class="container">
+        <h2>@ViewData["Title"]</h2>
+        <div class="row">
+            <div class="bg-white shadow text-center p-5 px-md-2 px-lg-5 w-100">
+                <h3 class="section-title">Contact Form</h3>
+                <form class="row" action="/Home/Contact" method="post">
+                    <div class="col-md-6">
+                        <span class="text-danger field-validation-valid"></span>
+                        <input type="text" class="form-control border-0 rounded-0 shadow mb-4 w-100" placeholder="Voornaam" id="FirstName" name="FirstName" value="">
+                    </div>
+                    <div class="col-md-6">
+                        <span class="text-danger field-validation-valid"></span>
+                        <input type="text" class="form-control border-0 rounded-0 shadow mb-4" placeholder="Achternaam" id="LastName" name="LastName" value="">
+                    </div>
+                    <div class="col-md-6">
+                        <span class="text-danger field-validation-valid"></span>
+                        <input type="text" class="form-control border-0 rounded-0 shadow mb-4" placeholder="Emailadres" id="Email" name="Email" value="">
+                    </div>
+                    <div class="col-md-12">
+                        <span class="text-danger field-validation-valid"></span>
+                        <input type="text" class="form-control border-0 rounded-0 shadow mb-4" placeholder="Onderwerp" id="Subject" name="Subject" value="">
+                    </div>
+                    <div class="col-12">
+                        <span class="text-danger field-validation-valid"></span>
+                        <textarea name="message" class="form-control border-0 rounded-0 shadow mb-5 py-3 px-4" placeholder="Bericht" id="Message"></textarea>
+                    </div>
+                    <div class="col-12">
+                        <input id="Email" name="Email" type="hidden" value=""/>
+                        <input id="OrganisationName" name="OrganisationName" type="hidden" value="City Of Ideas"/>
+                        <button type="submit" class="btn-default">Verzend</button>
+                    </div>
+                </form>
+            </div>
+
+            @*<div class="col-md-4 mb-4 mb-md-0">
+                <div class="bg-white shadow text-center p-5 px-md-2 px-lg-5">
+                    <i class="fas fa-phone fa-3x"></i>
+                    <h4 class="mb-4">Telefoonnummer</h4>
+                    <ul class="list-unstyled">
+                        <li></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4 mb-md-0">
+                <div class="bg-white shadow text-center p-5 px-md-2 px-lg-5">
+                    <i class="fas fa-envelope fa-3x"></i>
+                    <h4 class="mb-4">Email</h4>
+                    <ul class="list-unstyled">
+                        <li>info@cityofideas.be</li>
+                    </ul>
+                </div>
+            </div>*@
+        </div>
+    </div>
+</section>
+<section class="section">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-7">
+                <h3 class="section-title">Contact Form</h3>
+                <form class="row" action="/Home/Contact" method="post">
+                    <div class="col-md-6">
+                        <span class="text-danger field-validation-valid"></span>
+                        <input type="text" class="form-control border-0 rounded-0 shadow mb-4" placeholder="Voornaam" id="FirstName" name="FirstName" value="">
+                    </div>
+                    <div class="col-md-6">
+                        <span class="text-danger field-validation-valid"></span>
+                        <input type="text" class="form-control border-0 rounded-0 shadow mb-4" placeholder="Achternaam" id="LastName" name="LastName" value="">
+                    </div>
+                    <div class="col-md-6">
+                        <span class="text-danger field-validation-valid"></span>
+                        <input type="text" class="form-control border-0 rounded-0 shadow mb-4" placeholder="Emailadres" id="Email" name="Email" value="">
+                    </div>
+                    <div class="col-md-12">
+                        <span class="text-danger field-validation-valid"></span>
+                        <input type="text" class="form-control border-0 rounded-0 shadow mb-4" placeholder="Onderwerp" id="Subject" name="Subject" value="">
+                    </div>
+                    <div class="col-12">
+                        <span class="text-danger field-validation-valid"></span>
+                        <textarea name="message" class="form-control border-0 rounded-0 shadow mb-5 py-3 px-4" placeholder="Bericht" id="Message"></textarea>
+                    </div>
+                    <div class="col-12">
+                        <input id="Email" name="Email" type="hidden" value=""/>
+                        <input id="OrganisationName" name="OrganisationName" type="hidden" value="City Of Ideas"/>
+                        <button type="submit" class="btn-default">Verzend</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+<section>
+    <div class="bg-white shadow text-center p-5 px-md-2 px-lg-5 w-100">
+        <ul class="list-unstyled">
+            <li>
+                <i class="fas fa-map-marker-alt fa-3x"></i>
+                <h4 class="mb-4">Adres</h4>
+                @*<a href="https://www.google.be/maps/place/Nationalestraat+5,+2000+Antwerpen/">
+                                    Nationalestraat 5, 2000 Antwerpen
+                                </a>*@
+                Nationalestraat 5, 2000 Antwerpen
+                <br/>
+                @* <button><i class="fas fa-copy"></i></button> *@
+            </li>
+            <li>
+                <i class="fas fa-phone fa-3x"></i>
+                <h4 class="mb-4">Telefoonnummer</h4>
+                03 613 16 00
+                <br/>
+            </li>
+            <li>
+                <i class="fas fa-envelope fa-3x"></i>
+                <h4 class="mb-4">Email</h4>
+                info@cityofideas.be
+                <br/>
+            </li>
+        </ul>
+    </div>
+</section>

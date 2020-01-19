@@ -1,0 +1,54 @@
+@using COI.UI_MVC.Models
+@model List<COI.UI_MVC.Models.FormProjectsViewModel>
+
+@{
+    ViewBag.Title = "Resultaten van vragenlijsten";
+    Layout = "_LayoutAdmin";
+}
+
+<h2>Resultaten van alle vragenlijsten</h2>
+
+<div class="col-xl-6 col-lg-12">
+    @foreach (FormProjectsViewModel project in @Model)
+    {
+        <h5>@project.Title</h5>
+        if (project.forms.Count > 0)
+        {
+            <table class="table">
+                <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Titel</th>
+                    <th scope="col">Antwoorden</th>
+                    <th scope="col">Bekijk</th>
+                </tr>
+                <tbody>
+                @{
+                    ViewBag.index = 1;
+                }
+                @foreach (FormResultsViewModel form in project.forms)
+                {
+                    <tr>
+                        <th scope="row">@ViewBag.index</th>
+                        <td>@form.Title</td>
+                        <td>@form.AnswerCount</td>
+                        <td>
+                            <a asp-action="Result" asp-route-id="@form.FormId">Resultaten</a>
+                        </td>
+                    </tr>
+
+                    {
+                        ViewBag.index++;
+                    }
+                }
+                </tbody>
+                </thead>
+            </table>
+        }
+        else
+        {
+            <p class="italic">Dit project heeft geen vragenlijsten</p>
+        }
+        
+    }
+</div>
