@@ -1,0 +1,35 @@
+plugins {
+    id 'scala'
+    id 'org.openjfx.javafxplugin' version '0.0.8'
+}
+
+group 'be.kdg'
+version '1.0-SNAPSHOT'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+javafx {
+    version = "11"
+    modules = [ 'javafx.controls' ]
+}
+
+dependencies {
+    // Scala
+    compile group: 'org.scala-lang', name: 'scala-library', version: '2.13.1'
+
+    // Logger
+    compile group: 'org.apache.logging.log4j', name: 'log4j-api', version: '2.12.1'
+    compile group: 'org.apache.logging.log4j', name: 'log4j-core', version: '2.12.1'
+
+    // UI
+    compile 'com.jfoenix:jfoenix:9.0.8'
+
+    // Tests
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+    testCompile group: 'org.scalactic', name: 'scalactic_2.13', version: '3.0.8'
+    testCompile group: 'org.scalatest', name: 'scalatest_2.13', version: '3.0.8'
+}

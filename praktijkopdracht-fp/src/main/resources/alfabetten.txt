@@ -1,0 +1,39 @@
+Danish:
+volledig     -> abcdefghijklmnopqrstuvwxyzæåø
+klinkers     -> aeiouæåø
+medeklinkers -> bcdfghjklmnpqrstvwxyz
+
+Finnish:
+volledig     -> abcdefghijklmnopqrstuvwxyzäö
+klinkers     -> aeiouäö
+medeklinkers -> bcdfghjklmnpqrstvwxyz
+
+Italian:
+volledig     -> abcdefghilmnopqrstuvz
+klinkers     -> aeiou
+medeklinkers -> bcdfghlmnpqrstvz
+
+Dutch:
+volledig     -> abcdefghijklmnopqrstuvwxyz
+klinkers     -> aeiou
+medeklinkers -> bcdfghjklmnpqrstvwxyz
+
+English:
+volledig     -> abcdefghijklmnopqrstuvwxyz
+klinkers     -> aeiou
+medeklinkers -> bcdfghjklmnpqrstvwxyz
+
+German:
+volledig     -> abcdefghijklmnopqrstuvwxyzäöüß
+klinkers     -> aeiouäöü
+medeklinkers -> bcdfghjklmnpqrstvwxyzß
+
+Portuguese:
+volledig     -> abcdefghijklmnopqrstuvwxyz
+klinkers     -> aeiou
+medeklinkers -> bcdfghjklmnpqrstvwxyz
+
+Spanish:
+volledig     -> abcdefghijklmnñopqrstuvwxyz
+klinkers     -> aeiou
+medeklinkers -> bcdfghjklmnñpqrstvwxyz

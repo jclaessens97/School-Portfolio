@@ -1,0 +1,41 @@
+.view {
+    -fx-background-color: #303030;
+}
+
+.label {
+    -fx-font-size: 16pt;
+    -fx-font-weight: 900;
+    -fx-text-fill: #FFF;
+}
+
+.title {
+    -fx-font-size: 15px;
+    -fx-font-weight: 700;
+}
+
+.jfx-button {
+    -jfx-button-type: RAISED;
+    -fx-background-color: #1DB954;
+    -fx-text-fill: white;
+    -fx-pref-width: 475;
+}
+
+.active {
+    -fx-opacity: 0.4;
+}
+
+.chart-pie-label {
+    -fx-fill: #FFF;
+}
+
+.bar-chart-label {
+    -fx-fill: #FFF;
+}
+
+.toggle-button {
+    -fx-background-color: #1DB954;
+}
+
+.toggle-button:selected {
+    -fx-opacity: 0.4;
+}
