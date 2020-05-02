@@ -1,0 +1,19 @@
+.menu {
+    /* background-color: rgb(209, 209, 209); */
+    border: black;
+    width: 100%;
+    height: 500px;
+}
+
+mat-card {
+    box-shadow: none !important;
+}
+
+mat-card:nth-child(odd) {
+    background-color: #fafafa;;
+}
+
+.game-action {
+    cursor: pointer;
+    color: blue;
+}

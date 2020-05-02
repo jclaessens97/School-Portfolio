@@ -1,0 +1,182 @@
+{
+  "alert": {
+    "INFORMATION_UPDATED": "Je informatie is bijgewerkt.",
+    "PASSWORD_UPDATED": "Je wachtwoord is bijgewerkt.",
+    "REGISTER_SUCCESFULL": "Je bent succesvol geregistreerd.",
+    "PASSWORD_NOT_VALID": "Het wachtwoord moet 1 hoofdletter en 1 cijfer bevatten.",
+    "PASSWORD_IS_SAME": "Het wachtwoord moet verschillen om te kunnen wijzigen.",
+    "WRONG_PASSWORD": "Het oude wachtwoord is verkeerd.",
+    "INVALID_LOGIN": "Ongeldige combinatie gebruikersnaam en passwoord",
+
+    "CHARACTERTYPE_TAKEN": "Dit character is al in gebruik.",
+    "LOBBY_START_PLAYER_COUNT": "Er moeten minimaal 3 spelers zijn om een spel te starten",
+    "PLAYER_NOT_HOST": "Enkel de host kan het spel starten.",
+    "UNEXPECTED": "Er heeft zich een onverwachte fout voorgedaan.",
+    "USERNAME_EXISTS": "Deze gebruikersnaam is al in gebruik.",
+    "EMAIL_EXISTS": "Dit emailadres is al in gebruik.",
+    "PLAYER_ALREADY_IN_LOBBY": "Je bent al reeds gejoined"
+  },
+  "general": {
+    "actions": {
+      "close": "Sluiten",
+      "invite_button": "Uitnodigen",
+      "invite": "Vrienden uitnodigen",
+      "invite_question": "Wie wil je uitnodigen?"
+    },
+    "friends": {
+      "add": "toevoegen",
+      "add_a_friend": "Voeg een vriend toe",
+      "friends": "Vrienden",
+      "requests": "Verzoeken",
+      "confirm": "bevestigen"
+    },
+    "navigation": {
+      "admin": "Admin",
+      "settings": "Instellingen",
+      "play": "Spelen",
+      "statistics": "Statistieken",
+      "logout": "Afmelden"
+    },
+    "welcome": "Welkom {{username}}",
+    "languages": {
+      "en": "English",
+      "nl": "Nederlands"
+    },
+    "language": "Nederlands",
+    "login": {
+      "fieldname": "Aanmelden"
+    },
+    "register": {
+      "email": {
+        "fieldname": "Email",
+        "required": "Email is verplicht",
+        "invalid": "Email is verplicht"
+      },
+      "username": {
+        "fieldname": "Gebruikersnaam",
+        "required": "Gebruikersnaam is verplicht",
+        "minlength": "Gebruikersnaam moet minstens 3 karakters bevatten"
+      },
+      "password": {
+        "fieldname": "Wachtwoord",
+        "required": "Wachtwoord is verplicht",
+        "minlength": "Wachtwoord moet minimaal uit 6 characters bestaan"
+      },
+      "action": "Registreren",
+      "back": "Reeds geregistreerd? Aanmelden"
+    },
+    "account": {
+      "title": "Instellingen",
+      "profile": "Profiel",
+      "username": "Gebruikersnaam",
+      "save": "Opslaan",
+      "account": "Account",
+      "change": "Verander wachtwoord",
+      "changeInformation": "Verander je gebruikersnaam of email",
+      "delete": "Verwijder account",
+      "newpassword": "Nieuw wachtwoord",
+      "currentpassword": "Huidig wachtwoord",
+      "back": "Annuleer"
+    },
+    "report": {
+      "OFFENSIVE_LANGUAGE": "Ongepaste taal",
+      "OFFENSIVE_USERNAME": "Ongepaste gebruikersnaam",
+      "CHEATING": "Valsspelen"
+    }
+  },
+  "statistics": {
+    "watch": "Statistieken"
+  },
+  "lobby": {
+    "list": {
+      "title": "Spel joinen of aanmaken",
+      "new": "Nieuwe lobby maken",
+      "refresh": "Verniewen",
+      "name": "Naam",
+      "host": "Host",
+      "players": "Spelers",
+      "action": "Actie",
+      "open": "Openen",
+      "ongoing": "Lopende spellen",
+      "joined": "Uw lobbies",
+      "other": "Andere lobbies",
+      "join": "Join"
+    },
+    "lobby": {
+      "settings": "Instellingen",
+      "name": "Lobby naam",
+      "maxplayers": "Max spelers",
+      "playeramount": "{{amount}} spelers",
+      "maxturn": "Max duur beurt",
+      "players": "Spelers",
+      "playersInGame": "Spelers in het spel",
+      "kick": "Kicken",
+      "report": "Misbruik melden",
+      "noactions": "Geen beschikbare acties",
+      "host": "host",
+      "start": "Spel starten",
+      "invite": "Vrienden uitnodigen",
+      "leave": "Lobby verlaten",
+      "menu": "Terug naar menu"
+    }
+  },
+  "game": {
+    "playerTurn": ") is aan de beurt.",
+    "active": "actief",
+    "dice": {
+      "total": "Totaal: {{count}}",
+      "roll": "Gooi"
+    },
+    "cardtypes": {
+      "suspects": "Verdachten",
+      "weapons": "Wapens",
+      "rooms": "Kamers"
+    },
+    "types": {
+      "PURPLE": "Professor Pimpel",
+      "RED": "Rosa Roodhart ",
+      "GREEN": "Dominee Groenewoud",
+      "YELLOW": "Kolonel van Geelen",
+      "BLUE": "Mw. Blauw van Draet",
+      "WHITE": "Mh. Dewit",
+      "REVOLVER": "Revolver",
+      "ROPE": "Touw",
+      "DAGGER": "Dolk",
+      "WRENCH": "Engelse sleutel",
+      "CANDLESTICK": "Kandelaar",
+      "LEADPIPE": "Loden pijp",
+      "KITCHEN": "Keuken",
+      "BALLROOM": "Balzaal",
+      "CONSERVATORY": "Conservatorium",
+      "BILLIARDROOM": "Biljartkamer",
+      "LIBRARY": "Bibliotheek",
+      "STUDY": "Studeerkamer",
+      "HALL": "Hal",
+      "LOUNGE": "Serre",
+      "DININGROOM": "Eetkamer",
+      "CELLAR": "kelder",
+      "": ""
+    },
+    "suggestion": {
+      "choice": "Kies een kaart",
+      "make": "Maak een suggestie",
+      "enemy": "Suggestie van de speler aan beurt",
+      "showCard" : "Kies de kaart die je wil laten zien",
+      "reply": "gaat antwoorden op deze suggestie",
+      "replyCard": "Dit is jouw opponent's antwoord op jouw suggestie",
+      "no-card": "Niemand heeft één van de suggestiekaarten",
+      "replyDialog": "Kies de kaart die je wil tonen aan de speler die een suggestie doet",
+      "own-cards": "Mijn kaarten",
+      "btn-own": "Toon mijn kaarten",
+      "btn-suggestion": "Toon suggestiekaarten"
+    },
+    "accusation": {
+      "make": "Doe een gok",
+      "turn": "Eindig beurt",
+      "enemy": "SPELER AAN ZET HEEFT EEN GOK GEDAAN",
+      "right": "Heeft het juist geraden dus hij heeft gewonnen en het spel is over",
+      "wrong": "Heeft fout geraden en mag niet meer mee spelen",
+      "wrongEnd": "heeft gewonnen omdat de andere players al fout hebben geraden"
+    }
+  }
+}

@@ -1,0 +1,74 @@
+<div *ngIf="gameboard">
+<ng-template #tplPieceImage let-tile let-classes="classes">
+  <span class="image character"
+        *ngFor="let character of getCharacters(tile.xcoord, tile.ycoord)"
+        [ngClass]="character+classes">
+    </span>
+</ng-template>
+
+<div class="mb-3" id="buttons" [hidden]="character!=currentTurn.player.characterType">
+  <button class="mr-2" mat-raised-button color="primary" (click)="startSuggestion(false)" [disabled]="!isInRoom() || visibleSuggestionScreen">Make suggestion</button>
+  <button class="mr-2" mat-raised-button color="warn" (click)="startSuggestion(true)" [disabled]="visibleSuggestionScreen" >Make accusation</button>
+  <button class="mr-2" mat-raised-button color="primary" (click)="endTurn()" [disabled]="visibleSuggestionScreen">End Turn</button>
+</div>
+
+<div class="gameboard" [ngStyle]="{ width: convertToUnit(gwidth*dimensions.width) }" *ngIf="dimensions">
+  <div class="gameboard-content">
+      <span class="gameTile room" [ngStyle]="{ width: convertToUnit(gwidth*room.width), height: convertToUnit(gwidth*room.height), left: convertToUnit(gwidth*room.xcoord), top: convertToUnit(gwidth*room.ycoord) }"
+                                *ngFor="let room of gameboard.rooms" (click)="moveRoom(room.xcoord, room.ycoord, room.roomType)"
+                                [ngClass]="getRoom(room.xcoord, room.ycoord, room.roomType)">
+      <ng-template *ngTemplateOutlet="tplPieceImage; context: {$implicit: room, classes: ' character charRoom '}"></ng-template>
+      <span translate>{{ 'game.types.' + room.roomType }}</span>
+    </span>
+
+    <span class="gameTile spawntile" [ngStyle]="{ width: convertToUnit(gwidth), left: convertToUnit(gwidth*spawntile.xcoord), top: convertToUnit(gwidth*spawntile.ycoord) }"
+                                      *ngFor="let spawntile of gameboard.spawnTiles" (click)="move(spawntile.xcoord, spawntile.ycoord)"
+                                      [ngClass]="getSpawnTile(spawntile)">
+      <ng-template *ngTemplateOutlet="tplPieceImage; context: {$implicit: spawntile, classes: ' character '}"></ng-template>
+    </span>
+
+    <span class="gameTile tile" [ngStyle]="{ width: convertToUnit(gwidth), left: convertToUnit(gwidth*tile.xcoord), top: convertToUnit(gwidth*tile.ycoord) }"
+                                *ngFor="let tile of gameboard.tiles" (click)="move(tile.xcoord, tile.ycoord)"
+                                [ngClass]="getChoice(tile.xcoord, tile.ycoord)">
+    <ng-template *ngTemplateOutlet="tplPieceImage; context: {$implicit: tile, classes: ' character '}"></ng-template>
+    </span>
+
+    <div [class]="visibleSuggestionScreen? 'suggestionContainer' : ''">
+      <app-make-suggestion class="choiceBox" (madeSuggestion)="suggestionCall = true" (canceller)="visibleSuggestionScreen = false;" [room]="getRoomForSuggestion()" id="scenarioScreen" [gameId]="gameId" [character]="character" [asAccusation]="asAccusation" [hidden]="!visibleSuggestionScreen"></app-make-suggestion>
+    </div>
+
+    <div [class]="visibleSuggestionCard? 'suggestionContainer' : ''" [hidden]="!visibleSuggestionCard">
+      <div  class="card">
+        <div class="box box2">
+          <img [src]="suggestionShownCard.url" alt="" class="imgCard"/>
+          <span>{{ "game.types." + suggestionShownCard.type.toUpperCase() | translate }}</span>
+        </div>
+        <span translate>game.suggestion.replyCard</span>
+      </div>
+      <button (click)="makeCallFalse()" mat-raised-button color="grey" >Ok</button>
+    </div>
+  </div>
+</div>
+
+<!--TODO: hide turn when suggestion or a choice has been made-->
+<turn id="turn" [possibilities]="possibilities" [currentTurn]="currentTurn" (roll)="getPositions($event)" [character]="character"  [gameId]="gameId" (passage)="takePassage()" [hidden]="visibleSuggestionScreen"></turn>
+
+<div class="container">
+  <div class="subcontainer" *ngFor="let info of cardsToShowText; let i = index">
+    <button mat-raised-button color="grey" (click)="showCards(i)">{{info.buttonTxt | translate}}</button>
+    <div [hidden]="!info.showButton">
+    <h5><span>{{info.description | translate}}</span></h5>
+    <div class="box">
+      <div *ngFor="let card of info.cardList" class="card">
+        <img
+          [src]="card.url"
+          alt=""
+          class="imgCard"
+        />
+        <span id="cardTxt2" translate>{{ "game.types." + card.type.toUpperCase() }}</span>
+      </div>
+    </div>
+  </div>
+  </div>
+</div>
+

@@ -1,0 +1,48 @@
+image: larsdroid/integratieproject1:v1
+
+stages:
+  - build
+  - test
+  - deploy
+
+variables:
+  GRADLE_USER_HOME: "cache/.gradle"
+  GRADLE_ARGS_CI: "--no-daemon --stacktrace"
+  NEO4J_AUTH: "neo4j/groep16"
+  RABBITMQ_DEFAULT_USER: "rabbitmq"
+  RABBITMQ_DEFAULT_PASS: "rabbitmq"
+
+cache:
+  paths:
+    - $GRADLE_USER_HOME/wrapper/
+    - $GRADLE_USER_HOME/caches
+
+build:
+  stage: build
+  script:
+    - ./gradlew $GRADLE_ARGS_CI -g $GRADLE_USER_HOME assemble
+  artifacts:
+    paths:
+      - build/libs/*.jar
+    expire_in: 1 week
+  only:
+    - master
+
+test:
+  stage: test
+  services:
+    - neo4j:3.5.14
+    - rabbitmq:latest
+  script:
+    - export SPRING_PROFILES_ACTIVE=test
+    - ./gradlew $GRADLE_ARGS_CI -g $GRADLE_USER_HOME check
+  only:
+    - master
+
+deploy:
+  stage: deploy
+  script:
+    - gcloud auth activate-service-account --key-file $GOOGLE_SERVICE_ACCOUNT_FILE
+    - gcloud app deploy app.yaml --quiet --project $GOOGLE_PROJECT_ID
+  only:
+    - master

@@ -1,0 +1,38 @@
+.card {
+    width: 340px;
+    padding: 1px;
+    color: black;
+}
+
+@media only screen and (min-width: 479px) {
+  .container {
+  padding-top: 100px !important;
+  max-width: 2048px !important;
+  }
+}
+.container {
+  display: flex;
+  justify-content: center;
+  padding-top: 20px;
+}
+
+.title {
+  font-size: xx-large;
+  text-align: center;
+  padding: 30px;
+  background-color: rgb(240, 240, 240);
+  /* font-family: 'Courier New', Courier, monospace */
+}
+
+.card {
+  padding: 0px;
+  border: none;
+}
+
+img {
+  width: 100%;
+}
+
+mat-form-field {
+  padding: 2.5% 5% 0 5%;
+}

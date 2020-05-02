@@ -1,0 +1,14 @@
+<div ngClass="container">
+    <mat-card class="card">
+        <img src="assets/img/cluedo_logo.png"/>
+        <!-- <div class="title">Cluedo</div> -->
+        <mat-tab-group style="color: black;" [(selectedIndex)]="selectedIndex" mat-stretch-tabs>
+            <mat-tab label="{{ 'general.login.fieldname' | translate }}">
+                <app-login></app-login>
+            </mat-tab>
+            <mat-tab label="{{ 'general.register.action' | translate }}">
+                <app-register (emitIndex)="receiveIndex($event)"></app-register>
+            </mat-tab>
+        </mat-tab-group>
+    </mat-card>
+</div>

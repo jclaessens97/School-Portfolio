@@ -1,0 +1,19 @@
+version: '3'
+services:
+  neo4j:
+    image: neo4j:3.5.14
+    ports:
+      - 7474:7474 # HTTP
+      # - 7473:7473 # HTTPS
+      - 7687:7687 # Bolt
+    environment:
+      NEO4J_AUTH: neo4j/groep16
+
+  rabbitmq:
+    image: rabbitmq:3-management
+    ports:
+      - 5672:5672
+    environment:
+      RABBITMQ_DEFAULT_USER: "rabbitmq"
+      RABBITMQ_DEFAULT_PASS: "rabbitmq"
+      RABBITMQ_DEFAULT_VHOST: "/"

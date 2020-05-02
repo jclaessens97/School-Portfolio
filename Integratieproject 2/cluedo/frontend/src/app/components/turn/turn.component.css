@@ -1,0 +1,21 @@
+.option{
+  display: inline-block;
+  width: 25%;
+  margin-right: 3px;
+}
+
+#possibleMoves{
+  justify-content: space-evenly;
+  display: flex;
+  height: fit-content;
+}
+
+app-dice {
+  min-width: 150px;
+}
+
+.playerColor {
+  height: 10px;
+  width: 10px;
+}
+

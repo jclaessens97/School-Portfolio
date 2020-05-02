@@ -1,0 +1,8 @@
+<p>Report {{ data.player.name }}</p>
+<mat-selection-list [(ngModel)]="reasons">
+  <mat-list-option [value]="reportReason" *ngFor="let reportReason of reportReasons | enumToArray">
+    <span translate>{{ 'general.report.' + reportReason }}</span>
+  </mat-list-option>
+</mat-selection-list>
+<button (click)="send()" mat-raised-button color="primary">Send report</button>
+<button (click)="close()" mat-raised-button color="primary">Cancel</button>

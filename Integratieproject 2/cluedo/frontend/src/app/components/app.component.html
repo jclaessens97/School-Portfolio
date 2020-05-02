@@ -1,0 +1,105 @@
+<div class="mainContainer">
+  <mat-drawer-container
+    [ngClass]="!currentToken ? 'bg-accent' : 'bg-white'"
+    class="mainContainer"
+  >
+    <mat-drawer
+      color="primary"
+      *ngIf="currentToken"
+      class="drawer bg-accent"
+      mode="side"
+      [opened]="drawerOpen"
+    >
+      <mat-sidenav-container
+        class="p-2 bg-accent h-100"
+        style="position: sticky; top: 0;"
+      >
+        <img class="w-100" src="assets/img/cluedo_logo.png" />
+        <div class="d-flex flex-column justify-content-between">
+          <mat-nav-list>
+            <a class="nav-item nav-link">
+              <span [translateParams]="{username: userInfo.username}" translate>general.welcome</span>
+            </a>
+            <a (click)="navAction()" mat-list-item routerLink="/lobbies" class="nav-item nav-link">
+              <mat-icon class="mr-2">play_arrow</mat-icon>
+              <span translate>general.navigation.play</span>
+            </a>
+            <a (click)="navAction(); routeStatistics()" mat-list-item class="nav-item nav-link">
+              <mat-icon class="mr-2">trending_up</mat-icon>
+              <span translate>general.navigation.statistics</span>
+            </a>
+            <a (click)="navAction()" mat-list-item *ngIf="isAdmin" routerLink="/admin" class="nav-item nav-link">
+              <mat-icon class="mr-2">security</mat-icon>
+              <span translate>general.navigation.admin</span>
+            </a>
+
+            <a (click)="navAction()" mat-list-item routerLink="manage-account" class="nav-item nav-link">
+              <mat-icon class="mr-2">settings</mat-icon>
+              <span translate>general.navigation.settings</span>
+            </a>
+            <a mat-list-item *ngIf="currentToken" class="nav-item nav-link" (click)="logout()">
+              <mat-icon class="mr-2">exit_to_app</mat-icon>
+              <span translate>general.navigation.logout</span>
+            </a>
+          </mat-nav-list>
+          <mat-nav-list style="position: fixed; bottom: 10px">
+            <mat-menu #appMenu="matMenu">
+              <a *ngFor="let enum of languageEnum | keyvalue" mat-menu-item (click)="setLanguage(enum.value)" translate>
+                {{ "general.languages." + enum.value }}
+              </a>
+            </mat-menu>
+            <a mat-list-item [matMenuTriggerFor]="appMenu">
+              <mat-icon class="mr-2">g_translate</mat-icon>
+              <span translate>general.language</span>
+            </a>
+          </mat-nav-list>
+        </div>
+      </mat-sidenav-container>
+    </mat-drawer>
+
+    <mat-drawer-content>
+      <div *ngIf="(drawerOpen || friendsOpen) && currentToken" (click)="toggleDrawer(2); toggleFriends(2)" class="overlay"></div>
+      <mat-toolbar class="d-flex justify-content-between mb-3">
+        <button *ngIf="currentToken" mat-icon-button class="menu" (click)="toggleDrawer()">
+          <mat-icon>menu</mat-icon>
+        </button>
+        <div class="d-flex row mr-1">
+          <div>
+            <mat-nav-list>
+              <mat-menu #notifications="matMenu">
+                <app-notification  (emitter)="receiveNumber($event)"></app-notification>
+              </mat-menu>
+              <div style="width: fit-content;" mat-list-item [matMenuTriggerFor]="notifications">
+                <button *ngIf="currentToken" mat-icon-button class="menu alert" (click)="toggleNotifications()"
+                  [matBadge]="notificationsNumber" matBadgePosition="above after">
+                  <mat-icon>add_alert</mat-icon>
+                </button>
+              </div>
+            </mat-nav-list>
+          </div>
+          <button *ngIf="currentToken" mat-icon-button class="menu" (click)="toggleFriends()">
+            <mat-icon>contacts</mat-icon>
+          </button>
+        </div>
+      </mat-toolbar>
+      <alert></alert>
+      <router-outlet></router-outlet>
+    </mat-drawer-content>
+
+    <mat-drawer
+      color="primary"
+      *ngIf="currentToken"
+      class="drawer bg-accent"
+      mode="side"
+      position="end"
+      [opened]="friendsOpen"
+    >
+      <mat-sidenav-container
+        class="p-2 bg-accent h-100"
+        style="position: sticky; top: 0;"
+      >
+        <friend-list></friend-list>
+      </mat-sidenav-container>
+    </mat-drawer>
+  </mat-drawer-container>
+</div>

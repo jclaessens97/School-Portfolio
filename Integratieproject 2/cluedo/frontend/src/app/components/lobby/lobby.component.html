@@ -1,0 +1,63 @@
+<div class="container" *ngIf="lobbyDetails">
+  <h1>{{ lobbyDetails.lobbyName }}</h1>
+  <mat-card>
+    <mat-card-title><span translate>lobby.lobby.settings</span></mat-card-title>
+    <mat-card-content>
+      <mat-form-field>
+        <mat-label><span translate>lobby.lobby.name</span></mat-label>
+        <input (change)="updateSettings()" [disabled]="!isHost" type="text" matInput
+          [(ngModel)]="lobbyDetails.lobbyName">
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label><span translate>lobby.lobby.maxplayers</span></mat-label>
+        <mat-select (selectionChange)="updateSettings()" [(value)]="lobbyDetails.maxPlayers" [disabled]="!isHost">
+          <mat-option *ngFor="let amount of [3, 4, 5, 6]" [value]="amount">
+            <span translate [translateParams]="{amount: amount}">lobby.lobby.playeramount</span>
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label><span translate>lobby.lobby.maxturn</span></mat-label>
+        <input (change)="updateSettings()" [disabled]="!isHost" type="number" matInput placeholder="Ex. 60"
+          [(ngModel)]="lobbyDetails.turnDuration">
+      </mat-form-field>
+    </mat-card-content>
+  </mat-card>
+  <div class="reponsive-flex">
+    <mat-card class="align-top players">
+      <mat-card-title><span translate>lobby.lobby.players</span></mat-card-title>
+      <mat-card-content>
+        <mat-list role="list">
+          <mat-list-item [ngClass]="{'ownPlayer' : lobbyDetails.playerId == player.playerId}" class="player" role="listitem"
+            *ngFor="let player of lobbyDetails.players">
+            <div class="playerColor mr-1" [ngStyle]="{ 'background-color': player.characterType }"></div>
+            <span [matMenuTriggerFor]="playerOptions" class="mr-1 playerOptions">{{ player.name }}</span>
+            <mat-menu #playerOptions="matMenu">
+              <button (click)="kick(player)" *ngIf="isHost && !(lobbyDetails.playerId == player.playerId)" mat-menu-item><span translate>lobby.lobby.kick</span></button>
+              <button (click)="report(player)" *ngIf="!(lobbyDetails.playerId == player.playerId)" mat-menu-item><span translate>lobby.lobby.report</span></button>
+              <button routerLink="/statistics" (click)="watchStatistics(player.playerId, lobbyDetails.cluedoId)" *ngIf="!(lobbyDetails.playerId == player.playerId)" mat-button
+                      color="warn"><span translate>statistics.watch</span></button>
+              <button *ngIf="(lobbyDetails.playerId == player.playerId)" mat-menu-item translate><span translate>lobby.lobby.noactions</span></button>
+            </mat-menu>
+            <span class="mr-1 font-weight-bold" *ngIf="player.playerId == lobbyDetails.hostPlayerId" translate>lobby.lobby.host</span>
+            <span class="font-italic" translate>{{ 'game.types.' + player.characterType }}</span>
+          </mat-list-item>
+        </mat-list>
+      </mat-card-content>
+    </mat-card>
+    <mat-card class="chat">
+      <mat-card-title>Chat</mat-card-title>
+      <mat-card-content>
+        <app-chat [playerId]="lobbyDetails.playerId" [cluedoId]="lobbyDetails.cluedoId"></app-chat>
+      </mat-card-content>
+    </mat-card>
+  </div>
+
+  <div class="mt-2">
+    <p class="text-danger small" *ngIf="error" translate>{{ 'alert.' + error }}</p>
+    <button class="mr-1" (click)="start()" *ngIf="isHost" mat-raised-button color="primary"><span translate>lobby.lobby.start</span></button>
+    <button class="mr-1" (click)="invite()" mat-raised-button color="primary"><span translate>lobby.lobby.invite</span></button>
+    <button class="mr-1" (click)="leave()" mat-raised-button color="primary"><span translate>lobby.lobby.leave</span></button>
+    <button mat-raised-button color="primary" (click)="back()"><span translate>lobby.lobby.menu</span></button>
+  </div>
+</div>

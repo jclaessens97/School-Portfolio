@@ -1,0 +1,57 @@
+<div class="container"> 
+  <div class="container" [hidden]="gameHasEnded">
+    <h2>{{ lobbyDetails.lobbyName }}</h2>
+    <mat-expansion-panel class="mb-1">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          <span translate>lobby.lobby.players</span>
+        </mat-panel-title>
+        <mat-panel-description>
+          <span translate>lobby.lobby.playersInGame</span>
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <mat-list *ngIf="currentTurn" role="list">
+        <mat-list-item [ngClass]="{'activePlayer' : currentTurn.player.playerId == player.playerId}" class="player" role="listitem"
+          *ngFor="let player of lobbyDetails.players">
+          <div class="playerColor mr-1" [ngStyle]="{ 'background-color': player.characterType }"></div>
+          <span [matMenuTriggerFor]="playerOptions" class="mr-1 playerOptions">{{ player.name }}</span>
+          <mat-menu #playerOptions="matMenu">
+            <button (click)="report(player)" *ngIf="!(lobbyDetails.playerId == player.playerId)" mat-menu-item><span translate>lobby.lobby.report</span></button>
+            <button routerLink="/statistics" (click)="watchStatistics(player.playerId, lobbyDetails.cluedoId)" *ngIf="!(lobbyDetails.playerId == player.playerId)" mat-button
+                    color="warn"><span translate>statistics.watch</span></button>
+            <button *ngIf="(lobbyDetails.playerId == player.playerId)" mat-menu-item translate><span translate>lobby.lobby.noactions</span></button>
+          </mat-menu>
+          <span class="mr-1 font-weight-bold" *ngIf="player.playerId == lobbyDetails.hostPlayerId" translate>lobby.lobby.host</span>
+          <span class="mr-1 font-italic" translate>{{ 'game.types.' + player.characterType }}</span>
+          <span  class="mr-1 font-weight-bold" *ngIf="currentTurn.player.playerId == player.playerId" translate>game.active</span>
+        </mat-list-item>
+      </mat-list>
+    </mat-expansion-panel>
+    <div [hidden]="!gameHasEnded">
+      <h2>{{accusationPlayer.name + '(' + accusationPlayer.characterType.toString() + ')'}}<span>{{accusationText | translate}}</span></h2>
+    </div>
+    <div>
+      <span *ngIf="timeLeft">Time remaining: {{ timeRemaningFormatted }}</span>
+      <br>
+      <span *ngIf="accusationText" [hidden]="!suggestionCall">{{!isAccusation ? suggestionReplyPlayer.name + '(' + suggestionReplyPlayer.characterType.toString()  + ')'
+        : accusationPlayer.name + '(' + accusationPlayer.characterType.toString() + ')'}}<span>{{accusationText | translate}}</span></span>
+      <span [hidden]="!noOneHasSuggestionCard" translate>game.suggestion.no-card</span>
+
+    </div>
+    <div class="mt-2">
+      <div (click)="toggleNotepad()" [ngClass]="{'notepadActive': isNotepadOpen}" class="accordeon">
+        <mat-icon class="d-block mx-auto mt-2">notes</mat-icon>
+      </div>
+      <app-gameboard *ngIf="lobbyDetails && lobbyDetails.cluedoId && lobbyDetails.playerId" (refreshGame)="getTurn()" class="gameboard" [currentTurn]="currentTurn" [gameId]="lobbyDetails.cluedoId"  [playerId]="lobbyDetails.playerId" ></app-gameboard>
+      <app-note (toggleNoteBookEmitter)="toggleNotepad()" [ngClass]="{'notepadActive': isNotepadOpen}" class="notebook" *ngIf="lobbyDetails" [cluedoId]="lobbyDetails.cluedoId"></app-note>
+      <button (click)="openDialog()" [hidden]="!selectCardToShow" mat-raised-button color="warn"><span translate>game.suggestion.showCard</span></button>
+    </div>
+      <app-chat [playerId]="lobbyDetails.playerId" [cluedoId]="lobbyDetails.cluedoId"></app-chat>
+  </div>
+  <div class="container" *ngIf="gameHasEnded">
+    <h2>Game ended</h2>
+    {{ accusationInfo.winningPlayer.name + ' has won the game!' }}
+  </div>
+</div>
+
+

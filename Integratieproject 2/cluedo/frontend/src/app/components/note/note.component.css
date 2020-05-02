@@ -1,0 +1,37 @@
+.container {
+    border : 1px solid black;
+    max-width: 300px;
+    background-color: #ECE63D;
+}
+.line {
+    display: flex;
+    justify-content: flex-end; 
+    align-items: center;
+}
+.name {
+   margin-right: auto;
+}
+.field {
+    min-width: 25px;
+    height: 25px;
+    border : 1px solid gray;
+    margin: 2px;
+}
+.green {
+    color : green;
+}
+.red {
+    color : red;
+}
+.black {
+    color : black;
+}
+
+.crossed {
+    text-decoration: line-through;
+}
+
+
+.closeBtn {
+  cursor: pointer;
+}

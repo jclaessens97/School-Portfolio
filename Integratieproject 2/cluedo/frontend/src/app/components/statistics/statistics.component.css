@@ -1,0 +1,19 @@
+.title {
+  text-align: center;
+}
+
+.container, .subcontainer {
+  display: flex; flex-direction: row; flex-wrap: nowrap
+}
+
+.block {
+  flex: 1;
+}
+
+h1 {
+  margin-bottom: 50px;
+}
+
+.table {
+  margin-top: 50px;
+}

@@ -1,0 +1,44 @@
+/* You can add global styles to this file, and also import other style files */
+@import "@angular/material/prebuilt-themes/deeppurple-amber.css";
+@import "~bootstrap/dist/css/bootstrap.min.css";
+@import url('https://fonts.googleapis.com/css?family=Montserrat&display=swap');
+// @import './cluedo-app-theme.scss';
+html, body { height: 100%; }
+body { margin: 0; font-family: 'Montserrat', Roboto, "Helvetica Neue", sans-serif; }
+
+
+mat-dialog-container#modal-component {
+    border: 3px solid #262626;
+    background-color: #8a8a8a;
+}
+
+.snackbar-link {
+  color: #ffd740 !important;
+  /* color: #03414d !important; */
+  text-decoration: none;
+}
+
+.cdk-overlay-pane.my-dialog {
+  position: relative!important;
+}
+
+.close.mat-button {
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 5px;
+  line-height: 14px;
+  min-width: auto;
+  color: red;
+}
+
+.mat-expansion-panel-content > .mat-expansion-panel-body {
+  padding: 0 !important;
+}
+
+.whiteInput .mat-form-field-label{
+  color:white !important;
+}
+.whiteInput .mat-form-field-underline{
+  background-color:white !important;
+}

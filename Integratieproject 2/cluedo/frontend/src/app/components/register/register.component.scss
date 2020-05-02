@@ -1,0 +1,18 @@
+.registerBtn {
+  height: 70px;
+  color: #03414d;
+  /* background-color: #86c5da; */
+  background-color: #72dfd0;
+  font-size: xx-large;
+  align-self: flex-end;
+  border-radius: 0;
+}
+.container{
+  display: flex;
+  flex-direction: column;
+  padding: 1px;
+}
+
+mat-form-field {
+  padding: 1.5% 5% 0 5%;
+}

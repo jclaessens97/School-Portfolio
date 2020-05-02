@@ -1,0 +1,45 @@
+
+<h1>Game statistics</h1>
+<div class="container">
+  <div class="block" >
+    <h2 class="title">Wins & losses</h2>
+      <canvas baseChart
+              [chartType]="chartTypeWins"
+              [datasets]="chartDatasetsWins"
+              [labels]="chartLabelsWins"
+              [colors]="chartColors"
+              [options]="chartOptions"
+              [legend]="true"
+              (chartHover)="chartHovered($event)"
+              (chartClick)="chartClicked($event)">
+      </canvas>
+      <h3>Ratio: {{statistics.winsRatio.toFixed(2)}}</h3>
+  </div>
+  <div class="block">
+    <h2 class="title">Right & wrong accusations</h2>
+      <canvas baseChart
+              [chartType]="chartTypeWins"
+              [datasets]="chartDatasetsAccusations"
+              [labels]="chartLabelsAccusations"
+              [colors]="chartColors"
+              [options]="chartOptions"
+              [legend]="true"
+              (chartHover)="chartHovered($event)"
+              (chartClick)="chartClicked($event)">
+      </canvas>
+      <h3>Ratio: {{statistics.accusationRatio.toFixed(2)}}</h3>
+
+  </div>
+</div>
+
+<table class="table table-striped">
+  <tbody>
+  <tr *ngFor="let data of statisticsFormatted; index as i">
+    <th scope="row">{{ i + 1 }}</th>
+    <td>
+      {{ data.name }}
+    </td>
+    <td>{{ data.amount | number }}</td>
+  </tr>
+  </tbody>
+</table>

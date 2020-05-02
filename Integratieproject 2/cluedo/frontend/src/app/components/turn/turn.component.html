@@ -1,0 +1,17 @@
+<div class="mt-1 font-weight-bold" id="noMovesPossible" [hidden]="possibilities.hasTurn">
+  <div class="d-inline-block playerColor mr-1" [ngStyle]="{ 'background-color': currentTurn.player.characterType }"></div>
+  <span class="text-capitalize">{{ currentTurn.player.name + ' (' }}</span>
+  <span>
+    {{ 'game.types.' + currentTurn.player.characterType | translate }}
+  </span>
+  <span translate>
+    game.playerTurn
+  </span>
+</div>
+
+<div id="possibleMoves" [hidden]="!possibilities.hasTurn">
+  <app-dice class="option"  (rolledTotal)="getRoll($event)" [canRoll]="(possibilities.movesPossible && possibilities.thrownDice == 0 && possibilities.currentLocation.x == null )"></app-dice>
+  <button class="option" (click)="takePassage()" [disabled]="(possibilities.roomWithPassage == undefined || possibilities.currentLocation.x != null)">Take Passage</button>
+
+
+</div>

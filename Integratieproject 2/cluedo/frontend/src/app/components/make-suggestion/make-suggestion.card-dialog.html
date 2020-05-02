@@ -1,0 +1,44 @@
+<button class="close" mat-button (click)="onNoClick()">X</button>
+<div class="container">
+  <h1 translate>game.suggestion.choice</h1>
+  <div *ngFor="let card of data" class="box">
+    <img [src]="card.url" alt="" class="card" (click)="cardPicker(card)" />
+    <span translate>{{'game.types.' + card.type.toUpperCase()}}</span>
+  </div>
+</div>
+
+<style>
+  .container {
+    display: block;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .box {
+    position: relative;
+    margin: 5px;
+    width: 15%;
+    display: inline-block;
+    cursor: pointer;
+  }
+
+  .box span {
+    position: absolute;
+    bottom: 20%;
+    text-align: center;
+    color: rgb(90, 0, 0);
+    width: 100%;
+    z-index: 10;
+    font-size: 0.9vw;
+    font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  }
+
+  .box:hover {
+    opacity: 0.3;
+  }
+  .card {
+    width: 100%;
+    height: auto;
+    z-index: 0;
+  }
+</style>

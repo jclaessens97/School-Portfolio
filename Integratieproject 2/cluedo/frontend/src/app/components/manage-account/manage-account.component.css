@@ -1,0 +1,21 @@
+
+mat-card-title {
+  font-size: 15px;
+}
+
+mat-card {
+  margin-bottom: 5px;
+  background-color: #fafafa;
+  box-shadow: none !important;
+}
+
+.error {
+  color: red;
+}
+
+.success {
+  color: green;
+}
+h1 {
+  margin-left: 2%;
+}

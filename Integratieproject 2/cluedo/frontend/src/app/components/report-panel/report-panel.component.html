@@ -1,0 +1,29 @@
+<p>Report panel</p>
+
+<table class="w-100" mat-table [dataSource]="reportDetails">
+    <ng-container matColumnDef="username">
+        <th mat-header-cell *matHeaderCellDef> Username </th>
+        <td mat-cell *matCellDef="let element"> {{ element.userName }} </td>
+    </ng-container>
+    <ng-container matColumnDef="userId">
+        <th mat-header-cell *matHeaderCellDef> User ID </th>
+        <td mat-cell *matCellDef="let element"> {{ element.userId }} </td>
+    </ng-container>
+    <ng-container matColumnDef="count">
+        <th mat-header-cell *matHeaderCellDef> # of reports </th>
+        <td mat-cell *matCellDef="let element"> {{ element.count }} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="details">
+        <th mat-header-cell *matHeaderCellDef></th>
+        <td mat-cell *matCellDef="let element"> <button (click)="openDetails(element.userId)" mat-button color="primary">Details</button> </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let myRowData; columns: displayedColumns"></tr>
+</table>
+<mat-paginator [length]="count"
+              [pageSize]="pageSize"
+              [pageSizeOptions]="[5, 10, 25, 100]"
+              (page)="get()">
+</mat-paginator>

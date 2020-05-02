@@ -1,0 +1,77 @@
+@import '../../cluedo-app-theme.scss';
+
+$accent: map-get($theme, accent);
+$primary: map-get($theme, primary);
+
+a {
+  cursor: pointer;
+}
+
+#account-img {
+  max-width:100%;
+}
+
+.drawer {
+  width: 12rem;
+  border: 1px solid #d6beffce;
+  background-color: #d6beffce;
+}
+
+@media only screen and (max-width: 630px) {
+  // .drawer {
+  //   width: 90%;
+  // }
+  .overlay {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    z-index: 10;
+    background-color: rgba($color: #000000, $alpha: .5);
+  }
+}
+
+mat-drawer-content {
+  min-width: 300px;
+  overflow: hidden;
+  padding-bottom: 20px;
+}
+
+.menu{
+  color: black;
+  // border: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+.mainContainer{
+  height: 100vh;
+}
+
+.bg-accent {
+  background-color: mat-color($accent);
+}
+
+.bg-white {
+
+}
+
+
+.bg-primary {
+  background-color: mat-color($primary);
+}
+
+.drawer {
+  border: none;
+ // padding: 0 1% 0 1%;
+}
+
+mat-nav-list a {
+  color: white !important;
+  font-family: 'Montserrat';
+}
+
+mat-drawer-content {
+  overflow-y: scroll;
+}
+
+.alert {
+  margin-right: 20px !important;
+}

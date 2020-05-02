@@ -1,0 +1,38 @@
+<h1 *ngIf="data.isCreate" mat-dialog-title>Create lobby</h1>
+<h1 *ngIf="!data.isCreate" mat-dialog-title>Join lobby</h1>
+<div mat-dialog-content>
+  <p class="text-danger small" *ngIf="error" translate>
+    {{ 'alert.' + error }}
+  </p>
+  <mat-form-field>
+    <mat-label>Select your character</mat-label>
+    <mat-select [(ngModel)]="selectedCharacter">
+      <mat-option
+        *ngFor="let character of characters | enumToArray"
+        [value]="character"
+        [disabled]="!isAvailable(character)"
+        ><span translate>{{ 'game.types.' + character }}</span></mat-option
+      >
+    </mat-select>
+    <!-- <mat-error class="error-message" translate>{{ 'alert.' + error }}</mat-error> -->
+  </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <button
+    *ngIf="data.isCreate"
+    [disabled]="!selectedCharacter"
+    mat-button
+    (click)="select()"
+  >
+    Create
+  </button>
+  <button
+    *ngIf="!data.isCreate"
+    [disabled]="!selectedCharacter"
+    mat-button
+    (click)="select()"
+  >
+    Join
+  </button>
+  <button mat-button (click)="close()">Cancel</button>
+</div>

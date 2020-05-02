@@ -1,0 +1,41 @@
+<h1 translate>game.suggestion.replyDialog</h1>
+<div class="box">
+  <div class="card">
+    <img
+      [src]="data.url"
+      alt=""
+      class="imgCard"
+    />
+    <span translate>{{ "game.types." + card.type.toUpperCase() }}</span>
+  </div>
+</div>
+
+<style>
+  .box {
+    position: relative;
+    margin: 5px;
+    width: 50%;
+    display: inline-block;
+    cursor: pointer;
+  }
+
+  .box span {
+    position: absolute;
+    bottom: 20%;
+    text-align: center;
+    color: rgb(90, 0, 0);
+    width: 100%;
+    z-index: 10;
+    font-size: 0.9vw;
+    font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  }
+
+  .box:hover {
+    opacity: 0.3;
+  }
+  .card {
+    width: 100%;
+    height: auto;
+    z-index: 0;
+  }
+</style>

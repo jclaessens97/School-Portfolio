@@ -1,0 +1,25 @@
+<mat-card id="dice-container">
+  <mat-grid-list cols="2" rowHeight="100px">
+      <mat-grid-tile>
+        <img [src]="dice1" alt="dice 1" draggable="false" />
+      </mat-grid-tile>
+      <mat-grid-tile>
+        <img [src]="dice2" alt="dice 2" [ngClass]="{'disabled-img' : singleDice}" draggable="false" />
+      </mat-grid-tile>
+    <mat-grid-tile [colspan]="2">
+      <button
+        mat-flat-button
+        color="primary"
+        (click)="onRollClick()"
+        id="btnRoll"
+        [disabled]="rolling||!canRoll"
+      >
+      <span translate>game.dice.roll</span>
+    </button>
+    </mat-grid-tile>
+  </mat-grid-list>
+
+  <p translate [translateParams]="{count: getTotal}">
+    game.dice.total
+  </p>
+</mat-card>

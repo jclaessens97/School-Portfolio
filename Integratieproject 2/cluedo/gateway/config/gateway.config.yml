@@ -1,0 +1,89 @@
+http:
+  port: ${PORT:-8080}
+
+apiEndpoints:
+  coreAPI:
+    - host: '*'
+      paths: ['/api', '/api/*']
+  websocketAPI:
+    - host: '*'
+      paths: ['/websocket', '/websocket/*']
+  authAPI:
+    - host: '*'
+      paths: ['/auth', '/auth/*']
+
+serviceEndpoints:
+  coreService:
+    url: ${BACKEND:-'https://backend-dot-complete-flash-267610.appspot.com'}
+  websocketService:
+    url: ${BACKEND:-'https://backend-dot-complete-flash-267610.appspot.com'}
+  authService:
+    url: ${AUTH:-'https://auth-dot-complete-flash-267610.appspot.com'}
+
+policies:
+  - cors
+  - log
+  - proxy
+  # - rate-limit
+  - jwt
+pipelines:
+  core:
+    apiEndpoints:
+      - coreAPI
+    policies:
+      - log:
+          action:
+            message: 'CORE: ${req.method} | ${req.url}'
+      - cors:
+          action:
+            origin: ${FRONTEND:-'https://cluedo-uigen.netlify.com'}
+            methods: 'HEAD,GET,POST,PUT,PATCH,DELETE,OPTIONS'
+            preflightContinue: false
+      - jwt:
+          action:
+            secretOrPublicKeyFile: './key/cluedo-public.pem'
+            checkCredentialExistence: false
+      - log:
+          action:
+            message: 'CORE: jwtCheck passed'
+      - proxy:
+          action:
+            serviceEndpoint: coreService
+            changeOrigin: true
+
+  ws:
+    apiEndpoints:
+      - websocketAPI
+    policies:
+      - log:
+          action:
+            message: 'WEBSOCKET: ${req.method} | ${req.url}'
+      - cors:
+          action:
+            origin: ${FRONTEND:-'https://cluedo-uigen.netlify.com'}
+            methods: 'HEAD,GET,POST,PUT,PATCH,DELETE,OPTIONS'
+            preflightContinue: false
+      - proxy:
+          action:
+            serviceEndpoint: websocketService
+            changeOrigin: true
+
+  auth:
+    apiEndpoints:
+      - authAPI
+    policies:
+      - log:
+          action:
+            message: 'AUTH: ${req.method} | ${req.url}'
+      - cors:
+          action:
+            origin: ${FRONTEND:-'https://cluedo-uigen.netlify.com'}
+            methods: 'HEAD,GET,POST,PUT,PATCH,DELETE,OPTIONS'
+            preflightContinue: false
+            exposedHeaders: ['authorization']
+      - proxy:
+          action:
+            serviceEndpoint: authService
+            changeOrigin: true
+
+

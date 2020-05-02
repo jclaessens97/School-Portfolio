@@ -1,0 +1,27 @@
+<div class="container" *ngIf="messages">
+    <cdk-virtual-scroll-viewport itemSize="22">
+        <div *cdkVirtualFor="let message of messages">
+            <div *ngIf="message.playerName; then playerMessage else systemMessage"></div>
+            <ng-template #playerMessage>
+                <div *ngFor="let player of lobbyDetails.players">
+                    <div class="line" *ngIf="message.playerName === player.name"> 
+                        <div>{{message.date}}</div>
+                        <div class="box playerColor mr-1" [ngStyle]="{ 'background-color': player.characterType }"></div>
+                        <div> {{message.playerName}} :{{message.content}}</div>
+                    </div>
+                </div>
+            </ng-template>
+            <ng-template #systemMessage>
+                <div [ngStyle]="{'color' : (message.content.includes('joined')) ? 'green' : 'red'}">
+                    <strong>{{message.content}}</strong>
+                </div>
+            </ng-template>
+        </div>
+    </cdk-virtual-scroll-viewport>
+    <div class="row">
+        <input class="msgHolder" type="text" placeholder="Type message" [(ngModel)]="msg" (keydown.enter)="sendMsg()">
+        <button class="sendBtn" (click)="sendMsg()" mat-mini-fab color="primary">
+            <mat-icon>send</mat-icon>
+        </button>
+    </div>
+</div>

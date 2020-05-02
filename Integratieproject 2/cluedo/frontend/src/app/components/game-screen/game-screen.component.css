@@ -1,0 +1,77 @@
+.player:nth-child(odd) {
+  background-color: #fafafa;
+}
+
+.player:nth-child(even) {
+  background-color: inherit;
+}
+
+.activePlayer {
+  background-color: lawngreen  !important;
+}
+
+.playerColor {
+  height: 10px;
+  width: 10px;
+}
+
+.playerOptions {
+  cursor: pointer;
+  color: blue;
+}
+
+.gameboard {
+  display: inline-block;
+  vertical-align: top;
+  padding: 0 5% 5% 0;
+  width: 75%;
+}
+
+.notebook {
+  width: 25%;
+  display: inline-block;
+}
+
+.accordeon { 
+  display: none;
+}
+
+@media only screen and (max-width: 1100px) {
+  .gameboard {
+    width: 100%;
+  }
+
+  .accordeon {
+    display: block;
+    position: absolute;
+    background-color: #ECE63D;
+    right: 5px;
+    height: 100%;
+    width: 40px;
+    cursor: pointer;
+  }
+
+  .notebook {
+    display: none;
+    position: absolute;
+    background-color: #ECE63D;
+    right: 5px;
+    height: 100%;
+    width: inherit;
+  }
+
+  .accordeon.notepadActive {
+    display: none !important;
+  }
+
+  .notebook.notepadActive {
+    display: inline-block !important;
+  }
+
+
+}
+
+span,button {
+  vertical-align: top;
+}
+

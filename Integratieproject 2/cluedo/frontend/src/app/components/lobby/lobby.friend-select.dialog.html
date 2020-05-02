@@ -1,0 +1,23 @@
+<h1 mat-dialog-title translate>general.actions.invite</h1>
+<div mat-dialog-content>
+  <p class="text-danger small" *ngIf="error" translate>
+    {{ 'error.' + error }}
+  </p>
+  <mat-form-field>
+    <mat-label translate>general.actions.invite_question</mat-label>
+    <mat-select [(ngModel)]="selectedFriend">
+      <mat-option *ngFor="let friend of data.availableFriends" [value]="friend"
+        ><span translate>{{ friend }}</span></mat-option
+      >
+    </mat-select>
+    <!-- <mat-error class="error-message" translate>{{ 'error.' + error }}</mat-error> -->
+  </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <button [disabled]="!selectedFriend" mat-button (click)="select()">
+    <span translate>general.actions.invite_button</span>
+  </button>
+  <button mat-button (click)="close()">
+    <span translate>general.account.back</span>
+  </button>
+</div>

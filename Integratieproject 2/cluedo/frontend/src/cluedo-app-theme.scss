@@ -1,0 +1,80 @@
+@import '~@angular/material/theming';
+
+@include mat-core();
+
+$primary-light-blue: (
+    50 : #eefbf9,
+    100 : #d5f5f1,
+    200 : #b9efe8,
+    300 : #9ce9de,
+    400 : #87e4d7,
+    500 : #72dfd0,
+    600 : #6adbcb,
+    700 : #5fd7c4,
+    800 : #55d2be,
+    900 : #42cab3,
+    A100 : #ffffff,
+    A200 : #eafffb,
+    A400 : #b7fff2,
+    A700 : #9dffed,
+    contrast: (
+        50 : #03414d,
+        100 : #03414d,
+        200 : #03414d,
+        300 : #03414d,
+        400 : #03414d,
+        500 : #03414d,
+        600 : #03414d,
+        700 : #03414d,
+        800 : #03414d,
+        900 : #03414d,
+        A100 : #03414d,
+        A200 : #03414d,
+        A400 : #03414d,
+        A700 : #03414d,
+    )
+);
+
+$accent: (
+    50 : #e1e8ea,
+    100 : #b3c6ca,
+    200 : #81a0a6,
+    300 : #4f7a82,
+    400 : #295e68,
+    500 : #03414d,
+    600 : #033b46,
+    700 : #02323d,
+    800 : #022a34,
+    900 : #011c25,
+    A100 : #60cfff,
+    A200 : #2dbfff,
+    A400 : #00adf9,
+    A700 : #009ce0,
+    contrast: (
+        50 : #000000,
+        100 : #000000,
+        200 : #000000,
+        300 : #ffffff,
+        400 : #ffffff,
+        500 : #ffffff,
+        600 : #ffffff,
+        700 : #ffffff,
+        800 : #ffffff,
+        900 : #ffffff,
+        A100 : #000000,
+        A200 : #000000,
+        A400 : #000000,
+        A700 : #ffffff,
+    )
+);
+
+$cluedo-app-primary: mat-palette($primary-light-blue);
+$cluedo-app-accent: mat-palette($accent);
+
+
+$cluedo-app-warn: mat-palette($mat-red);
+
+
+$theme: mat-light-theme($cluedo-app-primary, $cluedo-app-accent, $cluedo-app-warn);
+
+@include angular-material-theme($theme);

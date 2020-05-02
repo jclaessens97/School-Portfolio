@@ -1,0 +1,62 @@
+.optionContainer{
+  justify-content: center;
+  position: center;
+  display: flex;
+  width: 85%;
+  right: 0;
+}
+
+.option{
+  display: inline-block;
+  margin: 5px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: auto;
+  grid-template-rows: auto auto;
+  grid-template-areas:
+    "card"
+    "button";
+}
+
+.box {
+  display: inline-flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  grid-area: card;
+  justify-content: center;
+}
+
+.box span {
+  position: absolute;
+  bottom: 20%;
+  text-align: center;
+  color: rgb(90, 0, 0);
+  width: 100%;
+  z-index: 10;
+  font-size: 0.9vw;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+}
+
+.card {
+  margin: 5px;
+}
+
+.CHARACTER_SUGGESTION:hover,
+.WEAPON_SUGGESTION:hover,
+.CHARACTER_ACCUSATION:hover, .WEAPON_ACCUSATION:hover, .ROOM_ACCUSATION:hover,
+button:hover {
+  opacity: 0.3;
+  cursor: pointer;
+}
+
+img {
+  width: 100px;
+  height: 150px;
+}
+
+.ROOM_SUGGESTION:hover {
+  cursor: not-allowed;
+  pointer-events: none;
+}

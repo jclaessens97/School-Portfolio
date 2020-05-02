@@ -1,0 +1,66 @@
+<div *ngIf="notebook" class="container">
+  <mat-icon (click)="toggleNotebook()" class="d-block mt-2 closeBtn">notes</mat-icon>
+  <h2 translate>game.cardtypes.suspects</h2>
+  <div class="line" *ngFor="let row of notebook.characters; let x = index">
+    <div
+      [ngClass]="{ crossed: row.crossed }"
+      [ngClass]="{ singleClass: true }"
+      (click)="toggleCrossed(getCardType.CHARACTER, x)"
+      class="name"
+      translate
+    >
+      {{ "game.types." + row.card }}
+    </div>
+    <div
+      [ngClass]="'field'"
+      *ngFor="let column of row.columns; let y = index"
+      (click)="toggle(getCardType.CHARACTER, x, y)"
+    >
+      <mat-icon *ngIf="column != 'EMPTY'" [ngClass]="row.fieldClass[y]"
+        >{{ row.icons[y] }}
+      </mat-icon>
+    </div>
+  </div>
+  <h2 translate>game.cardtypes.weapons</h2>
+  <div class="line" *ngFor="let row of notebook.weapons; let x = index">
+    <div
+      [ngClass]="{ crossed: row.crossed }"
+      [ngClass]="{ singleClass: true }"
+      (click)="toggleCrossed(getCardType.WEAPON, x)"
+      class="name"
+      translate
+    >
+      {{ "game.types." + row.card }}
+    </div>
+    <div
+      [ngClass]="'field'"
+      *ngFor="let column of row.columns; let y = index"
+      (click)="toggle(getCardType.WEAPON, x, y)"
+    >
+      <mat-icon *ngIf="column != 'EMPTY'" [ngClass]="row.fieldClass[y]"
+        >{{ row.icons[y] }}
+      </mat-icon>
+    </div>
+  </div>
+  <h2 translate>game.cardtypes.rooms</h2>
+  <div class="line" *ngFor="let row of notebook.rooms; let x = index">
+    <div
+      [ngClass]="{ crossed: row.crossed }"
+      [ngClass]="{ singleClass: true }"
+      (click)="toggleCrossed(getCardType.ROOM, x)"
+      class="name"
+      translate
+    >
+      {{ "game.types." + row.card }}
+    </div>
+    <div
+      [ngClass]="'field'"
+      *ngFor="let column of row.columns; let y = index"
+      (click)="toggle(getCardType.ROOM, x, y)"
+    >
+      <mat-icon *ngIf="column != 'EMPTY'" [ngClass]="row.fieldClass[y]"
+        >{{ row.icons[y] }}
+      </mat-icon>
+    </div>
+  </div>
+</div>

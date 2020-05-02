@@ -1,0 +1,5 @@
+<div *ngIf="invitations.length > 0">
+    <div *ngFor="let invitation of invitations" class="notificationBox">
+        <div>{{invitation.inviter}} has invited you in cluedo #{{invitation.cluedoId}} <button (click)="join(invitation.cluedoId)" mat-button color="primary">join</button></div>
+    </div>
+</div>

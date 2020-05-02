@@ -1,0 +1,17 @@
+#dice-container {
+  max-width: 100%;
+}
+
+img {
+  height: 50%;
+  margin: 5%;
+  border: 1px solid #000;
+}
+
+#btnRoll {
+  width: 100%;
+}
+
+.disabled-img {
+  opacity: 0.2;
+}

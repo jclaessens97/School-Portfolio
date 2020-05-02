@@ -1,0 +1,100 @@
+<div class="menu container">
+  <h1 translate>lobby.list.title</h1>
+    <div class="d-flex justify-content-between mb-5">
+      <button (click)="create()" mat-raised-button color="primary"><span translate>lobby.list.new</span></button>
+      <button (click)="refresh()" mat-raised-button color="primary"><span translate>lobby.list.refresh</span></button>
+      
+    </div>
+    
+    <!-- <button routerLink="/menu" mat-raised-button color="primary">Menu</button> -->
+
+  <div>
+    <h4 translate>lobby.list.ongoing</h4>
+    <table mat-table [dataSource]="games" class="w-100 mb-5">
+    
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef translate> lobby.list.name </th>
+        <td mat-cell *matCellDef="let element"> {{ element.lobbyName }} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="host">
+        <th mat-header-cell *matHeaderCellDef translate> lobby.list.host </th>
+        <td mat-cell *matCellDef="let element"> {{ element.host }} </td>
+      </ng-container>
+    
+      <!-- Weight Column -->
+      <ng-container matColumnDef="players">
+        <th mat-header-cell *matHeaderCellDef translate> lobby.list.players </th>
+        <td mat-cell *matCellDef="let element"> {{ element.players }} / {{ element.maxPlayers }}</td>
+      </ng-container>
+    
+      <!-- Symbol Column -->
+      <ng-container matColumnDef="action">
+        <th mat-header-cell *matHeaderCellDef translate> lobby.list.action </th>
+        <td mat-cell *matCellDef="let element"> <a (click)="openGame(element.cluedoId)" class="game-action" translate>lobby.list.open</a> </td>
+      </ng-container>
+    
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+
+    <h4 translate>lobby.list.joined</h4>
+    <table mat-table [dataSource]="lobbiesJoined" class="w-100 mb-5">
+    
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef translate> lobby.list.name </th>
+        <td mat-cell *matCellDef="let element"> {{ element.lobbyName }} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="host">
+        <th mat-header-cell *matHeaderCellDef translate> lobby.list.host </th>
+        <td mat-cell *matCellDef="let element"> {{ element.host }} </td>
+      </ng-container>
+    
+      <!-- Weight Column -->
+      <ng-container matColumnDef="players">
+        <th mat-header-cell *matHeaderCellDef translate> lobby.list.players </th>
+        <td mat-cell *matCellDef="let element"> {{ element.players }} / {{ element.maxPlayers }}</td>
+      </ng-container>
+    
+      <!-- Symbol Column -->
+      <ng-container matColumnDef="action">
+        <th mat-header-cell *matHeaderCellDef translate> lobby.list.action </th>
+        <td mat-cell *matCellDef="let element"> <a (click)="open(element.cluedoId)" class="game-action" translate>lobby.list.open</a> </td>
+      </ng-container>
+    
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+
+    <h4 translate>lobby.list.other</h4>
+    <table mat-table [dataSource]="lobbiesNotJoined" class="w-100 mb-2">
+    
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef translate> lobby.list.name </th>
+        <td mat-cell *matCellDef="let element"> {{ element.lobbyName }} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="host">
+        <th mat-header-cell *matHeaderCellDef translate> lobby.list.host </th>
+        <td mat-cell *matCellDef="let element"> {{ element.host }} </td>
+      </ng-container>
+    
+      <!-- Weight Column -->
+      <ng-container matColumnDef="players">
+        <th mat-header-cell *matHeaderCellDef translate> lobby.list.players </th>
+        <td mat-cell *matCellDef="let element"> {{ element.players }} / {{ element.maxPlayers }}</td>
+      </ng-container>
+    
+      <!-- Symbol Column -->
+      <ng-container matColumnDef="action">
+        <th mat-header-cell *matHeaderCellDef translate> lobby.list.action </th>
+        <td mat-cell *matCellDef="let element"> <a (click)="join(element.cluedoId)" class="game-action" translate>lobby.list.join</a> </td>
+      </ng-container>
+    
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+
+  </div>
+</div>

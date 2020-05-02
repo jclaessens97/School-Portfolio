@@ -1,0 +1,163 @@
+<div class="container">
+  <h1 translate>general.account.title</h1>
+  <mat-card>
+    <mat-card-title translate>general.account.profile</mat-card-title>
+    <button
+      mat-raised-button
+      color="primary"
+      (click)="toggleChangeInfoField()"
+      [hidden]="info"
+    >
+      <span translate>general.account.changeInformation</span>
+    </button>
+    <form
+      [formGroup]="manageForm"
+      (ngSubmit)="onSubmitProfile()"
+      [hidden]="!info"
+    >
+      <mat-form-field class="w-100 mb-1">
+        <input
+          placeholder="{{ 'general.register.email.fieldname' | translate }}"
+          matInput
+          id="email"
+          class="input"
+          [(ngModel)]="user.email"
+          formControlName="email"
+          required
+          email
+        />
+        <mat-error *ngFor="let validation of validation_messages.email">
+          <mat-error
+            class="error-message"
+            *ngIf="manageForm.get('email').hasError(validation.type)"
+          >
+            {{ validation.message }}
+          </mat-error>
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="w-100 mb-1">
+        <input
+          placeholder="{{ 'general.register.username.fieldname' | translate }}"
+          matInput
+          id="username"
+          class="input"
+          [(ngModel)]="user.username"
+          required
+          formControlName="username"
+        />
+        <mat-error *ngFor="let validation of validation_messages.username">
+          <mat-error
+            class="error-message"
+            *ngIf="manageForm.get('username').hasError(validation.type)"
+          >
+            {{ validation.message }}
+          </mat-error>
+        </mat-error>
+      </mat-form-field>
+
+      <div class="form-group mt-2">
+        <p *ngIf="profileSuccess" class="success" translate>
+          {{ "alert." + profileSuccess }}
+        </p>
+        <p *ngIf="profileError" class="error" translate>
+          {{ "alert." + profileError }}
+        </p>
+        <button
+          class="mr-2"
+          mat-raised-button
+          color="primary"
+          [disabled]="!manageForm.valid"
+        >
+          <span translate>general.account.save</span>
+        </button>
+        <button
+          (click)="toggleChangeInfoField()"
+          mat-raised-button
+          color="warn"
+        >
+          <span translate>general.account.back</span>
+        </button>
+      </div>
+    </form>
+  </mat-card>
+
+  <mat-card>
+    <mat-card-title translate>general.account.account</mat-card-title>
+    <button
+      mat-raised-button
+      color="primary"
+      (click)="toggleChangePassField()"
+      [hidden]="change"
+    >
+      <span translate>general.account.change</span>
+    </button>
+    <form
+      [formGroup]="passwordForm"
+      (ngSubmit)="onSubmitPassword()"
+      *ngIf="change"
+    >
+      <mat-form-field class="w-100 mb-1">
+        <input
+          placeholder="{{ 'general.account.currentpassword' | translate }}"
+          type="password"
+          matInput
+          id="oldPassword"
+          class="input"
+          formControlName="oldPassword"
+          [(ngModel)]="pass.oldPassword"
+          required
+        />
+        <mat-error *ngFor="let validation of validation_messages.password">
+          <mat-error
+            class="error-message"
+            *ngIf="passwordForm.get('oldPassword').hasError(validation.type)"
+            >{{ validation.message }}</mat-error
+          >
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="w-100 mb-1">
+        <input
+          placeholder="{{ 'general.account.newpassword' | translate }}"
+          type="password"
+          matInput
+          id="newPassword"
+          class="input"
+          formControlName="newPassword"
+          [(ngModel)]="pass.newPassword"
+        />
+        <mat-error *ngFor="let validation of validation_messages.password">
+          <mat-error
+            class="error-message"
+            *ngIf="passwordForm.get('newPassword').hasError(validation.type)"
+            >{{ validation.message }}
+          </mat-error>
+        </mat-error>
+      </mat-form-field>
+      <div class="form-group mt-2">
+        <p *ngIf="accountSuccess" class="success" translate>
+          {{ "alert." + accountSuccess }}
+        </p>
+        <p *ngIf="accountError" class="error" translate>
+          {{ "alert." + accountError }}
+        </p>
+        <button
+          class="mr-2"
+          [disabled]="!passwordForm.valid"
+          mat-raised-button
+          color="primary"
+        >
+          <span translate>general.account.save</span>
+        </button>
+        <button
+          (click)="toggleChangePassField()"
+          mat-raised-button
+          color="warn"
+        >
+          <span translate>general.account.back</span>
+        </button>
+      </div>
+    </form>
+  </mat-card>
+</div>

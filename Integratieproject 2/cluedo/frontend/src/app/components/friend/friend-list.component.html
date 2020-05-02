@@ -1,0 +1,80 @@
+<mat-accordion multi="false">
+  <mat-expansion-panel expanded="true">
+    <mat-expansion-panel-header>
+      <mat-panel-title translate>
+        general.friends.add_a_friend
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+
+    <form [formGroup]="addFriendForm" (ngSubmit)="add()">
+      <mat-form-field class="w-100 whiteInput">
+        <input
+          matInput
+          placeholder="{{ 'general.register.username.fieldname' | translate }}"
+          formControlName="username"
+        />
+      </mat-form-field>
+      <button mat-raised-button color="secondary">
+        <span translate>general.friends.add</span>
+      </button>
+    </form>
+  </mat-expansion-panel>
+
+  <mat-expansion-panel *ngIf="hasFriends">
+    <mat-expansion-panel-header>
+      <mat-panel-title translate>
+        general.friends.friends
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+
+    <ul class="list-group list-group-flush mb-3" *ngFor="let friend of friends">
+      <li class="line">
+        <div>{{ friend.userName }}</div>
+        <button
+          (click)="routeStatistics(friend.userName)"
+          mat-button
+          color="warn"
+        >
+          <span translate>statistics.watch</span>
+        </button>
+        <button (click)="delete(friend)" mat-icon-button class="red-icon">
+          <mat-icon class="mr-2">delete</mat-icon>
+        </button>
+      </li>
+    </ul>
+  </mat-expansion-panel>
+
+  <mat-expansion-panel *ngIf="hasRequests">
+    <mat-expansion-panel-header>
+      <mat-panel-title translate>
+        general.friends.requests
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+
+    <ul
+      class="list-group list-group-flush mb-3"
+      *ngFor="let friend of requests"
+    >
+      <li class="line">
+        <div>{{ friend.userName }}</div>
+        <button (click)="confirm(friend)" mat-icon-button class="green-icon">
+          <mat-icon class="mr-2">check</mat-icon>
+        </button>
+        <button
+          (click)="deletePending(friend)"
+          mat-icon-button
+          class="red-icon"
+        >
+          <mat-icon> clear </mat-icon>
+        </button>
+        <button (click)="block(friend)" mat-icon-button class="gray-icon">
+          <mat-icon> block </mat-icon>
+        </button>
+      </li>
+    </ul>
+
+    <!--<mat-action-row>
+      <button mat-button>Accept all</button>
+    </mat-action-row> -->
+  </mat-expansion-panel>
+</mat-accordion>

@@ -1,0 +1,22 @@
+<div>
+  <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="container">
+    <mat-form-field class="w-100">
+      <input id="loginUsername" matInput placeholder="{{ 'general.register.username.fieldname' | translate }}" formControlName="username"
+        required>
+      <mat-error *ngIf="f.username.errors && f.username.errors.required && submitted">
+        <mat-error class="error-message" translate>general.register.username.required</mat-error>
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field class="w-100">
+      <input type="password" matInput placeholder="{{ 'general.register.password.fieldname' | translate }}"
+             formControlName="password" required>
+      <mat-error *ngIf="f.password.errors && f.password.errors.required && submitted">
+        <mat-error class="error-message" translate>general.register.password.required</mat-error>
+      </mat-error>
+    </mat-form-field>
+    <button [disabled]="loading" mat-raised-button ngClass="w-100 loginBtn">
+      <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+      <span translate>general.login.fieldname</span>
+    </button>
+  </form>
+</div>

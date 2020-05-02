@@ -1,0 +1,61 @@
+image: node:12.16
+
+variables:
+  DOCKER_DRIVER: overlay2
+
+cache:
+  untracked: false
+  paths:
+    - node_modules
+
+stages:
+  - setup
+  - test
+  - build
+  - deploy
+
+setup:
+  stage: setup
+  script:
+    - npm ci
+  only:
+    - master
+
+unit-test:
+  stage: test
+  script:
+    - npm run test:unit
+  only:
+    - master
+
+e2e-test:
+  image: cypress/base:10
+  stage: test
+  script:
+    - npm run cy:install
+    - npm run cy:verify
+    - npm run test:e2e
+  only:
+    - master
+
+build:
+  stage: build
+  script:
+    - npm run build:prod
+  artifacts:
+    paths:
+      - dist/cluedo
+    expire_in: 1 day
+  only:
+    - master
+
+deploy:
+  stage: deploy
+  script:
+    - npm i -g netlify-cli
+    - netlify deploy --site $NETLIFY_SITE_ID --auth $NETLIFY_AUTH_TOKEN --prod
+  dependencies:
+    - build
+  only:
+    - master
+

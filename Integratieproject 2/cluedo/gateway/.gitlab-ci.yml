@@ -1,0 +1,29 @@
+
+stages:
+  - setup
+  - deploy
+
+cache:
+  untracked: true
+  paths:
+    - node_modules/
+
+setup:
+  image: node:10
+  stage: setup
+  script:
+    - npm ci
+  only:
+    - master
+
+deploy:
+  image: larsdroid/integratieproject1:v1
+  stage: deploy
+  script:
+    - gcloud auth activate-service-account --key-file $GOOGLE_SERVICE_ACCOUNT_FILE
+    - gcloud app deploy app.yaml --quiet --project $GOOGLE_PROJECT_ID
+  dependencies:
+    - setup
+  only:
+    - master
+

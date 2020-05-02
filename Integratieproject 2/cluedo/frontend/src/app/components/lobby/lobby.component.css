@@ -1,0 +1,62 @@
+.player:nth-child(odd) {
+    background-color: white;
+}
+
+.player:nth-child(even) {
+  background-color: inherit;
+}
+
+.ownPlayer {
+    background-color: rgb(86, 243, 86);
+}
+
+.playerColor {
+  height: 10px;
+  width: 10px;
+}
+
+.playerOptions {
+  cursor: pointer;
+  color: blue;
+}
+
+mat-card-title {
+  font-size: 15px;
+}
+
+mat-card {
+  margin-bottom: 5px;
+  background-color: #fafafa;
+  box-shadow: none !important;
+}
+
+mat-form-field {
+  margin-right: 5px;
+}
+
+.players, .chat {
+  /* width: calc(49.5% - 2.5px); */
+  width: 49.5%;
+  display: inline-block;
+}
+
+.players {
+  margin-right: 5px;
+}
+
+.reponsive-flex {
+  display: flex;
+}
+
+@media only screen and (max-width: 820px) {
+  .players, .chat {
+    width: 100%;
+    display: block;
+    margin-right: 0;
+  }
+
+  .reponsive-flex {
+    display: block;
+  }
+
+}

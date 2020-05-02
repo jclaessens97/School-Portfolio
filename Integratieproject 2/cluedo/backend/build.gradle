@@ -1,0 +1,49 @@
+plugins {
+    id 'org.springframework.boot' version '2.2.4.RELEASE'
+    id 'io.spring.dependency-management' version '1.0.9.RELEASE'
+    id 'java'
+}
+
+group = 'be.kdg'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '11'
+
+configurations {
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation 'org.springframework.boot:spring-boot-starter-data-neo4j'
+    implementation 'org.neo4j.driver:neo4j-java-driver-spring-boot-starter:4.0.0.1'
+    implementation 'org.springframework.boot:spring-boot-starter-data-rest'
+    implementation 'org.springframework.boot:spring-boot-starter-security'
+    implementation 'org.bitbucket.b_c:jose4j:0.7.0'
+    implementation 'org.springframework.boot:spring-boot-starter-amqp'
+    implementation 'org.springframework.boot:spring-boot-starter-websocket'
+    implementation 'org.springframework.security:spring-security-messaging'
+
+    runtimeOnly('org.springframework.cloud:spring-cloud-gcp-starter-sql-postgresql:1.2.1.RELEASE')
+    runtimeOnly('com.h2database:h2')
+
+    compileOnly 'org.projectlombok:lombok'
+    annotationProcessor 'org.projectlombok:lombok'
+
+    implementation 'org.springframework.boot:spring-boot-devtools'
+
+    testImplementation('org.springframework.boot:spring-boot-starter-test')
+    testImplementation 'org.springframework.security:spring-security-test'
+    testImplementation 'org.springframework.amqp:spring-rabbit-test'
+}
+
+
+test {
+    useJUnitPlatform()
+}
