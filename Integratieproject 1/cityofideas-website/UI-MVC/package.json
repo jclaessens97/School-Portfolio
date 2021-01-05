@@ -19,7 +19,7 @@
     "@chenfengyuan/datepicker": "^1.0.7",
     "@fortawesome/fontawesome-free": "^5.8.1",
     "a-color-picker": "^1.1.7",
-    "axios": "^0.19.0",
+    "axios": "^0.21.1",
     "bootstrap": "^4.3.1",
     "chart.js": "^2.8.0",
     "counterup2": "1.0.2",
